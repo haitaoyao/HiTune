@@ -1,0 +1,27 @@
+<configuration>
+    <property>
+        <name>datasource</name>
+        <value>${HiTune.input.reposfolder}/HiTune.JobHistoryLog</value>
+        <description></description>
+    </property>
+    <property>
+        <name>jobid</name>
+        <value>job_${HiTune.analyzer.targetjob.baseid}</value>
+        <description></description>
+    </property>
+    <property>
+	    <name>HiTune.analyzer.filefilter.class</name>
+		<value>hitune.analysis.mapreduce.processor.FileFilter.ChukwaJobBasedFileFilter</value>
+		<description></description>
+	</property>
+	<property>
+        <name>mapred.reduce.tasks</name>
+        <value>1</value>
+        <description></description>
+    </property>
+	<property>
+	    <name>analyzerengine</name>
+	    <value>HistoryLog</value>
+	    <description></description>
+	</property>
+</configuration>

@@ -1,0 +1,44 @@
+#!/usr/bin/expect -f
+
+set LEN [llength $argv]
+if { $LEN < 4 } {
+puts stderr "Usage: $argv0 username password hostip command"
+exit
+}
+
+set username [lindex $argv 0]
+set password [lindex $argv 1]
+set hostip [lindex $argv 2]
+set params ""
+for { set i 3 } { $i < $LEN } { incr i } {
+        set param [lindex $argv $i]
+        set params [concat $params $param]
+}
+
+set timeout 3
+spawn -noecho /usr/bin/ssh $hostip -l $username $params
+
+expect {
+    "*assword:*"  {
+        send "$password\r"
+        exp_continue
+    } "*Last login:*" {
+        interact
+        exit 0
+    } "*continue connecting (yes/no)?*" {
+       send "yes\r"
+       exp_continue
+    } timeout {
+        send_user "connection to $hostip timeout!\n"
+        exit 1
+    } "*incorrect*" {
+        send_user "password incorrect!\n"
+        exit 2
+    } "*Permission*" {  #for LINUX ssh
+        send_user "password Error!\n"
+        exit 2
+    } eof {
+	    puts stderr $expect_out(buffer)
+        exit 0
+    }
+}

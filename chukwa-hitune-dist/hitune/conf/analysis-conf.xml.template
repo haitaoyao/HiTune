@@ -1,0 +1,29 @@
+<configuration>
+  <!-- Configure the following items each time before you do the analyzing. -->
+  <property>
+    <name>HiTune.output.reportfolder.name</name>
+    <value>test_sort</value>
+    <description>Test name. The analysis engine will create a sub folder under ${HiTune.output.reportfolder.home} named as this value</description>
+  </property>
+  <property>
+    <name>HiTune.analyzer.targetjob.baseid</name>
+    <value>201011161038_0005</value>
+    <description>The base id for single Hadoop job. Just extract the number part of job_{XXXXXXXXXXXX_XXXX}</description>
+  </property>
+  <property>
+    <name>HiTune.analyzer.targetjob.starttime_sec</name>
+    <value>1289877724</value>
+    <description>Start time in seconds. a) You can get this value from the your job's historylog file, copy the X part in SUBMIT_TIME="{XXXXXXXXXX}YYY"
+    b) Or you can get the start time from the Hadoop web page, for example: "Started at: Wed Mar 23 08:00:58 CST 2011". 
+    And then use a shell command to get its timestamp "$> date +%s -d 'Wed Mar 23 08:00:58 CST 2011'"
+    </description>
+  </property>
+  <property>
+    <name>HiTune.analyzer.targetjob.endtime_sec</name>
+    <value>1289879464</value>
+    <description>End time in seconds. You can get this value from the your job's historylog file, copy the X part in FINISH_TIME="{XXXXXXXXXX}YYY" 
+    b) Or you can get the start time from the Hadoop web page, for example: "Finished at: Wed Mar 23 08:00:58 CST 2011". 
+    And then use a shell command to get its timestamp "$> date +%s -d 'Wed Mar 23 08:00:58 CST 2011'"
+    </description>
+  </property>
+</configuration>

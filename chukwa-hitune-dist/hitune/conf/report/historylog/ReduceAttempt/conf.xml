@@ -1,0 +1,24 @@
+<configuration>
+	
+	<property>
+	    <name>outputfilename</name>
+	    <value>ReduceAttempt.csv</value>
+	    <description></description>
+	</property>
+	<property>
+	    <name>attemptid</name>
+	    <value>attempt_${HiTune.analyzer.targetjob.baseid}_r</value>
+	    <description></description>
+	</property>
+    
+        <property>
+        <name>HiTune.analyzer.filefilter.pattern</name>
+        <value>.*/ReduceAttempt/.*</value>
+        <description></description>
+    </property>
+    <property>
+        <name>metrics</name>
+        <value>TRACKER_NAME,TASKID,START_TIME,TASK_STATUS,FINISH_TIME,SHUFFLE_FINISHED,SORT_FINISHED,STATE_STRING,COUNTERS,HDFS bytes read,Local bytes written,Reduce input groups,Combine output records,Reduce output records,Combine input records,Reduce input records</value>
+        <description></description>
+    </property>
+</configuration>

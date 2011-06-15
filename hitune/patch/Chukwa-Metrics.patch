@@ -1,0 +1,13 @@
+Index: src/java/org/apache/hadoop/chukwa/extraction/demux/processor/mapper/HadoopMetricsProcessor.java
+===================================================================
+--- src/java/org/apache/hadoop/chukwa/extraction/demux/processor/mapper/HadoopMetricsProcessor.java	(revision 5849)
++++ src/java/org/apache/hadoop/chukwa/extraction/demux/processor/mapper/HadoopMetricsProcessor.java	(revision 5891)
+@@ -78,7 +78,7 @@
+           d = new Date(json.getLong(keyName));
+           Calendar cal = Calendar.getInstance();
+           cal.setTimeInMillis(d.getTime());
+-          cal.set(Calendar.SECOND, 0);
++          //cal.set(Calendar.SECOND, 0);
+           cal.set(Calendar.MILLISECOND, 0);
+           d.setTime(cal.getTimeInMillis());
+         } else if (contextNameField.intern() == keyName.intern()) {

@@ -1,0 +1,39 @@
+Index: src/java/org/apache/hadoop/chukwa/datacollection/adaptor/DirTailingAdaptor.java
+===================================================================
+--- src/java/org/apache/hadoop/chukwa/datacollection/adaptor/DirTailingAdaptor.java	(revision 5841)
++++ src/java/org/apache/hadoop/chukwa/datacollection/adaptor/DirTailingAdaptor.java	(revision 6041)
+@@ -53,6 +53,7 @@
+   long scanInterval;
+   String adaptorName; //name of adaptors to start
+   IOFileFilter fileFilter;
++  String wildcard = null;
+ 
+   @Override
+   public void start(long offset) throws AdaptorException {
+@@ -111,7 +112,7 @@
+ 
+   @Override
+   public String getCurrentStatus() {
+-    return type + " " + baseDirName + " " + adaptorName;
++      return (wildcard!=null)?type + " " + baseDirName + " " + wildcard + " " + adaptorName:type + " " + baseDirName + " " + adaptorName;
+   }
+ 
+   @Override
+@@ -125,14 +126,15 @@
+      adaptorName = args[1];
+     }else if(args.length == 3){
+      baseDir = new File(args[0]);
+-     fileFilter = new WildcardFileFilter(args[1]);
++     wildcard = args[1];
++     fileFilter = new WildcardFileFilter(wildcard);
+      adaptorName = args[2]; 
+     }else{
+      log.warn("bad syntax in DirTailingAdaptor args");
+      return null;
+     }
+     
+-    return (args.length == 2)? baseDir + " " + adaptorName : baseDir + " " + fileFilter + " " + adaptorName;  //both params mandatory
++    return (args.length == 2)? baseDir + " " + adaptorName : baseDir + " " + wildcard + " " + adaptorName;  //both params mandatory
+   }
+ 
+   @Override

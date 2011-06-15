@@ -1,0 +1,7 @@
+add org.apache.hadoop.chukwa.datacollection.adaptor.HiTune.ExecAdaptor HiTune.Iostat /usr/local/bin/iostat -x -k -d 5 | awk '{now=strftime("%s ");if($0 && !/Linux/) print now $0}' 0
+add org.apache.hadoop.chukwa.datacollection.adaptor.HiTune.ExecAdaptor HiTune.Memstat /usr/local/bin/sar -rSB 5 |awk '{if($0 && !/Linux/){if($0){$1="";$2="";if(/pgpgin/)now=strftime("%s ");if(NR>3 && NR%9==3){print now header"\n" now val;header=""; val=""};if(NR%3==0) {header=header" "$0;}; if(NR%3==1) val=val" "$0; }}}' 0
+add org.apache.hadoop.chukwa.datacollection.adaptor.HiTune.ExecAdaptor HiTune.Cpustat /usr/local/bin/sar -u 5 |awk '{if($0 && !/Linux/) {$1=""; $2=""; now=strftime("%s "); print now $0}}' 0
+add org.apache.hadoop.chukwa.datacollection.adaptor.HiTune.ExecAdaptor HiTune.Netstat /usr/local/bin/sar -n DEV 5 | awk '{if($0 &&!/Linux/){$1=""; $2=""; now=strftime("%s "); print now $0}}' 0
+add org.apache.hadoop.chukwa.datacollection.adaptor.HiTune.ExecAdaptor HiTune.Mpstat /usr/local/bin/mpstat -P ALL 5 | awk '{if($0 &&!/Linux/){$1=""; $2=""; now=strftime("%s "); if($0)print now $0}}' 0
+add org.apache.hadoop.chukwa.datacollection.adaptor.DirTailingAdaptor HiTune.Instrument ${CHUKWA_HOME}/hitune_output *.log org.apache.hadoop.chukwa.datacollection.adaptor.filetailer.CharFileTailingAdaptorUTF8NewLineEscaped 0
+add org.apache.hadoop.chukwa.datacollection.adaptor.DirTailingAdaptor HiTune.JobHistoryLog ${HADOOP_JOB_HISTORY_LOG} org.apache.hadoop.chukwa.datacollection.adaptor.filetailer.CharFileTailingAdaptorUTF8NewLineEscaped 0

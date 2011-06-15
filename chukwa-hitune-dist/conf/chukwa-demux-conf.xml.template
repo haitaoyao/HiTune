@@ -1,0 +1,220 @@
+<?xml version="1.0"?>
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<?xml-stylesheet type="text/xsl"  href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+
+<!-- Chukwa Job parameters -->
+	<property>
+	  <name>io.sort.mb</name>
+	  <value>@TODO-DEMUX-IO-SORT-MB@</value>
+	  <description>The total amount of buffer memory to use while sorting
+	  files, in megabytes.  By default, gives each merge stream 1MB, which
+	  should minimize seeks.</description>
+	</property>
+
+	<property>
+	  <name>fs.inmemory.size.mb</name>
+	  <value>@TODO-DEMUX-FS-INMEMORY-SIZE_MB@</value>
+	  <description>The size of the in-memory filsystem instance in MB</description>
+	</property>
+
+	<property>
+	  <name>io.sort.factor</name>
+	  <value>@TODO-DEMUX-IO-SORT-FACTOR@</value>
+	  <description>The number of streams to merge at once while sorting
+	  files.  This determines the number of open file handles.</description>
+	</property>
+
+<!-- Archive configuration -->
+  
+    <property>
+       <name>archive.grouper</name>
+       <value>Stream</value>
+       <description>How to group archive files. Choices are Hourly, Daily, DataType, and Stream.</description>
+    </property>
+
+    <property>
+       <name>archive.groupByClusterName</name>
+       <value>false</value>
+       <description>Whether the DataType grouper should group archived files by cluster name.</description>
+    </property>
+
+<!-- PostProcessorManager config -->
+  <property>
+    <name>chukwa.data.loader.threads.limit</name>
+    <value>3</value>
+    <description>Reduce count </description>
+  </property>
+
+  <property>
+    <name>chukwa.post.demux.data.loader</name>
+    <value>org.apache.hadoop.chukwa.dataloader.MetricDataLoaderPool,org.apache.hadoop.chukwa.dataloader.FSMDataLoader</value>
+  </property>
+
+<!-- -->
+
+<!-- ArchiveManager config -->
+  
+  <property>
+    <name>chukwaArchiveBuilder.reduceCount</name>
+    <value>5</value>
+    <description>Reduce count </description>
+  </property>
+
+<!-- -->
+
+
+<!-- Demux aliases -->
+
+  <property>
+    <name>HadoopMetricsProcessor</name>
+    <value>org.apache.hadoop.chukwa.extraction.demux.processor.mapper.HadoopMetricsProcessor</value>
+    <description>Parser class for Hadoop Metrics </description>
+  </property>
+
+  <property>
+    <name>jvm</name>
+    <value>org.apache.hadoop.chukwa.extraction.demux.processor.mapper.HadoopMetricsProcessor</value>
+    <description>Parser class for </description>
+  </property>
+
+  <property>
+    <name>mapred</name>
+    <value>org.apache.hadoop.chukwa.extraction.demux.processor.mapper.HadoopMetricsProcessor</value>
+    <description>Parser class for </description>
+  </property>
+
+  <property>
+    <name>rpc</name>
+    <value>org.apache.hadoop.chukwa.extraction.demux.processor.mapper.HadoopMetricsProcessor</value>
+    <description>Parser class for </description>
+  </property>
+
+  <property>
+    <name>dfs</name>
+    <value>org.apache.hadoop.chukwa.extraction.demux.processor.mapper.HadoopMetricsProcessor</value>
+    <description>Parser class for </description>
+  </property>
+  
+  <property>
+    <name>SysLog</name>
+    <value>org.apache.hadoop.chukwa.extraction.demux.processor.mapper.SysLog</value>
+    <description>Parser class for </description>
+  </property>
+
+  <property>
+    <name>Df</name>
+    <value>org.apache.hadoop.chukwa.extraction.demux.processor.mapper.Df</value>
+    <description>Parser class for </description>
+  </property>
+
+  <property>
+    <name>HadoopLog</name>
+    <value>org.apache.hadoop.chukwa.extraction.demux.processor.mapper.HadoopLogProcessor</value>
+    <description>Parser class for </description>
+  </property>
+
+  <property>
+    <name>Iostat</name>
+    <value>org.apache.hadoop.chukwa.extraction.demux.processor.mapper.Iostat</value>
+    <description>Parser class for </description>
+  </property>
+ 
+   <property>
+    <name>PbsNodes</name>
+    <value>org.apache.hadoop.chukwa.extraction.demux.processor.mapper.PbsNodes</value>
+    <description>Parser class for </description>
+  </property>
+ 
+   <property>
+    <name>Sar</name>
+    <value>org.apache.hadoop.chukwa.extraction.demux.processor.mapper.Sar</value>
+    <description>Parser class for </description>
+  </property>
+
+   <property>
+    <name>TsProcessor</name>
+    <value>org.apache.hadoop.chukwa.extraction.demux.processor.mapper.TsProcessor</value>
+    <description>Parser class for </description>
+   </property>
+  
+   <property>
+    <name>Top</name>
+    <value>org.apache.hadoop.chukwa.extraction.demux.processor.mapper.Top</value>
+    <description>Parser class for </description>
+   </property>
+
+   <property>
+    <name>Torque</name>
+    <value>org.apache.hadoop.chukwa.extraction.demux.processor.mapper.Torque</value>
+    <description>Parser class for Parsing qstat and tracejob</description>
+   </property>
+  
+   <property>
+    <name>DbLoader</name>
+    <value>org.apache.hadoop.chukwa.extraction.demux.processor.mapper.TsProcessor</value>
+    <description>Parser class for </description>
+   </property>
+
+   <property>
+    <name>JobHistory</name>
+    <value>org.apache.hadoop.chukwa.extraction.demux.processor.mapper.JobLog</value>
+    <description>Parser class for Job History Log File</description>
+   </property>
+
+   <property>
+    <name>JobConf</name>
+    <value>org.apache.hadoop.chukwa.extraction.demux.processor.mapper.JobConfProcessor</value>
+    <description>Parser class for Map reduce Job Configuration</description>
+   </property>
+    
+   <property>
+     <name>ClientTrace</name>
+     <value>org.apache.hadoop.chukwa.extraction.demux.processor.mapper.ClientTraceProcessor</value>
+     <description>Parser class for TaskTracker and DataNode clienttrace data</description>
+   </property>
+ 
+   <property>
+    <name>HDFSUsage</name>
+    <value>org.apache.hadoop.chukwa.extraction.demux.processor.mapper.JPluginMapper</value>
+    <description></description>
+   </property>
+
+   <property>
+    <name>chukwaAgent</name>
+    <value>org.apache.hadoop.chukwa.extraction.demux.processor.mapper.Log4JMetricsContextProcessor</value>
+    <description></description>
+   </property>
+
+   <property>
+    <name>chunkQueue</name>
+    <value>org.apache.hadoop.chukwa.extraction.demux.processor.mapper.Log4JMetricsContextProcessor</value>
+    <description></description>
+   </property>
+
+   <property>
+    <name>chukwaHttpSender</name>
+    <value>org.apache.hadoop.chukwa.extraction.demux.processor.mapper.Log4JMetricsContextProcessor</value>
+    <description></description>
+   </property>
+   
+</configuration>
+ 

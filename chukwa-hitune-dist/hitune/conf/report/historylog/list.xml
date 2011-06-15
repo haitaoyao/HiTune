@@ -1,0 +1,27 @@
+<list>
+    <category>
+        <name>job</name>
+        <value>${HiTune.analyzer.configfolder}/historylog/job</value>
+        <description></description>
+    </category>
+    <category>
+        <name>MapAttempt</name>
+        <value>${HiTune.analyzer.configfolder}/historylog/MapAttempt</value>
+        <description></description>
+    </category>
+    <category>
+        <name>MapTask</name>
+        <value>${HiTune.analyzer.configfolder}/historylog/MapTask</value>
+        <description></description>
+    </category>
+    <category>
+        <name>ReduceTask</name>
+        <value>${HiTune.analyzer.configfolder}/historylog/ReduceTask</value>
+        <description></description>
+    </category>
+    <category>
+        <name>ReduceAttempt</name>
+        <value>${HiTune.analyzer.configfolder}/historylog/ReduceAttempt</value>
+        <description></description>
+    </category>
+</list>

@@ -1,0 +1,27 @@
+<configuration>
+    <property>
+        <name>analyzerengine</name>
+        <value>SystemLog</value>
+        <description></description>
+    </property>
+    <property>
+        <name>starttime</name>
+        <value>${HiTune.analyzer.targetjob.starttime_sec}</value>
+        <description></description>
+    </property>
+    <property>
+        <name>endtime</name>
+        <value>${HiTune.analyzer.targetjob.endtime_sec}</value>
+        <description></description>
+    </property>
+	<property>
+	    <name>HiTune.analyzer.filefilter.class</name>
+		<value>hitune.analysis.mapreduce.processor.FileFilter.ChukwaTimeBasedFileFilter</value>
+		<description></description>
+	</property>
+	<property>
+        <name>mapred.reduce.tasks</name>
+        <value>1</value>
+        <description></description>
+    </property>
+</configuration>

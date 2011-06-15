@@ -1,0 +1,399 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="Apache Forrest" name="Generator">
+<meta name="Forrest-version" content="0.8">
+<meta name="Forrest-skin-name" content="pelt">
+<title>Guide to Chukwa Storage Layout</title>
+<link type="text/css" href="skin/basic.css" rel="stylesheet">
+<link media="screen" type="text/css" href="skin/screen.css" rel="stylesheet">
+<link media="print" type="text/css" href="skin/print.css" rel="stylesheet">
+<link type="text/css" href="skin/profile.css" rel="stylesheet">
+<script src="skin/getBlank.js" language="javascript" type="text/javascript"></script><script src="skin/getMenu.js" language="javascript" type="text/javascript"></script><script src="skin/fontsize.js" language="javascript" type="text/javascript"></script>
+<link rel="shortcut icon" href="">
+</head>
+<body onload="init()">
+<script type="text/javascript">ndeSetTextSize();</script>
+<div id="top">
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+<a href="http://www.apache.org/">Apache</a> &gt; <a href="http://hadoop.apache.org/">Hadoop</a> &gt; <a href="http://hadoop.apache.org/pig/">Chukwa</a><script src="skin/breadcrumbs.js" language="JavaScript" type="text/javascript"></script>
+</div>
+<!--+
+    |header
+    +-->
+<div class="header">
+<!--+
+    |start group logo
+    +-->
+<div class="grouplogo">
+<a href="http://hadoop.apache.org/"><img class="logoImage" alt="Hadoop" src="images/hadoop-logo.jpg" title="Apache Hadoop"></a>
+</div>
+<!--+
+    |end group logo
+    +-->
+<!--+
+    |start Project Logo
+    +-->
+<div class="projectlogo">
+<a href="http://hadoop.apache.org/"><img class="logoImage" alt="Chukwa" src="images/chukwa_logo_small.jpg" title="A data collection system for monitoring and analyzing large distributed systems."></a>
+</div>
+<!--+
+    |end Project Logo
+    +-->
+<!--+
+    |start Search
+    +-->
+<div class="searchbox">
+<form action="http://www.google.com/search" method="get" class="roundtopsmall">
+<input value="" name="sitesearch" type="hidden"><input onFocus="getBlank (this, 'Search the site with google');" size="25" name="q" id="query" type="text" value="Search the site with google">&nbsp; 
+                    <input name="Search" value="Search" type="submit">
+</form>
+</div>
+<!--+
+    |end search
+    +-->
+<!--+
+    |start Tabs
+    +-->
+<ul id="tabs">
+<li>
+<a class="unselected" href="http://hadoop.apache.org/chukwa">Project</a>
+</li>
+<li>
+<a class="unselected" href="http://wiki.apache.org/hadoop/Chukwa/">Wiki</a>
+</li>
+<li class="current">
+<a class="selected" href="index.html">Chukwa 0.4 Documentation</a>
+</li>
+</ul>
+<!--+
+    |end Tabs
+    +-->
+</div>
+</div>
+<div id="main">
+<div id="publishedStrip">
+<!--+
+    |start Subtabs
+    +-->
+<div id="level2tabs"></div>
+<!--+
+    |end Endtabs
+    +-->
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+
+             &nbsp;
+           </div>
+<!--+
+    |start Menu, mainarea
+    +-->
+<!--+
+    |start Menu
+    +-->
+<div id="menu">
+<div onclick="SwitchMenu('menu_selected_1.1', 'skin/')" id="menu_selected_1.1Title" class="menutitle" style="background-image: url('skin/images/chapter_open.gif');">Overview</div>
+<div id="menu_selected_1.1" class="selectedmenuitemgroup" style="display: block;">
+<div class="menuitem">
+<a href="index.html">Overview</a>
+</div>
+<div class="menuitem">
+<a href="design.html">Architecture</a>
+</div>
+<div class="menuitem">
+<a href="admin.html">Admin Guide</a>
+</div>
+<div class="menuitem">
+<a href="agent.html">Agent Configuration Guide</a>
+</div>
+<div class="menupage">
+<div class="menupagetitle">Guide to Chukwa Storage layout</div>
+</div>
+<div class="menuitem">
+<a href="programming.html">Programming Guide</a>
+</div>
+<div class="menuitem">
+<a href="api/index.html">API Docs</a>
+</div>
+<div class="menuitem">
+<a href="http://wiki.apache.org/hadoop/Chukwa/">Wiki</a>
+</div>
+<div class="menuitem">
+<a href="http://wiki.apache.org/hadoop/Chukwa/FAQ">FAQ</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.2', 'skin/')" id="menu_1.2Title" class="menutitle">Miscellaneous</div>
+<div id="menu_1.2" class="menuitemgroup">
+<div class="menuitem">
+<a href="releasenotes.html">Release Notes</a>
+</div>
+<div class="menuitem">
+<a href="changes.html">Change Log</a>
+</div>
+</div>
+<div id="credit"></div>
+<div id="roundbottom">
+<img style="display: none" class="corner" height="15" width="15" alt="" src="skin/images/rc-b-l-15-1body-2menu-3menu.png"></div>
+<!--+
+  |alternative credits
+  +-->
+<div id="credit2"></div>
+</div>
+<!--+
+    |end Menu
+    +-->
+<!--+
+    |start content
+    +-->
+<div id="content">
+<div title="Portable Document Format" class="pdflink">
+<a class="dida" href="dataflow.pdf"><img alt="PDF -icon" src="skin/images/pdfdoc.gif" class="skin"><br>
+        PDF</a>
+</div>
+<h1>Guide to Chukwa Storage Layout</h1>
+<div id="minitoc-area">
+<ul class="minitoc">
+<li>
+<a href="#Overview">Overview</a>
+</li>
+<li>
+<a href="#HDFS+File+System+Structure">HDFS File System Structure</a>
+</li>
+<li>
+<a href="#Raw+Log+Collection+and+Aggregation+Workflow">Raw Log Collection and Aggregation Workflow</a>
+</li>
+<li>
+<a href="#Log+Directories+Requiring+Cleanup">Log Directories Requiring Cleanup</a>
+</li>
+</ul>
+</div>
+
+
+<a name="N1000D"></a><a name="Overview"></a>
+<h2 class="h3">Overview</h2>
+<div class="section">
+<p>This document describes how Chukwa data is stored in HDFS and the processes that act on it.</p>
+</div>
+
+
+<a name="N10016"></a><a name="HDFS+File+System+Structure"></a>
+<h2 class="h3">HDFS File System Structure</h2>
+<div class="section">
+<p>The general layout of the Chukwa filesystem is as follows.</p>
+<pre class="code">
+/chukwa/
+   archivesProcessing/
+   dataSinkArchives/
+   demuxProcessing/
+   finalArchives/
+   logs/
+   postProcess/
+   repos/
+   rolling/
+   temp/
+</pre>
+</div>
+
+
+<a name="N10023"></a><a name="Raw+Log+Collection+and+Aggregation+Workflow"></a>
+<h2 class="h3">Raw Log Collection and Aggregation Workflow</h2>
+<div class="section">
+<p>What data is stored where is best described by stepping through the Chukwa workflow.</p>
+<ol>
+
+<li>Collectors write chunks to <span class="codefrag">logs/*.chukwa</span> files until a 64MB chunk size is reached or a given time interval has passed.
+  <ul>
+<li>
+<span class="codefrag">logs/*.chukwa</span>
+</li>
+</ul> 
+
+</li>
+
+<li>Collectors close chunks and rename them to <span class="codefrag">*.done</span>
+
+<ul>
+
+<li>from <span class="codefrag">logs/*.chukwa</span>
+</li>
+
+<li>to <span class="codefrag">logs/*.done</span>
+</li>
+
+</ul>
+
+</li>
+
+<li>DemuxManager checks for <span class="codefrag">*.done</span> files every 20 seconds.
+ <ol>
+  
+<li>If <span class="codefrag">*.done</span> files exist, moves files in place for demux processing:
+   <ul>
+     
+<li>from: <span class="codefrag">logs/*.done</span>
+</li>
+     
+<li>to: <span class="codefrag">demuxProcessing/mrInput</span>
+</li>
+   
+</ul>
+  
+</li>
+  
+<li>The Demux MapReduce job is run on the data in <span class="codefrag">demuxProcessing/mrInput</span>.</li>
+  
+<li>If demux is successful within 3 attempts, archives the completed files:
+    <ul>
+     
+<li>from: <span class="codefrag">demuxProcessing/mrOutput</span>
+</li>
+     
+<li>to: <span class="codefrag">dataSinkArchives/[yyyyMMdd]/*/*.done</span> 
+</li>
+    
+</ul>
+  
+</li>
+  
+<li>Otherwise moves the completed files to an error folder:
+    <ul>
+     
+<li>from: <span class="codefrag">demuxProcessing/mrOutput</span>
+</li>
+     
+<li>to: <span class="codefrag">dataSinkArchives/InError/[yyyyMMdd]/*/*.done</span> 
+</li>
+    
+</ul>
+   
+</li>
+  
+</ol>
+
+</li>
+
+<li>PostProcessManager wakes up every few minutes and aggregates, orders and de-dups record files.
+  <ul>
+<li>from: <span class="codefrag">postProcess/demuxOutputDir_*/[clusterName]/[dataType]/[dataType]_[yyyyMMdd]_[HH].R.evt</span>
+</li>
+  
+<li>to: <span class="codefrag">repos/[clusterName]/[dataType]/[yyyyMMdd]/[HH]/[mm]/[dataType]_[yyyyMMdd]_[HH]_[N].[N].evt</span>
+</li>
+  
+</ul>
+
+</li>
+
+<li>HourlyChukwaRecordRolling runs M/R jobs at 16 past the hour to group 5 minute logs to hourly.
+  <ul>
+  
+<li>from: <span class="codefrag">repos/[clusterName]/[dataType]/[yyyyMMdd]/[HH]/[mm]/[dataType]_[yyyyMMdd]_[mm].[N].evt</span>
+</li>
+  
+<li>to: <span class="codefrag">temp/hourlyRolling/[clusterName]/[dataType]/[yyyyMMdd]</span>
+</li>
+  
+<li>to: <span class="codefrag">repos/[clusterName]/[dataType]/[yyyyMMdd]/[HH]/[dataType]_HourlyDone_[yyyyMMdd]_[HH].[N].evt</span>
+</li>
+  
+<li>leaves: <span class="codefrag">repos/[clusterName]/[dataType]/[yyyyMMdd]/[HH]/rotateDone/</span> 
+</li>
+  
+</ul>
+
+</li>
+
+<li>DailyChukwaRecordRolling runs M/R jobs at 1:30AM to group hourly logs to daily.
+  <ul>
+  
+<li>from: <span class="codefrag">repos/[clusterName]/[dataType]/[yyyyMMdd]/[HH]/[dataType]_[yyyyMMdd]_[HH].[N].evt</span>
+</li>
+  
+<li>to: <span class="codefrag">temp/dailyRolling/[clusterName]/[dataType]/[yyyyMMdd]</span>
+</li>
+  
+<li>to: <span class="codefrag">repos/[clusterName]/[dataType]/[yyyyMMdd]/[dataType]_DailyDone_[yyyyMMdd].[N].evt</span>
+</li>
+  
+<li>leaves: <span class="codefrag">repos/[clusterName]/[dataType]/[yyyyMMdd]/rotateDone/</span> 
+</li>
+  
+</ul>
+  
+</li> 
+
+<li>ChukwaArchiveManager every half hour or so aggregates and removes dataSinkArchives data using M/R.
+  <ul>
+  
+<li>from: <span class="codefrag">dataSinkArchives/[yyyyMMdd]/*/*.done</span>
+</li>
+  
+<li>to: <span class="codefrag">archivesProcessing/mrInput</span>
+</li>
+  
+<li>to: <span class="codefrag">archivesProcessing/mrOutput</span>
+</li>
+  
+<li>to: <span class="codefrag">finalArchives/[yyyyMMdd]/*/chukwaArchive-part-*</span> 
+</li>
+  
+</ul>
+  
+</li> 
+ 
+</ol>
+</div> 
+
+
+<a name="N100F1"></a><a name="Log+Directories+Requiring+Cleanup"></a>
+<h2 class="h3">Log Directories Requiring Cleanup</h2>
+<div class="section">
+<p>The following directories will grow over time and will need to be periodically pruned:</p>
+<ul>
+
+<li>
+<span class="codefrag">finalArchives/[yyyyMMdd]/*</span>
+</li>
+
+<li>
+<span class="codefrag">repos/[clusterName]/[dataType]/[yyyyMMdd]/*.evt</span> 
+</li>
+
+</ul>
+</div>
+
+</div>
+<!--+
+    |end content
+    +-->
+<div class="clearboth">&nbsp;</div>
+</div>
+<div id="footer">
+<!--+
+    |start bottomstrip
+    +-->
+<div class="lastmodified">
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<div class="copyright">
+        Copyright &copy;
+         2007-2010 <a href="http://www.apache.org/licenses/">The Apache Software Foundation.</a>
+</div>
+<!--+
+    |end bottomstrip
+    +-->
+</div>
+</body>
+</html>

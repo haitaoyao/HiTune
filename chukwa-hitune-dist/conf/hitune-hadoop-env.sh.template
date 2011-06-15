@@ -1,0 +1,5 @@
+if [ "$HADOOP_CLASSPATH" = "" ]; then
+    export HADOOP_CLASSPATH="`ls @TODO_CHUKWA_HOME@/hitune/HiTuneChukwaAggregation-*.jar`":"`ls @TODO_CHUKWA_HOME@/hitune/HiTuneAnalysis-*.jar`"
+else
+	export HADOOP_CLASSPATH=${HADOOP_CLASSPATH}:"`ls @TODO_CHUKWA_HOME@/hitune/HiTuneChukwaAggregation-*.jar`":"`ls @TODO_CHUKWA_HOME@/hitune/HiTuneAnalysis-*.jar`"
+fi

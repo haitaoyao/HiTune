@@ -1,0 +1,22 @@
+<configuration>
+    <property>
+        <name>outputfilename</name>
+        <value>namenodemetric.csv</value>
+        <description></description>
+    </property>
+    <property>
+        <name>datasource</name>
+        <value>${HiTune.input.reposfolder}/Hadoop_dfs_namenode</value>
+        <description></description>
+    </property>
+    <property>
+        <name>category</name>
+        <value>dfs.namenode</value>
+        <description></description>
+    </property>
+    <property>
+        <name>metrics</name>
+        <value>FilesAppended,FilesCreated,FilesRenamed,GetBlockLocations,GetListingOps,Transactions_avg_time,Transactions_num_ops</value>
+        <description></description>
+    </property>
+</configuration>

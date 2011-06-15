@@ -1,0 +1,22 @@
+<configuration>
+    <property>
+        <name>outputfilename</name>
+        <value>datanodemetric.csv</value>
+        <description></description>
+    </property>
+    <property>
+        <name>datasource</name>
+        <value>${HiTune.input.reposfolder}/Hadoop_dfs_datanode</value>
+        <description></description>
+    </property>
+    <property>
+        <name>category</name>
+        <value>dfs.datanode</value>
+        <description></description>
+    </property>
+    <property>
+        <name>metrics</name>
+        <value>hostName,blocks_read,blocks_removed,blocks_replicated,blocks_verified,blocks_written,copyBlockOp_avg_time,copyBlockOp_num_ops,readBlockOp_avg_time,readBlockOp_num_ops,readMetadataOp_avg_time,readMetadataOp_num_ops,reads_from_local_client,reads_from_remote_client,replaceBlockOp_avg_time,replaceBlockOp_num_ops,writeBlockOp_avg_time,writeBlockOp_num_ops,writes_from_local_client,writes_from_remote_client</value>
+        <description></description>
+    </property>
+</configuration>

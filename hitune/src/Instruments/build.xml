@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="HiTuneInstrumentAgent" default="main" basedir=".">
+	<property name="src.dir"     value="../../src/Instruments"/>
+    <property name="build.dir"   value="../../build/Instruments"/>
+	<property name="lib.dir" value="../../lib"/>
+	<property name="jar.dir" value="../../build"/>
+	
+	<target name="main" description="Default target" depends="clean,jar"/>
+    
+	<target name="clean" description="Clean up build folder">
+    	<delete dir="${build.dir}"/>
+		<delete file="${jar.dir}/${ant.project.name}-${project.version}.jar"/>
+    </target>
+  	
+	<target name="compile" description="Compile all java code">
+  		<mkdir dir="${build.dir}"/>
+  		<javac debug="on" srcdir="${src.dir}" destdir="${build.dir}"/>
+  	</target>
+  	
+	<target name ="jar" description="Create a jar" depends="compile">
+        <jar jarfile="${jar.dir}/${ant.project.name}-${project.version}.jar" includes="*.class"  basedir="${build.dir}">
+        	<fileset dir="${build.dir}" includes="**/*.class" />
+        	<manifest>
+        		  <attribute name="Premain-Class" value="jvm.instrument.util.InstrumentAgent"/>
+      		</manifest>
+      	</jar>
+  	</target>
+</project>

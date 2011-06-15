@@ -1,0 +1,378 @@
+Index: src/java/org/apache/hadoop/chukwa/extraction/demux/PostProcessorManager.java
+===================================================================
+--- src/java/org/apache/hadoop/chukwa/extraction/demux/PostProcessorManager.java	(.../hitune-chukwa-dist)	(revision 5823)
++++ src/java/org/apache/hadoop/chukwa/extraction/demux/PostProcessorManager.java	(.../chukwa-hitune-dist)	(revision 5849)
+@@ -36,6 +36,7 @@
+ import org.apache.hadoop.fs.Path;
+ import org.apache.hadoop.fs.PathFilter;
+ import org.apache.log4j.Logger;
++import org.apache.hadoop.chukwa.util.HierarchyDataType;
+ 
+ public class PostProcessorManager implements CHUKWA_CONSTANT{
+   static Logger log = Logger.getLogger(PostProcessorManager.class);
+@@ -182,9 +183,15 @@
+         log.info(dataLoaderName+" processing: "+directory);
+         StringBuilder dirSearch = new StringBuilder();
+         dirSearch.append(directory);
+-        dirSearch.append("/*/*/*.evt");
++        dirSearch.append("/*/*");
++        log.debug("dirSearch: " + dirSearch);
+         Path demuxDir = new Path(dirSearch.toString());
+-        FileStatus[] events = fs.globStatus(demuxDir);
++        PathFilter filter = new PathFilter()
++        {public boolean accept(Path file) {
++          return file.getName().endsWith(".evt");
++        }  };
++        List<FileStatus> eventfiles = HierarchyDataType.globStatus(fs, demuxDir,filter,true);
++        FileStatus[] events = eventfiles.toArray(new FileStatus[eventfiles.size()]);
+         dataloader.load(conf, fs, events);
+       }
+     } catch(Exception e) {
+Index: src/java/org/apache/hadoop/chukwa/extraction/demux/MoveToRepository.java
+===================================================================
+--- src/java/org/apache/hadoop/chukwa/extraction/demux/MoveToRepository.java	(.../hitune-chukwa-dist)	(revision 5823)
++++ src/java/org/apache/hadoop/chukwa/extraction/demux/MoveToRepository.java	(.../chukwa-hitune-dist)	(revision 5849)
+@@ -29,12 +29,16 @@
+ import org.apache.hadoop.fs.FileUtil;
+ import org.apache.hadoop.fs.Path;
+ import org.apache.log4j.Logger;
++import java.util.List;
++import org.apache.hadoop.chukwa.extraction.CHUKWA_CONSTANT;
++import org.apache.hadoop.chukwa.util.HierarchyDataType;
++import org.apache.hadoop.fs.PathFilter;
+ 
+ // TODO
+ // First version of the Spill
+ // need some polishing
+ 
+-public class MoveToRepository {
++public class MoveToRepository implements CHUKWA_CONSTANT{
+   static Logger log = Logger.getLogger(MoveToRepository.class);
+ 
+   static ChukwaConfiguration conf = null;
+@@ -64,19 +68,33 @@
+                   + datasourceDirectory.getPath());
+         }
+ 
+-        String dirName = datasourceDirectory.getPath().getName();
+-        Path destPath = new Path(destDir + "/" + dirName);
+-        log.info("dest directory path: " + destPath);
+-        log.info("processClusterDirectory processing Datasource: (" + dirName
+-            + ")");
+-        processDatasourceDirectory(srcDir.getName(), datasourceDirectory
+-            .getPath(), destDir + "/" + dirName);
++        PathFilter filter = new PathFilter()
++        {public boolean accept(Path file) {
++          return file.getName().endsWith(".evt");
++        }  };
++        List<FileStatus> eventfiles = HierarchyDataType.globStatus(fs, datasourceDirectory.getPath(),filter,true);
++        for (FileStatus eventfile : eventfiles){
++          Path datatypeDir = eventfile.getPath().getParent();
++          String dirName = HierarchyDataType.getDataType(datatypeDir, srcDir);
++        
++          Path destPath = new Path(destDir + "/" + dirName);
++          log.info("dest directory path: " + destPath);
++          log.info("processClusterDirectory processing Datasource: (" + dirName
++              + ")");
++          StringBuilder dtDir = new StringBuilder(srcDir.toString()).append("/").append(dirName);
++          log.debug("srcDir: " + dtDir.toString());
++          processDatasourceDirectory(srcDir.toString(), new Path(dtDir.toString()), destDir + "/" + dirName);
++        }
+       }
+     }
+   }
+ 
+-  static void processDatasourceDirectory(String cluster, Path srcDir,
++  static void processDatasourceDirectory(String clusterpath, Path srcDir,
+       String destDir) throws Exception {
++
++    Path cPath = new Path(clusterpath);
++    String cluster = cPath.getName();
++
+     String fileName = null;
+     int fileDay = 0;
+     int fileHour = 0;
+@@ -93,7 +111,7 @@
+       log.info("fileName: " + fileName);
+ 
+       int l = fileName.length();
+-      String dataSource = srcDir.getName();
++      String dataSource = HierarchyDataType.getDataType(srcDir, cPath);
+       log.info("Datasource: " + dataSource);
+ 
+       if (fileName.endsWith(".D.evt")) {
+@@ -101,7 +119,7 @@
+ 
+         fileDay = Integer.parseInt(fileName.substring(l - 14, l - 6));
+         writeRecordFile(destDir + "/" + fileDay + "/", recordFile.getPath(),
+-            dataSource + "_" + fileDay);
++                dataSource.replace("/", HIERARCHY_CONNECTOR) + "_" + fileDay);
+       } else if (fileName.endsWith(".H.evt")) {
+         // Hadoop_dfs_datanode_20080925_1.H.evt
+         // Hadoop_dfs_datanode_20080925_12.H.evt
+@@ -123,7 +141,7 @@
+         fileHour = Integer.parseInt(hour);
+         // rotate there so spill
+         writeRecordFile(destDir + "/" + fileDay + "/" + fileHour + "/",
+-            recordFile.getPath(), dataSource + "_" + fileDay + "_" + fileHour);
++                recordFile.getPath(), dataSource.replace("/", HIERARCHY_CONNECTOR) + "_" + fileDay + "_" + fileHour);
+         // mark this directory for daily rotate
+         addDirectory4Rolling(true, fileDay, fileHour, cluster, dataSource);
+       } else if (fileName.endsWith(".R.evt")) {
+@@ -141,7 +159,7 @@
+         log.info("fileHour: " + fileHour);
+         log.info("fileMin: " + fileMin);
+         writeRecordFile(destDir + "/" + fileDay + "/" + fileHour + "/"
+-            + fileMin, recordFile.getPath(), dataSource + "_" + fileDay + "_"
++            + fileMin, recordFile.getPath(), HierarchyDataType.trimSlash(dataSource).replace("/", HIERARCHY_CONNECTOR) + "_" + fileDay + "_"
+             + fileHour + "_" + fileMin);
+         // mark this directory for hourly rotate
+         addDirectory4Rolling(false, fileDay, fileHour, cluster, dataSource);
+Index: src/java/org/apache/hadoop/chukwa/extraction/demux/ChukwaRecordOutputFormat.java
+===================================================================
+--- src/java/org/apache/hadoop/chukwa/extraction/demux/ChukwaRecordOutputFormat.java	(.../hitune-chukwa-dist)	(revision 5823)
++++ src/java/org/apache/hadoop/chukwa/extraction/demux/ChukwaRecordOutputFormat.java	(.../chukwa-hitune-dist)	(revision 5849)
+@@ -25,16 +25,19 @@
+ import org.apache.hadoop.chukwa.extraction.engine.RecordUtil;
+ import org.apache.hadoop.mapred.lib.MultipleSequenceFileOutputFormat;
+ import org.apache.log4j.Logger;
++import org.apache.hadoop.chukwa.extraction.CHUKWA_CONSTANT;
+ 
++//Allow the user define multiple level string separated by slash in the ReduceType
+ public class ChukwaRecordOutputFormat extends
+-    MultipleSequenceFileOutputFormat<ChukwaRecordKey, ChukwaRecord> {
++  MultipleSequenceFileOutputFormat<ChukwaRecordKey, ChukwaRecord> implements CHUKWA_CONSTANT{
+   static Logger log = Logger.getLogger(ChukwaRecordOutputFormat.class);
+ 
+   @Override
+   protected String generateFileNameForKeyValue(ChukwaRecordKey key,
+       ChukwaRecord record, String name) {
++    //To support Hierarchy datatype
+     String output = RecordUtil.getClusterName(record) + "/"
+-        + key.getReduceType() + "/" + key.getReduceType()
++        + key.getReduceType() + "/" + key.getReduceType().replace("/", HIERARCHY_CONNECTOR)
+         + Util.generateTimeOutput(record.getTime());
+ 
+     // {log.info("ChukwaOutputFormat.fileName: [" + output +"]");}
+Index: src/java/org/apache/hadoop/chukwa/extraction/demux/DailyChukwaRecordRolling.java
+===================================================================
+--- src/java/org/apache/hadoop/chukwa/extraction/demux/DailyChukwaRecordRolling.java	(.../hitune-chukwa-dist)	(revision 5823)
++++ src/java/org/apache/hadoop/chukwa/extraction/demux/DailyChukwaRecordRolling.java	(.../chukwa-hitune-dist)	(revision 5849)
+@@ -46,9 +46,11 @@
+ import org.apache.hadoop.mapred.lib.IdentityReducer;
+ import org.apache.hadoop.util.Tool;
+ import org.apache.log4j.Logger;
++import org.apache.hadoop.chukwa.extraction.CHUKWA_CONSTANT;
++import org.apache.hadoop.chukwa.util.HierarchyDataType;
+ 
+ // TODO do an abstract class for all rolling 
+-public class DailyChukwaRecordRolling extends Configured implements Tool {
++public class DailyChukwaRecordRolling extends Configured implements Tool, CHUKWA_CONSTANT {
+   static Logger log = Logger.getLogger(DailyChukwaRecordRolling.class);
+ 
+   static SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyyMMdd");
+@@ -114,7 +116,8 @@
+           + workingDay + "/" + cluster);
+       FileStatus[] dataSourcesFS = fs.listStatus(dataSourceClusterHourPaths);
+       for (FileStatus dataSourceFS : dataSourcesFS) {
+-        String dataSource = dataSourceFS.getPath().getName();
++      for (FileStatus dataSourcePath : HierarchyDataType.globStatus(fs,dataSourceFS.getPath(),true)){
++              String dataSource = HierarchyDataType.getDataType(dataSourcePath.getPath(),fs.getFileStatus(dataSourceClusterHourPaths).getPath());  
+         // Repo path = reposRootDirectory/<cluster>/<day>/*/*.evt
+ 
+ 
+@@ -176,7 +179,7 @@
+             }
+           }
+         } // End if (!rollInSequence)
+-
++		}
+         // Delete the processed dataSourceFS
+           FileUtil.fullyDelete(fs, dataSourceFS.getPath());
+ 
+Index: src/java/org/apache/hadoop/chukwa/extraction/demux/HourlyChukwaRecordRolling.java
+===================================================================
+--- src/java/org/apache/hadoop/chukwa/extraction/demux/HourlyChukwaRecordRolling.java	(.../hitune-chukwa-dist)	(revision 5823)
++++ src/java/org/apache/hadoop/chukwa/extraction/demux/HourlyChukwaRecordRolling.java	(.../chukwa-hitune-dist)	(revision 5849)
+@@ -46,9 +46,11 @@
+ import org.apache.hadoop.mapred.lib.IdentityReducer;
+ import org.apache.hadoop.util.Tool;
+ import org.apache.log4j.Logger;
++import org.apache.hadoop.chukwa.extraction.CHUKWA_CONSTANT;
++import org.apache.hadoop.chukwa.util.HierarchyDataType;
+ 
+ // TODO do an abstract class for all rolling 
+-public class HourlyChukwaRecordRolling extends Configured implements Tool {
++public class HourlyChukwaRecordRolling extends Configured implements Tool, CHUKWA_CONSTANT{
+   static Logger log = Logger.getLogger(HourlyChukwaRecordRolling.class);
+ 
+   static SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyyMMdd");
+@@ -79,9 +81,10 @@
+       Path dataSourceClusterHourPaths = new Path(rollingFolder + "/hourly/"
+           + workingDay + "/" + workingHour + "/" + cluster);
+       FileStatus[] dataSourcesFS = fs.listStatus(dataSourceClusterHourPaths);
+-      
++      log.debug("dataSourceClusterHourPath: " + dataSourceClusterHourPaths);
+       for (FileStatus dataSourceFS : dataSourcesFS) {
+-        String dataSource = dataSourceFS.getPath().getName();
++      for (FileStatus dataSourcePath : HierarchyDataType.globStatus(fs,dataSourceFS.getPath(),true)){
++        String dataSource = HierarchyDataType.getDataType(dataSourcePath.getPath(),fs.getFileStatus(dataSourceClusterHourPaths).getPath());
+         // Repo path = reposRootDirectory/<cluster>/<datasource>/<day>/<hour>/*/*.evt
+ 
+         // put the rotate flag
+@@ -133,7 +136,7 @@
+             }
+           }
+         } // End if (!rollInSequence)
+-
++		}
+         // Delete the processed dataSourceFS
+         FileUtil.fullyDelete(fs, dataSourceFS.getPath());
+ 
+Index: src/java/org/apache/hadoop/chukwa/extraction/CHUKWA_CONSTANT.java
+===================================================================
+--- src/java/org/apache/hadoop/chukwa/extraction/CHUKWA_CONSTANT.java	(.../hitune-chukwa-dist)	(revision 5823)
++++ src/java/org/apache/hadoop/chukwa/extraction/CHUKWA_CONSTANT.java	(.../chukwa-hitune-dist)	(revision 5849)
+@@ -59,5 +59,7 @@
+   public static final String ARCHIVES_MR_INPUT_DIR_NAME      = "mrInput/";
+   public static final String ARCHIVES_IN_ERROR_DIR_NAME      = "inError/";
+ 
+-  public static final String POST_DEMUX_DATA_LOADER = "chukwa.post.demux.data.loader";  
++  public static final String POST_DEMUX_DATA_LOADER = "chukwa.post.demux.data.loader";
++  //To support Hierarchy datatype
++  public static final String HIERARCHY_CONNECTOR = "-";
+ }
+Index: src/java/org/apache/hadoop/chukwa/util/HierarchyDataType.java
+===================================================================
+--- src/java/org/apache/hadoop/chukwa/util/HierarchyDataType.java	(.../hitune-chukwa-dist)	(revision 0)
++++ src/java/org/apache/hadoop/chukwa/util/HierarchyDataType.java	(.../chukwa-hitune-dist)	(revision 5849)
+@@ -0,0 +1,129 @@
++/**
++ * Licensed to the Apache Software Foundation (ASF) under one
++ * or more contributor license agreements.  See the NOTICE file
++ * distributed with this work for additional information
++ * regarding copyright ownership.  The ASF licenses this file
++ * to you under the Apache License, Version 2.0 (the
++ * "License"); you may not use this file except in compliance
++ * with the License.  You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.apache.hadoop.chukwa.util;
++
++import java.io.IOException;
++import java.util.ArrayList;
++import java.util.Collections;
++import java.util.List;
++
++import org.apache.hadoop.fs.FileStatus;
++import org.apache.hadoop.fs.FileSystem;
++import org.apache.hadoop.fs.Path;
++import org.apache.hadoop.fs.PathFilter;
++import org.apache.log4j.Logger;
++
++
++public class HierarchyDataType {
++  static Logger log = Logger.getLogger(HierarchyDataType.class);
++
++  /**
++   * 
++   * @param path
++   * @param filter
++   * @return
++   */
++  public static List<FileStatus> globStatus(FileSystem fs, Path path,PathFilter filter, boolean recursive){
++    List<FileStatus> results = new ArrayList<FileStatus>();
++    try {
++      FileStatus[] candidates = fs.globStatus(path);
++      for(FileStatus candidate : candidates){
++        log.debug("candidate is:"+candidate);
++        Path p = candidate.getPath();
++        if(candidate.isDir() && recursive){
++          StringBuilder subpath = new StringBuilder(p.toString());
++          subpath.append("/*");
++          log.debug("subfolder is:"+p);
++          results.addAll(globStatus(fs, new Path(subpath.toString()), filter, recursive)); 					
++        }
++        else{
++          log.debug("Eventfile is:"+p);
++          FileStatus[] qualifiedfiles = fs.globStatus(p,filter);
++          if (qualifiedfiles != null && qualifiedfiles.length > 0){
++            log.debug("qualified Eventfile is:"+p);
++            Collections.addAll(results, qualifiedfiles);
++          }
++        }
++      }
++    } catch (IOException e) {
++      // TODO Auto-generated catch block
++      e.printStackTrace();
++    }
++    log.debug("results.length: " + results.size());
++    return results;
++  }
++
++  public static List<FileStatus> globStatus(FileSystem fs, Path path, boolean recursive){
++    List<FileStatus> results = new ArrayList<FileStatus>();
++    try {
++      FileStatus[] candidates = fs.listStatus(path);
++      if( candidates.length > 0 ) {
++        for(FileStatus candidate : candidates){
++          log.debug("candidate is:"+candidate);
++          Path p = candidate.getPath();
++          if(candidate.isDir() && recursive){
++            results.addAll(globStatus(fs, p, recursive)); 					
++          }
++        }
++      }
++      else {
++        log.debug("path is:"+path);
++        results.add(fs.globStatus(path)[0]);
++      }
++    } catch (IOException e) {
++      // TODO Auto-generated catch block
++      e.printStackTrace();
++    }
++
++    return results;
++  }
++
++
++  public static String getDataType(Path path, Path cluster){
++    log.debug("datasource path: " + path + " cluster path: " + cluster);
++    String Cluster = cluster.toString();
++    if (!Cluster.endsWith("/")){
++      Cluster = Cluster + "/";
++    }
++    String dataType = path.toString().replaceFirst(Cluster, "");
++    log.debug("The datatype is: " + dataType);
++    return dataType;
++  }
++
++  public static String trimSlash(String datasource){
++    String results = datasource;
++    if(datasource.startsWith("/")){
++      results = datasource.replaceFirst("/", "");
++    }
++    if(results.endsWith("/")){
++      results = results.substring(0, -1);
++    }
++    return results;
++  }
++
++
++
++  /**
++   * @param args
++   */
++  public static void main(String[] args) {
++    // TODO Auto-generated method stub
++
++  }
++
++}

@@ -1,0 +1,25 @@
+<configuration>
+    <!-- It only requires to configure following items once -->
+    <property>
+        <name>HiTune.input.reposfolder</name>
+        <value>/chukwa/repos/chukwa</value>
+        <description>
+            The cluster folder under your CHUKWA/repos directory
+        </description>
+    </property>
+    <property>
+        <name>HiTune.output.reportfolder.home</name>
+        <value>/chukwa/report</value>
+        <description>HOME of report ouput folder</description>
+    </property>
+    <property>
+        <name>HiTune.analyzer.value.class</name>
+        <value>org.apache.hadoop.chukwa.extraction.engine.ChukwaRecord</value>
+        <description></description>
+    </property>
+    <property>
+        <name>HiTune.analyzer.key.class</name>
+        <value>org.apache.hadoop.chukwa.extraction.engine.ChukwaRecordKey</value>
+        <description></description>
+    </property>
+</configuration>

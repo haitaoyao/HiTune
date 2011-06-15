@@ -1,0 +1,22 @@
+<configuration>
+    <property>
+        <name>outputfilename</name>
+        <value>jobtrackermetric.csv</value>
+        <description></description>
+    </property>
+    <property>
+        <name>datasource</name>
+        <value>${HiTune.input.reposfolder}/Hadoop_mapred_jobtracker</value>
+        <description></description>
+    </property>
+    <property>
+        <name>category</name>
+        <value>mapred.jobtracker</value>
+        <description></description>
+    </property>
+    <property>
+        <name>metrics</name>
+        <value>jobs_completed,jobs_submitted,maps_completed,maps_launched,reduces_completed,reduces_launched</value>
+        <description></description>
+    </property>
+</configuration>

@@ -1,0 +1,399 @@
+<!--
+**********************************************************
+** WARNING: This file is generated from CHANGES.txt by the 
+**          Perl script 'changes2html.pl'.
+**          Do *not* edit this file!
+**********************************************************
+          
+****************************************************************************
+* Licensed to the Apache Software Foundation (ASF) under one or more
+* contributor license agreements.  See the NOTICE file distributed with
+* this work for additional information regarding copyright ownership.
+* The ASF licenses this file to You under the Apache License, Version 2.0
+* (the "License"); you may not use this file except in compliance with
+* the License.  You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+****************************************************************************
+-->
+<html>
+<head>
+  <title>Chukwa Change Log</title>
+  <link rel="stylesheet" href="ChangesFancyStyle.css" title="Fancy">
+  <link rel="alternate stylesheet" href="ChangesSimpleStyle.css" title="Simple">
+  <META http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <SCRIPT>
+    function toggleList(e) {
+      element = document.getElementById(e).style;
+      element.display == 'none' ? element.display = 'block' : element.display='none';
+    }
+    function collapse() {
+      for (var i = 0; i < document.getElementsByTagName("ul").length; i++) {
+        var list = document.getElementsByTagName("ul")[i];
+        if (list.id != 'release_0.3_' && list.id != '_chukwa-333._copy_release_notes_from_0.2_forward_to_trunk._(asrabkin)_') {
+          list.style.display = "none";
+        }
+      }
+      for (var i = 0; i < document.getElementsByTagName("ol").length; i++) {
+        document.getElementsByTagName("ol")[i].style.display = "none"; 
+      }
+    }
+    window.onload = collapse;
+  </SCRIPT>
+</head>
+<body>
+
+<a href="http://hadoop.apache.org/chukwa/"><img class="logoImage" alt="Chukwa" src="images/chukwa_logo_small.jpg" title="Scalable monitoring Platform"></a>
+<h1>Chukwa Change Log</h1>
+
+<h2><a href="javascript:toggleList('release_0.3_')">Release 0.3
+</a></h2>
+<ul id="release_0.3_">
+  <li><a href="javascript:toggleList('release_0.3_._new_features_')">  NEW FEATURES
+</a>&nbsp;&nbsp;&nbsp;(26)
+    <ol id="release_0.3_._new_features_">
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-344">CHUKWA-344</a>. State-Machine Generation for input to SALSA visualizations.<br />(Jiaqi Tan via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-384">CHUKWA-384</a>. Added REST API charting capability.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-369">CHUKWA-369</a>. Tolerance of collector failures.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-368">CHUKWA-368</a>. New data integrity validation tool.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-383">CHUKWA-383</a>. Added embed mode for HICC.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-382">CHUKWA-382</a>. Added export button to export HICC graph as static image.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-366">CHUKWA-366</a>. Custom tags.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-358">CHUKWA-358</a>. Real-time monitoring at collector.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-352">CHUKWA-352</a>. Xtrace in contrib.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-346">CHUKWA-346</a>. Simplified sink archiver.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-343">CHUKWA-343</a>. Static HDFS Heatmap visualization.<br />(Jiaqi Tan via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-342">CHUKWA-342</a>. Static swimlanes visualization widget.<br />(Jiaqi Tan via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-299">CHUKWA-299</a>. Added HDFS Spatial heatmaps visualization.<br />(Jiaqi Tan via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-185">CHUKWA-185</a>. Ability to tail a whole directory.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-280">CHUKWA-280</a>. Added end to end test to detect iostat overflow.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-194">CHUKWA-194</a>.  Backfilling tools.<br />(Jerome Boulon via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-253">CHUKWA-253</a>. Added aggregations by user.<br />(Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-95">CHUKWA-95</a>. Added Web Service API to export data from database.<br />(Terence Kwan via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-281">CHUKWA-281</a>. Created pig scripts to perform down sampling.<br />(Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-20">CHUKWA-20</a>. Added pig support for ChukwaRecords.<br />(Jerome Boulon via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-279">CHUKWA-279</a>. Added swim lane visualization for Hadoop job progress.<br />(Jiaqi Tan via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-267">CHUKWA-267</a>. Added TaskLogAppender for collecting Task Tracker Log file.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-71">CHUKWA-71</a>. Status/version command for chukwa agent.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-271">CHUKWA-271</a>. Added SQL client to HICC for SQL data exploration.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-210">CHUKWA-210</a>. Add new job conf metrics as database columns.<br />(Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-91">CHUKWA-91</a>.  Additional test case for acks.<br />(asrabkin)</li>
+    </ol>
+  </li>
+  <li><a href="javascript:toggleList('release_0.3_._improvements_')">  IMPROVEMENTS
+</a>&nbsp;&nbsp;&nbsp;(14)
+    <ol id="release_0.3_._improvements_">
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-390">CHUKWA-390</a>. Improvements to asynchronous acknowledgement mechanism.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-397">CHUKWA-397</a>. Allow "all" as search pattern.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-393">CHUKWA-393</a>. Support using pig on Chunks.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-392">CHUKWA-392</a>.  FIFO queueing of threads in collector.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-388">CHUKWA-388</a>.  Clean up user interface color.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-387">CHUKWA-387</a>.  Summarize mode for dumpChunks should count bytes.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-379">CHUKWA-379</a>.  Refactor sender code.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-374">CHUKWA-374</a>.  Adaptor.getStatus() shouldn't throw exceptions.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-373">CHUKWA-373</a>.  Test code for backpressure.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-370">CHUKWA-370</a>.  Exec adaptor should commit immediately.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-367">CHUKWA-367</a>.  Print metadata in DumpChunks.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-74">CHUKWA-74</a>.  Agent shouldn't log exceptions for down collectors.<br />(Rushin Barot via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-365">CHUKWA-365</a>.  Improved DumpArchive tool.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-364">CHUKWA-364</a>.  Design and Architecture document in documentation.<br />(asrabkin)</li>
+    </ol>
+  </li>
+</ul>
+<h2><a href="javascript:toggleList('_chukwa-333._copy_release_notes_from_0.2_forward_to_trunk._(asrabkin)_')">    CHUKWA-333.  Copy release notes from 0.2 forward to Trunk. (asrabkin)
+</a></h2>
+    <ul id="_chukwa-333._copy_release_notes_from_0.2_forward_to_trunk._(asrabkin)_">
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-362">CHUKWA-362</a>.  Archiver group-by-cluster conf name shouldn't be hardcoded.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-355">CHUKWA-355</a>.  Remove obsolete datacollection.protocol package.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-270">CHUKWA-270</a>. ChukwaAgentController no longer uses stdout.<br />(Rushin Barot via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-356">CHUKWA-356</a>. More powerful file extractor.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-350">CHUKWA-350</a>. Improve docs, add programmer guide.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-282">CHUKWA-282</a>. Demux should output detailed per-operation ClientTrace records<br />(Jiaqi Tan via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-341">CHUKWA-341</a>. Heap space in HICC Jetty is configurable.<br />(Jiaqi Tan via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-284">CHUKWA-284</a>.  Checkpoint includes last byte Acked, not sent.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-25">CHUKWA-25</a>.  Archiver can group by cluster name.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-308">CHUKWA-308</a>. Added capability to start hicc without tomcat.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-326">CHUKWA-326</a>. If the chukwa records produce errors in post process, move to InErrorDirectory.<br />(Jerome Boulon via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-318">CHUKWA-318</a>. Added check for disk capacity for collector to write.<br />(Jerome Boulon via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-276">CHUKWA-276</a>. Fix hourly and daily rolling to use a single reducer.<br />(Jerome Boulon via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-313">CHUKWA-313</a>. Removed the 10 second ack from SeqFileWriter.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-5">CHUKWA-5</a>. Adaptors have durable names.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-280">CHUKWA-280</a>. Added end to end test to detect iostat overflow.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-278">CHUKWA-278</a>. Improve post process manager and metric data loader to support data loading from pig aggregation.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-263">CHUKWA-263</a>. Added ability to configure demux parameters during build time.<br />(Jerome Boulon via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-195">CHUKWA-195</a>. Update demux compilation to use Hadoop 0.20 jar file.<br />(Jerome Boulon via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-268">CHUKWA-268</a>. Expose adaptor manager interface, refactor Agent class hierarchy.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-259">CHUKWA-259</a>. More flexible CollectorStub.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-274">CHUKWA-274</a>. Improve rate calculation for accumulated values for visualization.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-275">CHUKWA-275</a>. Add standard deviation to statics calculation for HICC charts.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-137">CHUKWA-137</a>. Add collector IP to the dataSink fileName.<br />(Jerome Boulon via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-258">CHUKWA-258</a>. More detailed logging of SQL errors.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-30">CHUKWA-30</a>.  Remove HDFS flush and connection holding in Collector.<br />(Jerome Boulon via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-142">CHUKWA-142</a>. Remove add(Chunk) from SeqFileWriter.<br />(Jerome Boulon via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-82">CHUKWA-82</a>.  Added min,max,average to HICC Charting widget.<br />(Terence Kwan via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-219">CHUKWA-219</a>. Improved usability of host selector, and updated caching for host list.<br />(Eric Yang)</li>
+    </ul>
+    <ul id="_chukwa-333._copy_release_notes_from_0.2_forward_to_trunk._(asrabkin)_._bug_fixes_">
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-407">CHUKWA-407</a>. PatternSyntaxExceptions should be sent to client.<br />(thushara wijeratna via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-402">CHUKWA-402</a>. Added readme and license notice file.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-401">CHUKWA-401</a>. Fix race condition in Dir Tailing adaptor test case.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-398">CHUKWA-398</a>. Make ConstRateAdaptor more deterministic.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-386">CHUKWA-386</a>. Fix a bug in echo id to the browser for the iframe servlet.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-380">CHUKWA-380</a>. FTA shouldn't emit empty chunks.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-378">CHUKWA-378</a>. Disable TestArchive unit test.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-377">CHUKWA-377</a>. Revised xtrace adaptor code.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-372">CHUKWA-372</a>. select_multiple_callback does not work in hicc<br />(Eric Yang via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-354">CHUKWA-354</a>. Fix corner case in SinkArchiver.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-334">CHUKWA-334</a>. Fix LocalHdfsMover exception handling.<br />(Jerome Boulon via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-335">CHUKWA-335</a>. Discard meta line in job history file.<br />(Cheng Zhang via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-330">CHUKWA-330</a>. Make separation between fixed adaptor parameters and optional adaptor parameters for generating adaptor id.<br />(Ari Rabkin via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-37">CHUKWA-37</a>. Remove stale and unused bin scripts.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-331">CHUKWA-331</a>. Fixed regular expression for down sampling base on record type.<br />(Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-329">CHUKWA-329</a>. Correction to user job summary script.<br />(Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-328">CHUKWA-328</a>. Handle empty sequence file more gracefully for MetricDataLoader.<br />(Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-327">CHUKWA-327</a>. Remove START_TIME="0", FINISH_TIME="0" from JobHistory.<br />(Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-325">CHUKWA-325</a>. Removed hourly rolling flag from daily rolling.<br />(Jerome Boulon via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-324">CHUKWA-324</a>. For 0 matched field, changed MDL to skip empty SQL statement.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-321">CHUKWA-321</a>. Added 2 seconds sleep to avoid chukwa agent race condition.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-319">CHUKWA-319</a>. Added cluster name to pig user aggregation script.<br />(Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-316">CHUKWA-316</a>. Added explicit rule for MetricDataLoader to prevent loading of data.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-42">CHUKWA-42</a>. Clean up logging of adaptor creation.<br />(Ari Rabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-312">CHUKWA-312</a>. Fixed chukwa-pig.jar class path for pig aggregation.<br />(Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-304">CHUKWA-304</a>. Propagate exception upward for database test cases.<br />(Jerome Boulon via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-314">CHUKWA-314</a>. Added filtering for start_time to remove invalid value.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-304">CHUKWA-304</a>. Propagate exception upward for database test cases.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-309">CHUKWA-309</a>. Fix MDL configuration for mr_job_conf table.<br />(Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-301">CHUKWA-301</a>. Set TestFileExpirationPolicy controller port to 0 to avoid race condition.<br />(Jerome Boulon via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-302">CHUKWA-302</a>. Removed hard coded dependency of Hadoop jar file.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-298">CHUKWA-298</a>. Update branch 0.2 and trunk version number.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-296">CHUKWA-296</a>. Fix jsp syntax error.<br />(Terence Kwan via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-294">CHUKWA-294</a>. Added post process data loader configuration.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-10">CHUKWA-10</a>. Fix TestAgentConfig<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-291">CHUKWA-291</a>. Append slash to collector paths.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-287">CHUKWA-287</a>. Fix collector crash on startup when no args.<br />(Eric Yang via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-273">CHUKWA-273</a>. Agents correctly use configured collector port numbers.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-216">CHUKWA-216</a>. postProcess.sh should use HADOOP_CONF_DIR to find hadoop-site.xml.<br />(Jerome Boulon via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-261">CHUKWA-261</a>. Added X axis label for non Time Series graphs.<br />(Eric Yang)</li>
+    </ul>
+<h2><a href="javascript:toggleList('older')">Older Releases</a></h2>
+<ul id="older">
+<h3><a href="javascript:toggleList('release_0.2_-_unreleased_')">Release 0.2 - Unreleased
+</a></h3>
+    <ul id="release_0.2_-_unreleased_">
+    </ul>
+<h3><a href="javascript:toggleList('release_0.1.2_-_2009-05-14_')">Release 0.1.2 - 2009-05-14
+</a></h3>
+<ul id="release_0.1.2_-_2009-05-14_">
+  <li><a href="javascript:toggleList('release_0.1.2_-_2009-05-14_._incompatible_changes_')">  INCOMPATIBLE CHANGES
+</a>&nbsp;&nbsp;&nbsp;(none)
+    <ol id="release_0.1.2_-_2009-05-14_._incompatible_changes_">
+    </ol>
+  </li>
+  <li><a href="javascript:toggleList('release_0.1.2_-_2009-05-14_._new_features_')">  NEW FEATURES
+</a>&nbsp;&nbsp;&nbsp;(13)
+    <ol id="release_0.1.2_-_2009-05-14_._new_features_">
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-97">CHUKWA-97</a>.  Refactored FileTailers, added LWFTAdaptor.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-236">CHUKWA-236</a>. Added migration script for moving database schema for Chukwa 0.1.1 to Chukwa 0.1.2.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-78">CHUKWA-78</a>.  Added down sample SQL aggregation for job data, task data and utilization data.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-17">CHUKWA-17</a>. Collect PS output every 10 minutes and parse into key/value pairs sequence file.<br />(Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-55">CHUKWA-55</a>. Aggregate data from HDFS bytes usage, and Mapreduce Job slot time to compute user usage of the cluster.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-50">CHUKWA-50</a>.  Added parser for extract Job History and Job Conf into key value pairs,
+            and database loader dictionary file.<br />(Contribute by Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-69">CHUKWA-69</a>.  Calculate trapezoid area for a given series of data.<br />(Contribute by Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-62">CHUKWA-62</a>.  Add script to start tailing files.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-12">CHUKWA-12</a>.  Add instrumention Api for Chukwa components.<br />(Jerome Boulon via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-14">CHUKWA-14</a>.  Added permalink support to HICC GUI.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-45">CHUKWA-45</a>.  Added docs to folder structure.<br />(Corinne Chandel via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-13">CHUKWA-13</a>.  Create a new Macro class for macro substitution.
+            Changed Aggregator to use Macro class.
+            Added macro substitution support to Chukwa Charting.
+            Added Macro test case.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-4989">HADOOP-4989</a>. Added capability to add scatter chart.<br />(Eric Yang)</li>
+    </ol>
+  </li>
+  <li><a href="javascript:toggleList('release_0.1.2_-_2009-05-14_._improvements_')">  IMPROVEMENTS
+</a>&nbsp;&nbsp;&nbsp;(31)
+    <ol id="release_0.1.2_-_2009-05-14_._improvements_">
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-226">CHUKWA-226</a>. Changed HDFS usage collection frequency from 10 minutes to 60 minutes.<br />(Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-104">CHUKWA-104</a>. Remove permission setting code for Log4JMetricsContext and ChukwaDailyRollingFileAppender.<br />(Jerome Boulon via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-178">CHUKWA-178</a>. Extend aggregation by 5 minutes for cluster metrics.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-176">CHUKWA-176</a>. Rearrange the parameter order for aggregator.sh.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-173">CHUKWA-173</a>. Parameterize configuration, and enable substitution at build time.<br />(Jerome Boulon via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-131">CHUKWA-131</a>. Added additional Mapred job/task metrics.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-145">CHUKWA-145</a>. Tuned hadoop parameters for demux.<br />(Jerome Boulon via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-163">CHUKWA-163</a>. Updated reference to mdl.xml file.<br />(Terence Kwan via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-157">CHUKWA-157</a>. Added javadoc target, api-xml, api-report, and change log 2 html.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-141">CHUKWA-141</a>. Updated Chukwa Docs overview page for 0.1.2.<br />(Corinne Chandel via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-138">CHUKWA-138</a>. Updated Chukwa Admin Guide.<br />(Corinne Chandel via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-128">CHUKWA-128</a>. Added tools to compute aggregation in database.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-112">CHUKWA-112</a>. Updated README file.<br />(Corinne Chandel via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-134">CHUKWA-134</a>. Add release audit target.<br />(Giridharan Kesavan via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-80">CHUKWA-80</a>.  Extracted rpm spec file from build.xml file.  Fix start up script, and config script.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-26">CHUKWA-26</a>.  * DemuxManager, ArchiveManager and PostProcessorManager are now a single daemon process each.
+            * Each one working independently from others, as soon as something is available.
+            * Start-data-processor is now using those new daemons instead of pocessSink.sh
+            * Daily will process a daily compaction only when all hourly would have been done.
+            * Demux is now able to send NSCA commands to Nagios.<br />(Jerome Boulon via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-81">CHUKWA-81</a>.  Fix file descriptor leak.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-29">CHUKWA-29</a>.  Added TaskTracker and DataNode client trace log parser and database loader.<br />(Chris Douglas via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-86">CHUKWA-86</a>. Improved JDBC compatibility layer<br />(Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-64">CHUKWA-64</a>. Changed version number to 0.1.2, and release number to alpha.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-59">CHUKWA-59</a>. Collect HDFS Usage information for users.<br />(Contribute by Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-54">CHUKWA-54</a>. Filters web based input from HICC to prevent cross site scripting attack.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-31">CHUKWA-31</a>. Added duration logging for SQL statements.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-5373">HADOOP-5373</a>. Collectors track lifetime-received chunks.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-5370">HADOOP-5370</a>. Collectors don't write empty sink files<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-5228">HADOOP-5228</a>. Chukwa tests shouldn't write to /tmp.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-5035">HADOOP-5035</a>. Improved Y axis ticker labelling.
+             Used TreeMap to build non-time series data for charting.
+             Improved handling of "not a number "values.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-5030">HADOOP-5030</a>. Changed RPM install location to the value specified by build.properties file.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-5029">HADOOP-5029</a>. Added mdl script to manually load chukwa sequence file to database.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-4843">HADOOP-4843</a>. Enable job history log file streaming into Chukwa by using JobTrackerInstrumentation API.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-4827">HADOOP-4827</a>. * Replace Consolidator with Aggregator macros
+             * Updated database table schema
+             * Fix interval for aggregation execute
+             * Improved SQL macros support, add group_avg() and past_*_minutes key word<br />(Eric Yang)</li>
+    </ol>
+  </li>
+  <li><a href="javascript:toggleList('release_0.1.2_-_2009-05-14_._optimizations_')">  OPTIMIZATIONS
+</a>&nbsp;&nbsp;&nbsp;(none)
+    <ol id="release_0.1.2_-_2009-05-14_._optimizations_">
+    </ol>
+  </li>
+  <li><a href="javascript:toggleList('release_0.1.2_-_2009-05-14_._bug_fixes_')">  BUG FIXES
+</a>&nbsp;&nbsp;&nbsp;(89)
+    <ol id="release_0.1.2_-_2009-05-14_._bug_fixes_">
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-249">CHUKWA-249</a>. Use ChukwaConfiguration in Demux.<br />(Jerome Boulon via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-257">CHUKWA-257</a>. fixed right arrow image for date picker.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-251">CHUKWA-251</a>. Added per widget Time range input.<br />(Terence Kwan via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-239">CHUKWA-239</a>. Demux settings now work out of the box.<br />(Ari Rabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-250">CHUKWA-250</a>. Updated hadoop jar reference in chukwa config.<br />(Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-211">CHUKWA-211</a>. Manage symlink correctly for RPM upgrade and uninstall.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-245">CHUKWA-245</a>. Includes ChukwaJobTrackerInstrumentation class as part of the input tools compilation.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-234">CHUKWA-234</a>. Improved handling of null session for XssFilter.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-232">CHUKWA-232</a>. Fixed classpath for chukwa core jar file.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-215">CHUKWA-215</a>. Corrected postProcess.sh environment setup.<br />(Jerome Boulon via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-223">CHUKWA-223</a>. Renamed read only session caching object to cache.*, and skip those values for caching.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-238">CHUKWA-238</a>.  Resolve race condition in archiving.<br />(Ari Rabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-228">CHUKWA-228</a>.  Added rpm.hdfsusage.uid option to run HDFS usage as a separate user.<br />(Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-227">CHUKWA-227</a>. Improved the user privilege for reading HDFS usage.<br />(Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-229">CHUKWA-229</a>. Fix descriptor leak for ExecPlugin.<br />(Ari Rabkin via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-212">CHUKWA-212</a>. Fix file descriptor leak in MDL.<br />(Jerome Boulon via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-220">CHUKWA-220</a>. Correct min, max settings for yaxis charting.<br />(Terence Kwan via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-222">CHUKWA-222</a>. Reduce Sar version dependency.<br />(Ari Rabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-103">CHUKWA-103</a>. Fix documentation broken link.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-208">CHUKWA-208</a>. Skip copying of test/sample directory if it doesn't exist.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-206">CHUKWA-206</a>. Removed hard coded path from configuration files, and sample data.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-201">CHUKWA-201</a>. Removed sourcing of Timeline widget from simile.mit.edu.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-193">CHUKWA-193</a>. Remove unrecognized tag from Job History Log file parser.<br />(Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-189">CHUKWA-189</a>. Added JAVA_LIBRARY_PATH to chukwa-env.sh for enabling compression.<br />(Jerome Boulon via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-186">CHUKWA-186</a>. Remove duplicated timestamp from aggregation script.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-187">CHUKWA-187</a>. Correction to status for job and task status.<br />(Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-183">CHUKWA-183</a>. Added HICC startup script.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-177">CHUKWA-177</a>. Added test case for verify the value between JSON values and database values.<br />(Terence Kwan via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-181">CHUKWA-181</a>. Changed chukwa check point file to $CHUKWA_LOG_DIR.<br />(Jerome Boulon via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-182">CHUKWA-182</a>. Added nagios appender configuration.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-158">CHUKWA-158</a>. Consolidate namenode address to a single configuration object.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-168">CHUKWA-168</a>. Added watchdog for database.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-175">CHUKWA-175</a>.  Removed error message for shutting down data processors.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-155">CHUKWA-155</a>.  Store final job status only<br />(Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-164">CHUKWA-164</a>.  Use year corresponding to the sender time stamp.<br />(Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-166">CHUKWA-166</a>.  Handle null parameter case for XSSFilter.<br />(Terence Kwan via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-156">CHUKWA-156</a>. Test Macro testcase changed to use timestamp check for the generated macros.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-154">CHUKWA-154</a>.  Handle adaptor exception, close file pointers on failure condition.<br />(Jerome Boulon via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-139">CHUKWA-139</a>.  Rewrite collector bail out code.<br />(Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-119">CHUKWA-119</a>.  Removed dependency of ChukwaAgent from ChunkImpl for preventing multiple
+             MetricsContext to be initialized in the same VM.<br />(Jerome Boulon via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-121">CHUKWA-121</a>.  Added logic to detect partition number less than 0.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-132">CHUKWA-132</a>.  Handle multi-line output in Job History file more gracefully.<br />(Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-124">CHUKWA-124</a>.  Fixed JDBC connection initialization and closing.  Added escapeQuotes utility method.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-122">CHUKWA-122</a>. Updated logic for finding time partition for Macro.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-125">CHUKWA-125</a>. Updated chukwa demux template to include JobHistory parser.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-98">CHUKWA-98</a>.  Added Daemon watcher to capture signal for pid file management.<br />(Cheng Zhang via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-120">CHUKWA-120</a>. Added the missing commons-cli library.<br />(Jerome Boulon via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-61">CHUKWA-61</a>.  Added report widget for accounting information.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-77">CHUKWA-77</a>.  Added Database Schema for Hadoop accounting information.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-92">CHUKWA-92</a>.  AbstractMetricsContext was using the wrong value<br />(Jerome Boulon via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-70">CHUKWA-70</a>.  Rewrite FileAdaptor.<br />(Jerome Boulon via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-93">CHUKWA-93</a>.  Fix NPE in SeqFileWriter.<br />(Jiaqi Tan via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-1">CHUKWA-1</a>. Remove lzo job configuration from Chukwa data processors.<br />(Contribute by Jerome Boulon via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-40">CHUKWA-40</a>. Check for null pointer exception before unregister adaptor.<br />(Contribute By Jerome Boulon via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-75">CHUKWA-75</a>. Filter out iostat values that is greater than 1+e10.
+</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-47">CHUKWA-47</a>. ChukwaJobTrackerInstrumentation class extends JobTrackerMetricsInst and added
+           finalizedJob method for stop streaming job history log file.<br />(Jerome Boulon via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-66">CHUKWA-66</a>. Corrected TerminatorThread logger class name.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-65">CHUKWA-65</a>. Redirect metrics log file to CHUKWA_LOG_DIR, and setup read/writable permission on the metrics
+           log files.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-73">CHUKWA-73</a>. Added Socket Timeout 60 seconds.<br />(Jerome Boulon via Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-58">CHUKWA-58</a>. Changed watchdog to look for CHUKWA_PID_DIR.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-43">CHUKWA-43</a>.  ChukwaLog4jAppender should send the current file offset instead of sending 0.<br />(Jerome Boulon via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-41">CHUKWA-41</a>.  ChukwaLog4jAppender does not escape \n for exception.<br />(Jerome Boulon via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-28">CHUKWA-28</a>.  Late initalization of log4j adaptor.<br />(Jerome Boulon via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-48">CHUKWA-48</a>.  Cleanup code to resolve compiler warnings.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-9">CHUKWA-9</a>.  MetricDataLoader should close JDBC connection.<br />(Jerome Boulon via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-37">CHUKWA-37</a>.  Remove ChuckwaArchiveBuilder.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-33">CHUKWA-33</a>.  Reformat code to fit hadoop style.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-8">CHUKWA-8</a>.  Remove deprecated conf files.<br />(eyang via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/CHUKWA-11">CHUKWA-11</a>.  Remove non .template files from conf dir.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-5409">HADOOP-5409</a>. Changed opt directory copy to a optional operation, if opt exist.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-5138">HADOOP-5138</a>. Fixing failing test cases by separating TestCharFileTailing
+and TestFileTailing adaptors.<br />(Jerome Boulon via acmurthy)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-5401">HADOOP-5401</a>. Standardize control port conf option name as chukwaAgent.control.port<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-5087">HADOOP-5087</a>. Fix regex for command parsing.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-5057">HADOOP-5057</a>. Better test coverage for missing checkpoint cases.<br />(asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-5055">HADOOP-5055</a>. Changed alert.conf location from $CHUKWA_HOME/conf/alert.conf to $CHUKWA_CONF_DIR/alert.conf.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-5054">HADOOP-5054</a>. Improved database partitioning by date.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-5051">HADOOP-5051</a>. * Added macro token subsitution for sum(table_name)
+             * Added correct hdfs throughput aggregation SQL macros.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-5032">HADOOP-5032</a>. Export CHUKWA_CONF_DIR in chukwa-config.sh.
+</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-4960">HADOOP-4960</a>. Changed metrics time from current system time to data source time.
+</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-4959">HADOOP-4959</a>. Support parsing of top output for Redhat EL 5.1.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-4916">HADOOP-4916</a>. * Added external property file to reference location and ownership of chukwa
+             * Added ability to control the user name to run chukwa<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-4914">HADOOP-4914</a>. Added description fields to chukwa init.d scripts.
+</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-4889">HADOOP-4889</a>. Move chown from post install phase to build phase of the RPM file.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-4884">HADOOP-4884</a>. Change date format from dd/mm/yyyy to yyyy/mm/dd for display in the chart tool tips.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-4860">HADOOP-4860</a>. Changed test cases into 3 different test classes to prevent Agent from loading chukwa_check_point file which interfered with test cases.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-4825">HADOOP-4825</a>. Replaced jps with ps ax for shutdown scripts.
+             Clean up reference of jar file from top level instead of build directory.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-4805">HADOOP-4805</a>. Removed black list collector feature from Chukwa Agent HTTP Sender.<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-4796">HADOOP-4796</a>. Change component unit test targets from "ant test-agent" to "ant -Dtestcase=TestAgent test".<br />(Eric Yang)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-4791">HADOOP-4791</a>. Add build configuration parameter to specify where Chukwa will be installed for RPM packaging.<br />(Eric Yang)</li>
+    </ol>
+  </li>
+</ul>
+<h3><a href="javascript:toggleList('release_0.1.1_-_unreleased_')">Release 0.1.1 - Unreleased
+</a></h3>
+<ul id="release_0.1.1_-_unreleased_">
+  <li><a href="javascript:toggleList('release_0.1.1_-_unreleased_._improvements_')">  IMPROVEMENTS
+</a>&nbsp;&nbsp;&nbsp;(4)
+    <ol id="release_0.1.1_-_unreleased_._improvements_">
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-4431">HADOOP-4431</a>. Add versionning/tags to Chukwa Chunk.<br />(Jerome Boulon via Johan)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-4433">HADOOP-4433</a>. Improve data loader for collecting metrics and log files.<br />(Eric Yang via omalley)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-5205">HADOOP-5205</a>.  Change the value of CHUKWA_IDENT_STRING from demo to TODO-AGENTS-INSTANCE-NAME in chukwa-env.sh.template<br />(Jerome Boulon via asrabkin)</li>
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-5033">HADOOP-5033</a>.  Simplified ChukwaWriter API.<br />(asrabkin)</li>
+    </ol>
+  </li>
+  <li><a href="javascript:toggleList('release_0.1.1_-_unreleased_._new_features_')">  NEW FEATURES
+</a>&nbsp;&nbsp;&nbsp;(1)
+    <ol id="release_0.1.1_-_unreleased_._new_features_">
+      <li><a href="http://issues.apache.org/jira/browse/HADOOP-3719">HADOOP-3719</a>. Initial checkin of Chukwa, which is a data collection and
+analysis framework.<br />(Jerome Boulon, Andy Konwinski, Ari Rabkin,
+and Eric Yang)</li>
+    </ol>
+  </li>
+</ul>
+</ul>
+</body>
+</html>

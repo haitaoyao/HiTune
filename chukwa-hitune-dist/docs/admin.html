@@ -1,0 +1,692 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="Apache Forrest" name="Generator">
+<meta name="Forrest-version" content="0.8">
+<meta name="Forrest-skin-name" content="pelt">
+<title>Chukwa Administration Guide</title>
+<link type="text/css" href="skin/basic.css" rel="stylesheet">
+<link media="screen" type="text/css" href="skin/screen.css" rel="stylesheet">
+<link media="print" type="text/css" href="skin/print.css" rel="stylesheet">
+<link type="text/css" href="skin/profile.css" rel="stylesheet">
+<script src="skin/getBlank.js" language="javascript" type="text/javascript"></script><script src="skin/getMenu.js" language="javascript" type="text/javascript"></script><script src="skin/fontsize.js" language="javascript" type="text/javascript"></script>
+<link rel="shortcut icon" href="">
+</head>
+<body onload="init()">
+<script type="text/javascript">ndeSetTextSize();</script>
+<div id="top">
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+<a href="http://www.apache.org/">Apache</a> &gt; <a href="http://hadoop.apache.org/">Hadoop</a> &gt; <a href="http://hadoop.apache.org/pig/">Chukwa</a><script src="skin/breadcrumbs.js" language="JavaScript" type="text/javascript"></script>
+</div>
+<!--+
+    |header
+    +-->
+<div class="header">
+<!--+
+    |start group logo
+    +-->
+<div class="grouplogo">
+<a href="http://hadoop.apache.org/"><img class="logoImage" alt="Hadoop" src="images/hadoop-logo.jpg" title="Apache Hadoop"></a>
+</div>
+<!--+
+    |end group logo
+    +-->
+<!--+
+    |start Project Logo
+    +-->
+<div class="projectlogo">
+<a href="http://hadoop.apache.org/"><img class="logoImage" alt="Chukwa" src="images/chukwa_logo_small.jpg" title="A data collection system for monitoring and analyzing large distributed systems."></a>
+</div>
+<!--+
+    |end Project Logo
+    +-->
+<!--+
+    |start Search
+    +-->
+<div class="searchbox">
+<form action="http://www.google.com/search" method="get" class="roundtopsmall">
+<input value="" name="sitesearch" type="hidden"><input onFocus="getBlank (this, 'Search the site with google');" size="25" name="q" id="query" type="text" value="Search the site with google">&nbsp; 
+                    <input name="Search" value="Search" type="submit">
+</form>
+</div>
+<!--+
+    |end search
+    +-->
+<!--+
+    |start Tabs
+    +-->
+<ul id="tabs">
+<li>
+<a class="unselected" href="http://hadoop.apache.org/chukwa">Project</a>
+</li>
+<li>
+<a class="unselected" href="http://wiki.apache.org/hadoop/Chukwa/">Wiki</a>
+</li>
+<li class="current">
+<a class="selected" href="index.html">Chukwa 0.4 Documentation</a>
+</li>
+</ul>
+<!--+
+    |end Tabs
+    +-->
+</div>
+</div>
+<div id="main">
+<div id="publishedStrip">
+<!--+
+    |start Subtabs
+    +-->
+<div id="level2tabs"></div>
+<!--+
+    |end Endtabs
+    +-->
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+
+             &nbsp;
+           </div>
+<!--+
+    |start Menu, mainarea
+    +-->
+<!--+
+    |start Menu
+    +-->
+<div id="menu">
+<div onclick="SwitchMenu('menu_selected_1.1', 'skin/')" id="menu_selected_1.1Title" class="menutitle" style="background-image: url('skin/images/chapter_open.gif');">Overview</div>
+<div id="menu_selected_1.1" class="selectedmenuitemgroup" style="display: block;">
+<div class="menuitem">
+<a href="index.html">Overview</a>
+</div>
+<div class="menuitem">
+<a href="design.html">Architecture</a>
+</div>
+<div class="menupage">
+<div class="menupagetitle">Admin Guide</div>
+</div>
+<div class="menuitem">
+<a href="agent.html">Agent Configuration Guide</a>
+</div>
+<div class="menuitem">
+<a href="dataflow.html">Guide to Chukwa Storage layout</a>
+</div>
+<div class="menuitem">
+<a href="programming.html">Programming Guide</a>
+</div>
+<div class="menuitem">
+<a href="api/index.html">API Docs</a>
+</div>
+<div class="menuitem">
+<a href="http://wiki.apache.org/hadoop/Chukwa/">Wiki</a>
+</div>
+<div class="menuitem">
+<a href="http://wiki.apache.org/hadoop/Chukwa/FAQ">FAQ</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.2', 'skin/')" id="menu_1.2Title" class="menutitle">Miscellaneous</div>
+<div id="menu_1.2" class="menuitemgroup">
+<div class="menuitem">
+<a href="releasenotes.html">Release Notes</a>
+</div>
+<div class="menuitem">
+<a href="changes.html">Change Log</a>
+</div>
+</div>
+<div id="credit"></div>
+<div id="roundbottom">
+<img style="display: none" class="corner" height="15" width="15" alt="" src="skin/images/rc-b-l-15-1body-2menu-3menu.png"></div>
+<!--+
+  |alternative credits
+  +-->
+<div id="credit2"></div>
+</div>
+<!--+
+    |end Menu
+    +-->
+<!--+
+    |start content
+    +-->
+<div id="content">
+<div title="Portable Document Format" class="pdflink">
+<a class="dida" href="admin.pdf"><img alt="PDF -icon" src="skin/images/pdfdoc.gif" class="skin"><br>
+        PDF</a>
+</div>
+<h1>Chukwa Administration Guide</h1>
+<div id="minitoc-area">
+<ul class="minitoc">
+<li>
+<a href="#Purpose"> Purpose </a>
+</li>
+<li>
+<a href="#Pre-requisites"> Pre-requisites</a>
+</li>
+<li>
+<a href="#Installing+Chukwa">Installing Chukwa</a>
+<ul class="minitoc">
+<li>
+<a href="#First+Steps">First Steps </a>
+</li>
+<li>
+<a href="#General+Configuration">General Configuration</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#Agents">Agents </a>
+<ul class="minitoc">
+<li>
+<a href="#Configuration">Configuration</a>
+</li>
+<li>
+<a href="#Starting%2C+stopping%2C+and+monitoring">Starting, stopping, and monitoring</a>
+</li>
+<li>
+<a href="#Configuring+Hadoop+for+monitoring">Configuring Hadoop for monitoring</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#Collectors">Collectors </a>
+<ul class="minitoc">
+<li>
+<a href="#Configuration-N10142">Configuration</a>
+</li>
+<li>
+<a href="#Starting%2C+stopping%2C+and+monitoring-N1015F">Starting, stopping, and monitoring</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#Demux+and+HICC">Demux and HICC</a>
+<ul class="minitoc">
+<li>
+<a href="#Start+the+Chukwa+Processes">Start the Chukwa Processes </a>
+</li>
+<li>
+<a href="#Set+Up+the+Database">Set Up the Database </a>
+</li>
+<li>
+<a href="#Set+Up+HICC">Set Up HICC </a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#Troubleshooting+Tips">Troubleshooting Tips</a>
+<ul class="minitoc">
+<li>
+<a href="#UNIX+Processes+For+Chukwa+Agents">UNIX Processes For Chukwa Agents</a>
+</li>
+<li>
+<a href="#UNIX+Processes+For+Chukwa+Collectors">UNIX Processes For Chukwa Collectors</a>
+</li>
+<li>
+<a href="#UNIX+Processes+For+Chukwa+Data+Processes">UNIX Processes For Chukwa Data Processes</a>
+</li>
+<li>
+<a href="#Checks+for+MySQL+Replication">Checks for MySQL Replication </a>
+</li>
+<li>
+<a href="#Checks+For+Disk+Full"> Checks For Disk Full </a>
+</li>
+<li>
+<a href="#Emergency+Shutdown+Procedure">Emergency Shutdown Procedure</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+
+<a name="N1000D"></a><a name="Purpose"></a>
+<h2 class="h3"> Purpose </h2>
+<div class="section">
+<p> Chukwa is a system for large-scale reliable log collection and processing
+with Hadoop. The <a href="design.html">Chukwa design overview</a> discusses the overall architecture of Chukwa.
+You should read that document before this one.
+The purpose of this document is to help you install and configure Chukwa.</p>
+</div>
+
+
+<a name="N1001B"></a><a name="Pre-requisites"></a>
+<h2 class="h3"> Pre-requisites</h2>
+<div class="section">
+<p>Chukwa should work on any POSIX platform, but  GNU/Linux is the only
+ production platform that has been tested extensively. Chukwa has also been used
+ successfully on Mac OS X, which several members of the Chukwa team use for 
+ development. </p>
+<p>
+ The only absolute software requirements are <a href="http://java.sun.com">Java 1.6
+ </a> or better and <a href="http://hadoop.apache.org/">Hadoop 0.18+</a>.
+  
+
+ HICC, the Chukwa
+ visualization interface, <a href="#Set+Up+the+Database">requires MySQL 5.1.30+.</a>
+</p>
+<p>
+The Chukwa cluster management scripts rely on <span class="codefrag">ssh</span>; these scripts, however,
+are not required if you have some alternate mechanism for starting and stopping
+daemons.
+ </p>
+</div>
+
+
+
+<a name="N10039"></a><a name="Installing+Chukwa"></a>
+<h2 class="h3">Installing Chukwa</h2>
+<div class="section">
+<p>A minimal Chukwa deployment has three components: </p>
+<ul>
+
+<li> A Hadoop cluster on which Chukwa will store data (referred to as the Chukwa cluster).</li> 
+
+<li> A collector process, that writes collected data to HDFS, the Hadoop file system.</li>
+
+<li> One or more agent processes, that send monitoring data to the collector. 
+The nodes with active agent processes are referred to as the monitored source nodes.</li>
+
+</ul>
+<p>In addition, you may wish to run the Chukwa Demux jobs, which parse collected
+data, or HICC, the Chukwa visualization tool.</p>
+<p></p>
+<p></p>
+<p></p>
+<div id="" style="text-align: center;">
+<img id="" class="figure" alt="Chukwa Components" src="images/components.gif"></div>
+<a name="N1005C"></a><a name="First+Steps"></a>
+<h3 class="h4">First Steps </h3>
+<ol>
+
+<li>Obtain a copy of Chukwa. You can find the latest release on the 
+<a href="http://hadoop.apache.org/chukwa/releases.html">Chukwa release page</a>.</li>
+
+<li>Un-tar the release, via <span class="codefrag">tar xzf</span>.</li>
+
+<li>Make sure a copy of Chukwa is available on each node being monitored, and on
+each node that will run a collector.</li>
+
+<li>
+We refer to the directory containing Chukwa as <span class="codefrag">CHUKWA_HOME</span>. It may
+be helpful to set <span class="codefrag">CHUKWA_HOME</span> explicitly in your environment,
+but Chukwa does not require that you do so.</li>
+
+</ol>
+<a name="N10081"></a><a name="General+Configuration"></a>
+<h3 class="h4">General Configuration</h3>
+<p>Agents and collectors are configured differently, but part of the process
+is common to both. </p>
+<ul>
+
+<li>Make sure that <span class="codefrag">JAVA_HOME</span> is set correctly and points to a Java 1.6 JRE. 
+It's generally best to set this in <span class="codefrag">conf/chukwa-env.sh</span>.</li>
+
+<li>
+In <span class="codefrag">conf/chukwa-env.sh</span>, set <span class="codefrag">CHUKWA_LOG_DIR</span> and
+<span class="codefrag">CHUKWA_PID_DIR</span> to the directories where Chukwa should store its
+console logs and pid files.  The pid directory must not be shared between
+different Chukwa instances: it should be local, not NFS-mounted.
+</li>
+ 
+<li> Optionally, set CHUKWA_IDENT_STRING. This string is
+ used to name Chukwa's own console log files.</li>
+<!--
+<li>Set <b>either</b> <code>HADOOP_HOME</code> or <code>HADOOP_JAR</code></li>
+-->
+
+</ul>
+</div>
+
+<!-- 
+</li> <li> Download and un-tar the Chukwa binary.
+</li> <li> Configure the components for the Chukwa cluster (see <a href="#Chukwa+Cluster+Deployment">Chukwa Cluster Deployment</a>).
+</li> <li> Configure the Hadoop configuration files (see <a href="#Hadoop+Configuration+Files">Hadoop Configuration Files</a>).
+</li> <li> Zip the directory and deploy to all nodes in the Chukwa cluster.
+</li></ul> 
+<p></p>
+<p></p>
+<p>2. Select one of the source nodes to be monitored: </p>
+<ul>
+<li> Create a directory for the Chukwa installation (Chukwa will set the environment variable <strong>CHUKWA_HOME</strong> to point to this directory during the install).
+</li> <li> Move to the new directory.
+</li> <li> Download and un-tar the Chukwa binary.
+</li> <li> Configure the components for the source nodes (see <a href="#Monitored+Source+Node+Deployment">Monitored Source Node Deployment</a>).
+</li> <li> Configure the Hadoop configuration files (see <a href="#Hadoop+Configuration+Files">Hadoop Configuration Files</a>).
+</li> <li> Zip the directory and deploy to all source nodes to be monitored.
+</li></ul> 
+</section>
+ -->
+
+
+<a name="N100AB"></a><a name="Agents"></a>
+<h2 class="h3">Agents </h2>
+<div class="section">
+<p>Agents are the Chukwa processes that actually produce data. This section
+describes how to configure and run them. More details are available in the
+<a href="agent.html">Agent configuration guide</a>.</p>
+<a name="N100B8"></a><a name="Configuration"></a>
+<h3 class="h4">Configuration</h3>
+<p>This section describes how to set up the agent process on the source nodes. </p>
+<p>The one mandatory configuration step is to set up 
+<span class="codefrag"> $CHUKWA_HOME/conf/collectors</span>. This file should contain a list
+of hosts that will run Chukwa collectors. Agents will pick a random collector
+from this list to try sending to, and will fail-over to another listed collector
+on error.  The file should look something like:</p>
+<pre class="code">
+http://&lt;collector1HostName&gt;:&lt;collector1Port&gt;/
+http://&lt;collector2HostName&gt;:&lt;collector2Port&gt;/
+http://&lt;collector3HostName&gt;:&lt;collector3Port&gt;/
+</pre>
+<p>Edit the CHUKWA_HOME/conf/initial_adaptors configuration file. This is 
+where you tell Chukwa what log files to monitor. See
+<a href="agent.html#Adaptors">the adaptor configuration guide</a> for
+a list of available adaptors.</p>
+<p>There are a number of optional settings in 
+<span class="codefrag">$CHUKWA_HOME/conf/chukwa-agent-conf.xml</span>:</p>
+<ul>
+
+<li>The most important of these is the cluster/group name that identifies the
+monitored source nodes. This value is stored in each Chunk of collected data;
+you can therefore use it to distinguish data coming from different groups of 
+machines.
+<pre class="code">
+ &lt;property&gt;
+    &lt;name&gt;chukwaAgent.tags&lt;/name&gt;
+    &lt;value&gt;cluster="demo"&lt;/value&gt;
+    &lt;description&gt;The cluster's name for this agent&lt;/description&gt;
+  &lt;/property&gt;
+</pre>
+
+</li>
+
+<li>
+Another important option is <span class="codefrag">chukwaAgent.checkpoint.dir</span>.
+This is the directory Chukwa will use for its periodic checkpoints of running adaptors.
+It <strong>must not</strong> be a shared directory; use a local, not NFS-mount, directory.
+</li>
+
+
+<li>
+Setting the option <span class="codefrag">chukwaAgent.control.remote</span> will disallow remote connections
+to the agent control socket.
+</li>
+
+</ul>
+<a name="N100F4"></a><a name="Starting%2C+stopping%2C+and+monitoring"></a>
+<h3 class="h4">Starting, stopping, and monitoring</h3>
+<p>To run an agent process on a single node, use <span class="codefrag">bin/chukwa agent</span>.
+</p>
+<p>
+Typically, agents run as daemons. The script <span class="codefrag">bin/start-agents.sh</span> 
+will ssh to each machine listed in <span class="codefrag">conf/agents</span> and start an agent,
+running in the background. The script <span class="codefrag">bin/stop-agents.sh</span> 
+does the reverse.</p>
+<p>You can, of course, use any other daemon-management system you like. 
+For instance, <span class="codefrag">tools/init.d</span> includes init scripts for running
+Chukwa agents.</p>
+<p>To check if an agent is working properly, you can telnet to the control
+port (9093 by default) and hit "enter". You will get a status message if
+the agent is running normally.
+</p>
+<a name="N10116"></a><a name="Configuring+Hadoop+for+monitoring"></a>
+<h3 class="h4">Configuring Hadoop for monitoring</h3>
+<p>
+One of the key goals for Chukwa is to collect logs from Hadoop clusters. This section
+describes how to configure Hadoop to send its logs to Chukwa. Note that 
+these directions require Hadoop 0.20.0+.  Earlier versions of Hadoop do not have
+the hooks that Chukwa requires in order to grab MapReduce job logs.</p>
+<p>The Hadoop configuration files are located in <span class="codefrag">HADOOP_HOME/conf</span>.
+ To setup Chukwa to collect logs from Hadoop, you need to change some of the 
+ Hadoop configuration files.</p>
+<ol>
+	
+<li>Copy CHUKWA_HOME/conf/hadoop-log4j.properties file to HADOOP_HOME/conf/log4j.properties</li>
+	
+<li>Copy CHUKWA_HOME/conf/hadoop-metrics.properties file to HADOOP_HOME/conf/hadoop-metrics.properties</li>
+	
+<li>Edit HADOOP_HOME/conf/hadoop-metrics.properties file and change @CHUKWA_LOG_DIR@ to your actual CHUKWA log dirctory (ie, CHUKWA_HOME/var/log)</li>	
+<!-- <li>ln -s HADOOP_HOME/conf/hadoop-site.xml CHUKWA_HOME/conf/hadoop-site.xml</li>
+ -->	
+ 
+</ol>
+</div>
+
+
+
+<a name="N10135"></a><a name="Collectors"></a>
+<h2 class="h3">Collectors </h2>
+<div class="section">
+<p>This section describes how to set up the Chukwa collectors.
+For more details, see <a href="collector.html">the collector configuration guide</a>.</p>
+<a name="N10142"></a><a name="Configuration-N10142"></a>
+<h3 class="h4">Configuration</h3>
+<p>First, edit <span class="codefrag">$CHUKWA_HOME/conf/chukwa-env.sh</span> In addition to 
+the general directions given above, you should set <span class="codefrag">
+HADOOP_HOME</span>. This should be the Hadoop deployment Chukwa will use to
+store collected data.
+You will get a version mismatch error if this is configured incorrectly.
+</p>
+<p>Next, edit <span class="codefrag">$CHUKWA_HOME/conf/chukwa-collector-conf.xml</span>.
+The one mandatory configuration parameter is <span class="codefrag">writer.hdfs.filesystem</span>.
+This should be set to the HDFS root URL on which Chukwa will store data.
+Various optional configuration options are described in <a href="collector.html">the collector configuration guide</a>
+and in the collector configuration file itself.
+</p>
+<a name="N1015F"></a><a name="Starting%2C+stopping%2C+and+monitoring-N1015F"></a>
+<h3 class="h4">Starting, stopping, and monitoring</h3>
+<p>To run a collector process on a single node, use <span class="codefrag">bin/chukwa collector</span>.
+</p>
+<p>
+Typically, collectors run as daemons. The script <span class="codefrag">bin/start-collectors.sh</span> 
+will ssh to each collector listed in <span class="codefrag">conf/collectors</span> and start a
+collector, running in the background. The script <span class="codefrag">bin/stop-collectors.sh
+</span> does the reverse.</p>
+<p>You can, of course, use any other daemon-management system you like. 
+For instance, <span class="codefrag">tools/init.d</span> includes init scripts for running
+Chukwa collectors.</p>
+<p>To check if a collector is working properly, you can simply access
+<span class="codefrag">http://collectorhost:collectorport/chukwa?ping=true</span> with a web browser.
+If the collector is running, you should see a status page with a handful of statistics.</p>
+</div>
+
+
+<a name="N10185"></a><a name="Demux+and+HICC"></a>
+<h2 class="h3">Demux and HICC</h2>
+<div class="section">
+<a name="N1018D"></a><a name="Start+the+Chukwa+Processes"></a>
+<h3 class="h4">Start the Chukwa Processes </h3>
+<p>The Chukwa startup scripts are located in the CHUKWA_HOME/tools/init.d directory.</p>
+<ul>
+
+<li> Start the Chukwa data processors script (execute this command only on the data processor node):
+</li>
+</ul>
+<pre class="code">CHUKWA_HOME/tools/init.d/chukwa-data-processors start </pre>
+<ul>
+
+<li> Create down sampling daily cron job:
+</li>
+</ul>
+<pre class="code">CHUKWA_HOME/bin/downSampling.sh --config &lt;path to chukwa conf&gt; -n add </pre>
+<a name="N101A9"></a><a name="Set+Up+the+Database"></a>
+<h3 class="h4">Set Up the Database </h3>
+<p>Set up and configure the MySQL database.</p>
+<a name="N101B2"></a><a name="Install+MySQL"></a>
+<h4>Install MySQL</h4>
+<p>Download MySQL 5.1 from the <a href="http://dev.mysql.com/downloads/mysql/5.1.html#downloads">MySQL site</a>. </p>
+<pre class="code">
+tar fxvz mysql-*.tar.gz -C $CHUKWA_HOME/opt
+cd $CHUKWA_HOME/opt/mysql-*
+</pre>
+<p>
+Configure and then copy the my.cnf file to the CHUKWA_HOME/opt/mysql-* directory:
+</p>
+<pre class="code">
+./scripts/mysql_install_db
+./bin/mysqld_safe&amp;
+./bin/mysqladmin -u root create &lt;clustername&gt;
+./bin/mysql -u root &lt;clustername&gt; &lt; $CHUKWA_HOME/conf/database_create_table
+</pre>
+<p>Edit the CHUKWA_HOME/conf/jdbc.conf configuration file. </p>
+<p>Set the clustername to the MYSQL root URL:</p>
+<pre class="code">
+&lt;clustername&gt;=jdbc:mysql://localhost:3306/&lt;clustername&gt;?user=root
+</pre>
+<p>Download the MySQL Connector/J 5.1 from the  <a href="http://dev.mysql.com/downloads/connector/j/5.1.html">MySQL site</a>, 
+and place the jar file in $CHUKWA_HOME/lib.</p>
+<a name="N101DC"></a><a name="Set+Up+MySQL+for+Replication"></a>
+<h4>Set Up MySQL for Replication</h4>
+<p>Start the MySQL shell:</p>
+<pre class="code">
+mysql -u root -p
+Enter password:
+</pre>
+<p>From the MySQL shell, enter these commands (replace &lt;username&gt; and &lt;password&gt; with actual values):</p>
+<pre class="code">
+GRANT REPLICATION SLAVE ON *.* TO '&lt;username&gt;'@'%' IDENTIFIED BY '&lt;password&gt;';
+FLUSH PRIVILEGES; 
+</pre>
+<a name="N101F4"></a><a name="Set+Up+HICC"></a>
+<h3 class="h4">Set Up HICC </h3>
+<p>The Hadoop Infrastructure Care Center (HICC) is the Chukwa web user interface. To set up HICC, do the following:</p>
+<ul>
+
+<li>Download apache-tomcat 6.0.18+ from <a href="http://tomcat.apache.org/download-60.cgi">Apache Tomcat</a> and decompress the tarball to CHUKWA_HOME/opt. </li> 
+
+<li>Copy CHUKWA_HOME/hicc.war to apache-tomcat-6.0.18/webapps. </li> 
+
+<li>Start up HICC by running: </li> 
+
+</ul>
+<pre class="code">$CHUKWA_HOME/bin/hicc.sh start</pre>
+<ul>
+
+<li>Point your favorite browser to: http://&lt;server&gt;:8080/hicc  </li> 
+
+</ul>
+</div>
+
+
+
+
+<a name="N10219"></a><a name="Troubleshooting+Tips"></a>
+<h2 class="h3">Troubleshooting Tips</h2>
+<div class="section">
+<a name="N1021F"></a><a name="UNIX+Processes+For+Chukwa+Agents"></a>
+<h3 class="h4">UNIX Processes For Chukwa Agents</h3>
+<p>The Chukwa agent process name is identified by:</p>
+<ul>
+
+<li> org.apache.hadoop.chukwa.datacollection.agent.ChukwaAgent
+</li>
+</ul>
+<p>Command line to use to search for the process name:</p>
+<ul>
+
+<li> ps ax | grep org.apache.hadoop.chukwa.datacollection.agent.ChukwaAgent
+</li>
+</ul>
+<a name="N10238"></a><a name="UNIX+Processes+For+Chukwa+Collectors"></a>
+<h3 class="h4">UNIX Processes For Chukwa Collectors</h3>
+<p>Chukwa Collector name is identified by:</p>
+<ul>
+
+<li> 
+<strong>org.apache.hadoop.chukwa.datacollection.collector.CollectorStub</strong>
+
+</li>
+</ul>
+<a name="N1024A"></a><a name="UNIX+Processes+For+Chukwa+Data+Processes"></a>
+<h3 class="h4">UNIX Processes For Chukwa Data Processes</h3>
+<p>Chukwa Data Processors are identified by:</p>
+<ul>
+
+<li> org.apache.hadoop.chukwa.extraction.demux.Demux
+</li> 
+<li>org.apache.hadoop.chukwa.extraction.database.DatabaseLoader
+</li> 
+<li>org.apache.hadoop.chukwa.extraction.archive.ChukwaArchiveBuilder
+</li>
+</ul>
+<p>The processes are scheduled execution, therefore they are not always visible from the process list.</p>
+<a name="N10262"></a><a name="Checks+for+MySQL+Replication"></a>
+<h3 class="h4">Checks for MySQL Replication </h3>
+<p>At slave server, MySQL prompt, run:</p>
+<pre class="code">
+show slave status\G
+</pre>
+<p>Make sure both <strong>Slave_IO_Running</strong> and <strong>Slave_SQL_Running</strong> are both "Yes".</p>
+<p>Things to check if MySQL replication fails:</p>
+<ul>
+
+<li> Make sure grant permission has been enabled on master MySQL server.
+</li> 
+<li> Check disk space availability.  
+</li> 
+<li> Check Error status in slave status.
+</li>
+</ul>
+<p>To reset MySQL replication, run these commands on MySQL:</p>
+<pre class="code">
+STOP SLAVE;
+CHANGE MASTER TO
+  MASTER_HOST='hostname',
+  MASTER_USER='username',
+  MASTER_PASSWORD='password',
+  MASTER_PORT=3306,
+  MASTER_LOG_FILE='master2-bin.001',
+  MASTER_LOG_POS=4,
+  MASTER_CONNECT_RETRY=10;
+START SLAVE;
+</pre>
+<a name="N1028E"></a><a name="Checks+For+Disk+Full"></a>
+<h3 class="h4"> Checks For Disk Full </h3>
+<p>If anything is wrong, use /etc/init.d/chukwa-agent and CHUKWA_HOME/tools/init.d/chukwa-system-metrics stop to shutdown Chukwa.  
+Look at agent.log and collector.log file to determine the problems. </p>
+<p>The most common problem is the log files are growing unbounded. Set up a cron job to remove old log files:  </p>
+<pre class="code">
+ 0 12 * * * CHUKWA_HOME/tools/expiration.sh 10 !CHUKWA_HOME/var/log nowait
+</pre>
+<p>This will set up the log file expiration for CHUKWA_HOME/var/log for log files older than 10 days.</p>
+<a name="N102A2"></a><a name="Emergency+Shutdown+Procedure"></a>
+<h3 class="h4">Emergency Shutdown Procedure</h3>
+<p>If the system is not functioning properly and you cannot find an answer in the Administration Guide, execute the kill command. 
+The current state of the java process will be written to the log files. You can analyze these files to determine the cause of the problem.</p>
+<pre class="code">
+kill -3 &lt;pid&gt;
+</pre>
+</div>
+
+
+</div>
+<!--+
+    |end content
+    +-->
+<div class="clearboth">&nbsp;</div>
+</div>
+<div id="footer">
+<!--+
+    |start bottomstrip
+    +-->
+<div class="lastmodified">
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<div class="copyright">
+        Copyright &copy;
+         2007-2010 <a href="http://www.apache.org/licenses/">The Apache Software Foundation.</a>
+</div>
+<!--+
+    |end bottomstrip
+    +-->
+</div>
+</body>
+</html>

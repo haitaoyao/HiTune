@@ -1,0 +1,22 @@
+<configuration>
+    <property>
+        <name>outputfilename</name>
+        <value>jvmmetrics.csv</value>
+        <description></description>
+    </property>
+    <property>
+        <name>datasource</name>
+        <value>${HiTune.input.reposfolder}/Hadoop_jvm_metrics</value>
+        <description></description>
+    </property>
+    <property>
+        <name>category</name>
+        <value>jvm.metrics</value>
+        <description></description>
+    </property>
+    <property>
+        <name>metrics</name>
+        <value>gcCount,gcTimeMillis,memHeapCommittedM,memHeapUsedM,memNonHeapCommittedM,memNonHeapUsedM,hostName,processName,threadsBlocked,threadsNew,threadsRunnable,threadsTerminated,threadsTimedWaiting,threadsWaiting</value>
+        <description></description>
+    </property>
+</configuration>

@@ -1,0 +1,22 @@
+<configuration>
+    <property>
+        <name>outputfilename</name>
+        <value>network.csv</value>
+        <description></description>
+    </property>
+    <property>
+        <name>datasource</name>
+        <value>${HiTune.input.reposfolder}/HiTune.Netstat</value>
+        <description></description>
+    </property>
+    <property>
+        <name>device</name>
+        <value></value>
+        <description></description>
+    </property>
+    <property>
+        <name>metrics</name>
+        <value>rxpck/s,txpck/s,rxkB/s,txkB/s</value>
+        <description></description>
+    </property>
+</configuration>

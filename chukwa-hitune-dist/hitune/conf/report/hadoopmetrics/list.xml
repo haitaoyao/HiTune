@@ -1,0 +1,37 @@
+<list>
+    <category>
+        <name>jvmmetric</name>
+        <value>${HiTune.analyzer.configfolder}/hadoopmetrics/jvmmetric</value>
+        <description></description>
+    </category>
+    <category>
+        <name>mapredshuffleinmetric</name>
+        <value>${HiTune.analyzer.configfolder}/hadoopmetrics/mapredshuffleinmetric</value>
+        <description></description>
+    </category>
+    <category>
+        <name>mapredshuffleoutmetric</name>
+        <value>${HiTune.analyzer.configfolder}/hadoopmetrics/mapredshuffleoutmetric</value>
+        <description></description>
+    </category>
+    <category>
+        <name>tasktrackermeric</name>
+        <value>${HiTune.analyzer.configfolder}/hadoopmetrics/tasktrackermetric</value>
+        <description></description>
+    </category>
+    <category>
+        <name>jobtrackermetric</name>
+        <value>${HiTune.analyzer.configfolder}/hadoopmetrics/jobtrackermetric</value>
+        <description></description>
+    </category>
+    <category>
+        <name>datanodemetric</name>
+        <value>${HiTune.analyzer.configfolder}/hadoopmetrics/datanodemetric</value>
+        <description></description>
+    </category>
+    <category>
+        <name>namenodemetric</name>
+        <value>${HiTune.analyzer.configfolder}/hadoopmetrics/namenodemetric</value>
+        <description></description>
+    </category>
+</list>

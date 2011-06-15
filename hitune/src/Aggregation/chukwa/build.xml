@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="HiTuneChukwaAggregation" default="main" basedir=".">    
+	<property name="src.dir"     value="../../../src/Aggregation/chukwa"/>
+	<property name="build.dir"   value="../../../build/Aggregation/chukwa"/>
+	<property name="lib.dir" value="../../../lib"/>
+	<property name="jar.dir" value="../../../build"/>
+	
+	<path id="classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+		<fileset dir="${jar.dir}" includes="**/*.jar"/>
+    </path>
+    
+    
+    <target name="main" description="Default target" depends="clean,jar"/>
+    
+    <target name="clean" description="Clean up build folder">
+        <delete dir="${build.dir}"/>
+    	<delete file="${jar.dir}/${ant.project.name}-${project.version}.jar"/>
+    </target>
+    
+    <target name="compile" description="Compile all java code">
+        <mkdir dir="${build.dir}"/>
+    	<javac debug="on" srcdir="${src.dir}" destdir="${build.dir}" classpathref="classpath"/>
+    </target>
+    
+    <target name ="jar" description="Create a jar" depends="compile">
+        <jar jarfile="${jar.dir}/${ant.project.name}-${project.version}.jar" includes="*.class"  basedir="${build.dir}">
+            <fileset dir="${build.dir}" includes="**/*.class" />
+        </jar>
+    </target>
+</project>

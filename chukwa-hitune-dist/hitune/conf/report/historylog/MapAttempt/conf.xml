@@ -1,0 +1,24 @@
+<configuration>
+	
+	<property>
+	    <name>outputfilename</name>
+	    <value>MapAttempt.csv</value>
+	    <description></description>
+	</property>
+	<property>
+	    <name>attemptid</name>
+	    <value>attempt_${HiTune.analyzer.targetjob.baseid}_m</value>
+	    <description></description>
+	</property>
+	
+        <property>
+        <name>HiTune.analyzer.filefilter.pattern</name>
+        <value>.*/MapAttempt/.*</value>
+        <description></description>
+    </property>
+    <property>
+        <name>metrics</name>
+        <value>TRACKER_NAME,TASKID,START_TIME,TASK_STATUS,FINISH_TIME,STATE_STRING,COUNTERS,HDFS bytes read,Local bytes written,Combine output records,Map input records,Map output bytes,Map input bytes,Combine input records,Map output records</value>
+        <description></description>
+    </property>
+</configuration>

@@ -1,0 +1,22 @@
+<configuration>
+	<property>
+        <name>outputfilename</name>
+        <value>mapredshuffleoutmetric.csv</value>
+        <description></description>
+    </property>
+    <property>
+        <name>datasource</name>
+        <value>${HiTune.input.reposfolder}/Hadoop_mapred_shuffleOutput</value>
+        <description></description>
+    </property>
+    <property>
+        <name>category</name>
+        <value>mapred.shuffleOutput</value>
+        <description></description>
+    </property>
+    <property>
+        <name>metrics</name>
+        <value>hostName,shuffle_failed_outputs,shuffle_handler_busy_percent,shuffle_output_bytes,shuffle_success_outputs</value>
+        <description></description>
+    </property>
+</configuration>

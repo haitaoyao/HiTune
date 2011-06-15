@@ -1,0 +1,24 @@
+<list>
+    <category>
+        <name>System</name>
+        <value>${HiTune.analyzer.configfolder}/system</value>
+        <description></description>
+    </category>
+
+    <category>
+        <name>HadoopJob</name>
+        <value>${HiTune.analyzer.configfolder}/instruments</value>
+        <description></description>
+    </category>
+
+    <category>
+        <name>HadoopMetrics</name>
+        <value>${HiTune.analyzer.configfolder}/hadoopmetrics</value>
+        <description></description>
+    </category>
+    <category>
+        <name>HistoryLog</name>
+        <value>${HiTune.analyzer.configfolder}/historylog</value>
+        <description></description>
+    </category>
+</list>

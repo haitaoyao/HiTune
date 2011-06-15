@@ -1,0 +1,27 @@
+<project name="HiTune" default="main" basedir=".">
+	<property name="project.version" value="0.9"/>
+	<property name="src.dir"     value="./src"/>
+	<property name="build.dir"   value="./build"/>
+	<property name="lib.dir" value="./lib"/>
+	<property name="jar.dir" value="./build"/>
+	
+	<target name="main" description="Default target" depends="Instruments,Analysis,Aggregation"/>
+	<target name="Instruments" description="instrument">
+		<subant target="main">
+			<property name="project.version" value="${project.version}"/>
+			<fileset file="${src.dir}/Instruments/build.xml"/>
+		</subant>
+	</target>
+	<target name="Aggregation">
+		<subant target="main">
+			 <property name="project.version" value="${project.version}"/>
+		     <fileset file="${src.dir}/Aggregation/build.xml"/>
+		</subant>
+	</target>
+	<target name="Analysis">
+	    <subant target="main">
+              <property name="project.version" value="${project.version}"/>
+	          <fileset file="${src.dir}/Analysis/build.xml"/>
+	    </subant>
+	</target>
+</project>

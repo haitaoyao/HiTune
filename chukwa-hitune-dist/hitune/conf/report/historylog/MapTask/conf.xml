@@ -1,0 +1,25 @@
+<configuration>
+	
+	
+	<property>
+	    <name>outputfilename</name>
+	    <value>MapTask.csv</value>
+	    <description></description>
+	</property>
+	<property>
+	    <name>taskid</name>
+	    <value>task_${HiTune.analyzer.targetjob.baseid}_m</value>
+	    <description></description>
+	</property>
+	
+    <property>
+        <name>HiTune.analyzer.filefilter.pattern</name>
+        <value>.*/MapTask/.*</value>
+        <description></description>
+    </property>
+    <property>
+        <name>metrics</name>
+        <value>START_TIME,SPLITS,FINISH_TIME,TASK_TYPE,TASK_STATUS,COUNTERS,HDFS bytes read,Local bytes written,Combine output records,Map input records,Map output bytes,Map input bytes,Combine input records,Map output records</value>
+        <description></description>
+    </property>
+</configuration>

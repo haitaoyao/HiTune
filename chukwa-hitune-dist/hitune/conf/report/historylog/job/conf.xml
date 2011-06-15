@@ -1,0 +1,19 @@
+<configuration>
+	
+	<property>
+	    <name>outputfilename</name>
+	    <value>job.csv</value>
+	    <description></description>
+	</property>
+	
+        <property>
+        <name>HiTune.analyzer.filefilter.pattern</name>
+        <value>.*/Job/.*</value>
+        <description></description>
+    </property>
+	<property>
+		<name>metrics</name>
+        <value>SUBMIT_TIME,LAUNCH_TIME,TOTAL_MAPS,TOTAL_REDUCES,JOB_STATUS,FINISHED_REDUCES,FINISHED_MAPS,FINISH_TIME,COUNTERS,HDFS_BYTES_READ,HDFS_BYTES_WRITTEN,FILE_BYTES_READ,FILE_BYTES_WRITTEN</value>
+		<description></description>
+    </property>
+</configuration>

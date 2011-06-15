@@ -1,0 +1,425 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="Apache Forrest" name="Generator">
+<meta name="Forrest-version" content="0.8">
+<meta name="Forrest-skin-name" content="pelt">
+<title>Chukwa Agent Setup Guide</title>
+<link type="text/css" href="skin/basic.css" rel="stylesheet">
+<link media="screen" type="text/css" href="skin/screen.css" rel="stylesheet">
+<link media="print" type="text/css" href="skin/print.css" rel="stylesheet">
+<link type="text/css" href="skin/profile.css" rel="stylesheet">
+<script src="skin/getBlank.js" language="javascript" type="text/javascript"></script><script src="skin/getMenu.js" language="javascript" type="text/javascript"></script><script src="skin/fontsize.js" language="javascript" type="text/javascript"></script>
+<link rel="shortcut icon" href="">
+</head>
+<body onload="init()">
+<script type="text/javascript">ndeSetTextSize();</script>
+<div id="top">
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+<a href="http://www.apache.org/">Apache</a> &gt; <a href="http://hadoop.apache.org/">Hadoop</a> &gt; <a href="http://hadoop.apache.org/pig/">Chukwa</a><script src="skin/breadcrumbs.js" language="JavaScript" type="text/javascript"></script>
+</div>
+<!--+
+    |header
+    +-->
+<div class="header">
+<!--+
+    |start group logo
+    +-->
+<div class="grouplogo">
+<a href="http://hadoop.apache.org/"><img class="logoImage" alt="Hadoop" src="images/hadoop-logo.jpg" title="Apache Hadoop"></a>
+</div>
+<!--+
+    |end group logo
+    +-->
+<!--+
+    |start Project Logo
+    +-->
+<div class="projectlogo">
+<a href="http://hadoop.apache.org/"><img class="logoImage" alt="Chukwa" src="images/chukwa_logo_small.jpg" title="A data collection system for monitoring and analyzing large distributed systems."></a>
+</div>
+<!--+
+    |end Project Logo
+    +-->
+<!--+
+    |start Search
+    +-->
+<div class="searchbox">
+<form action="http://www.google.com/search" method="get" class="roundtopsmall">
+<input value="" name="sitesearch" type="hidden"><input onFocus="getBlank (this, 'Search the site with google');" size="25" name="q" id="query" type="text" value="Search the site with google">&nbsp; 
+                    <input name="Search" value="Search" type="submit">
+</form>
+</div>
+<!--+
+    |end search
+    +-->
+<!--+
+    |start Tabs
+    +-->
+<ul id="tabs">
+<li>
+<a class="unselected" href="http://hadoop.apache.org/chukwa">Project</a>
+</li>
+<li>
+<a class="unselected" href="http://wiki.apache.org/hadoop/Chukwa/">Wiki</a>
+</li>
+<li class="current">
+<a class="selected" href="index.html">Chukwa 0.4 Documentation</a>
+</li>
+</ul>
+<!--+
+    |end Tabs
+    +-->
+</div>
+</div>
+<div id="main">
+<div id="publishedStrip">
+<!--+
+    |start Subtabs
+    +-->
+<div id="level2tabs"></div>
+<!--+
+    |end Endtabs
+    +-->
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+
+             &nbsp;
+           </div>
+<!--+
+    |start Menu, mainarea
+    +-->
+<!--+
+    |start Menu
+    +-->
+<div id="menu">
+<div onclick="SwitchMenu('menu_selected_1.1', 'skin/')" id="menu_selected_1.1Title" class="menutitle" style="background-image: url('skin/images/chapter_open.gif');">Overview</div>
+<div id="menu_selected_1.1" class="selectedmenuitemgroup" style="display: block;">
+<div class="menuitem">
+<a href="index.html">Overview</a>
+</div>
+<div class="menuitem">
+<a href="design.html">Architecture</a>
+</div>
+<div class="menuitem">
+<a href="admin.html">Admin Guide</a>
+</div>
+<div class="menupage">
+<div class="menupagetitle">Agent Configuration Guide</div>
+</div>
+<div class="menuitem">
+<a href="dataflow.html">Guide to Chukwa Storage layout</a>
+</div>
+<div class="menuitem">
+<a href="programming.html">Programming Guide</a>
+</div>
+<div class="menuitem">
+<a href="api/index.html">API Docs</a>
+</div>
+<div class="menuitem">
+<a href="http://wiki.apache.org/hadoop/Chukwa/">Wiki</a>
+</div>
+<div class="menuitem">
+<a href="http://wiki.apache.org/hadoop/Chukwa/FAQ">FAQ</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.2', 'skin/')" id="menu_1.2Title" class="menutitle">Miscellaneous</div>
+<div id="menu_1.2" class="menuitemgroup">
+<div class="menuitem">
+<a href="releasenotes.html">Release Notes</a>
+</div>
+<div class="menuitem">
+<a href="changes.html">Change Log</a>
+</div>
+</div>
+<div id="credit"></div>
+<div id="roundbottom">
+<img style="display: none" class="corner" height="15" width="15" alt="" src="skin/images/rc-b-l-15-1body-2menu-3menu.png"></div>
+<!--+
+  |alternative credits
+  +-->
+<div id="credit2"></div>
+</div>
+<!--+
+    |end Menu
+    +-->
+<!--+
+    |start content
+    +-->
+<div id="content">
+<div title="Portable Document Format" class="pdflink">
+<a class="dida" href="agent.pdf"><img alt="PDF -icon" src="skin/images/pdfdoc.gif" class="skin"><br>
+        PDF</a>
+</div>
+<h1>Chukwa Agent Setup Guide</h1>
+<div id="minitoc-area">
+<ul class="minitoc">
+<li>
+<a href="#Overview">Overview</a>
+</li>
+<li>
+<a href="#Agent+Control">Agent Control</a>
+</li>
+<li>
+<a href="#Command-line+options">Command-line options</a>
+</li>
+<li>
+<a href="#Adaptors">Adaptors</a>
+</li>
+</ul>
+</div>
+
+
+<a name="N1000D"></a><a name="Overview"></a>
+<h2 class="h3">Overview</h2>
+<div class="section">
+<p>In a normal Chukwa installation, an <em>Agent</em> process runs on every 
+machine being monitored. This process is responsible for all the data collection
+on that host.  Data collection might mean periodically running a Unix command,
+or tailing a file, or listening for incoming UDP packets.</p>
+<p>Each particular data source corresponds to a so-called <em>Adaptor</em>. 
+Adaptors are dynamically loadable modules that run inside the Agent process. 
+There is generally one Adaptor for each data source: for each file being watched 
+or for each Unix command being executed. Each adaptor has a unique name. If you 
+do not specify a name, one will be auto-generated by hashing the Adaptor type and
+parameters.</p>
+<p>There are a number of Adaptors built into Chukwa, and you can also develop
+your own. Chukwa will use them if you add them to the Chukwa library search path
+ (e.g., by putting them in a jarfile in <span class="codefrag">$CHUKWA_HOME/lib</span>.)</p>
+</div>
+
+
+
+
+<a name="N10026"></a><a name="Agent+Control"></a>
+<h2 class="h3">Agent Control</h2>
+<div class="section">
+<p>Once an Agent process is running, there are a number of commands that you can
+ use to inspect and control it.  By default, Agents listen for incoming commands
+  on port 9093. Commands are case-insensitive</p>
+<table class="ForrestTable" cellspacing="1" cellpadding="4">
+
+<tr>
+<td colspan="1" rowspan="1">Command</td><td colspan="1" rowspan="1">Purpose</td><td colspan="1" rowspan="1">Options</td>
+</tr>
+
+
+<tr>
+<td colspan="1" rowspan="1"><span class="codefrag">add</span>   </td><td colspan="1" rowspan="1"> Start an adaptor.</td>  <td colspan="1" rowspan="1">See below</td>
+</tr>
+
+<tr>
+<td colspan="1" rowspan="1"><span class="codefrag">close</span> </td><td colspan="1" rowspan="1"> Close socket connection to agent.</td><td colspan="1" rowspan="1">None</td>
+</tr>
+
+<tr>
+<td colspan="1" rowspan="1"><span class="codefrag">help</span>  </td><td colspan="1" rowspan="1"> Display a list of available commands</td><td colspan="1" rowspan="1">None</td>
+</tr>
+
+<tr>
+<td colspan="1" rowspan="1"><span class="codefrag">list</span>  </td><td colspan="1" rowspan="1"> List currently running adaptors</td><td colspan="1" rowspan="1">None</td>
+</tr>
+
+<tr>
+<td colspan="1" rowspan="1"><span class="codefrag">reloadcollectors</span>  </td><td colspan="1" rowspan="1"> Re-read list of collectors</td><td colspan="1" rowspan="1">None</td>
+</tr>
+
+<tr>
+<td colspan="1" rowspan="1"><span class="codefrag">stop</span>  </td><td colspan="1" rowspan="1"> Stop adaptor, abruptly</td><td colspan="1" rowspan="1">Adaptor name</td>
+</tr>
+
+<tr>
+<td colspan="1" rowspan="1"><span class="codefrag">stopall</span>  </td><td colspan="1" rowspan="1"> Stop all adaptors, abruptly</td><td colspan="1" rowspan="1">Adaptor name</td>
+</tr>
+
+<tr>
+<td colspan="1" rowspan="1"><span class="codefrag">shutdown</span>  </td><td colspan="1" rowspan="1"> Stop adaptor, gracefully</td><td colspan="1" rowspan="1">Adaptor name</td>
+</tr>
+
+<tr>
+<td colspan="1" rowspan="1"><span class="codefrag">stopagent</span>  </td><td colspan="1" rowspan="1"> Stop agent process</td><td colspan="1" rowspan="1">None</td>
+</tr>
+
+</table>
+<p>The add command is by far the most complex; it takes several mandatory and 
+optional parameters. The general form is as follows:</p>
+<pre class="code">
+add [name =] &lt;adaptor_class_name&gt; &lt;datatype&gt; &lt;adaptor 
+specific params&gt; &lt;initial offset&gt;. 
+</pre>
+<p>
+There are four mandatory fields: The word <span class="codefrag">add</span>, the class name for 
+the Adaptor, the datatype of the Adaptor's output, and the sequence number for 
+the first byte.  There are two optional fields; the adaptor instance name, and 
+the adaptor parameters.
+</p>
+<p>The adaptor name, if specified, should go after the add command, and be 
+followed with an equals sign. It should be a string of printable characters, 
+without whitespace or '='.  Chukwa Adaptor names all start with "adaptor_".
+If you specify an adaptor name which does not start with that prefix, it will
+be added automatically.  
+</p>
+<p>Adaptor parameters aren't required by the Chukwa agent, but each class of adaptor 
+may itself specify both mandatory and optional parameters. See below.</p>
+</div>
+
+
+<a name="N100E5"></a><a name="Command-line+options"></a>
+<h2 class="h3">Command-line options</h2>
+<div class="section">
+<p>Normally, agents are configured via the file <span class="codefrag">conf/chukwa-agent-conf.xml.</span>
+However, there are a few command-line options that are sometimes useful in
+troubleshooting. If you specify "local" as an option, then the agent will print
+chunks to standard out, rather than to a collector. If you specify a URI, then
+that will be used as collector, overriding the collectors specified in
+<span class="codefrag">conf/collectors</span>.  These options are intended for testing and debugging,
+not for production use.</p>
+<pre class="code">
+bin/chukwa agent local
+</pre>
+</div>
+
+
+<a name="N100F9"></a><a name="Adaptors"></a>
+<h2 class="h3">Adaptors</h2>
+<div class="section">
+<p>This section lists the standard adaptors, and the arguments they take.</p>
+<ul>
+
+<li>
+<strong>FileAdaptor</strong>: Pushes a whole file, as one Chunk, then exits.
+ Takes one mandatory parameter; the file to push.
+
+<pre class="code">add FileTailer FooData /tmp/foo 0</pre>
+This pushes file <span class="codefrag">/tmp/foo</span> as one chunk, with datatype <span class="codefrag">FooData</span>.
+</li>
+
+<li>
+<strong>filetailer.LWFTAdaptor</strong>
+Repeatedly tails a file, treating the file as a sequence of bytes, ignoring the
+  content. Chunk boundaries are arbitrary. This is useful for streaming binary 
+  data. Takes one mandatory parameter; a path to the file to tail. If log file
+  is rotated while there is unread data, this adaptor will not attempt to recover it.
+  <pre class="code">add filetailer.LWFTAdaptor BarData /foo/bar 0</pre>
+This pushes <span class="codefrag">/foo/bar</span> in a sequence of Chunks of type <span class="codefrag">BarData</span>
+
+</li>
+
+
+<li>
+<strong>filetailer.FileTailingAdaptor</strong>
+ Repeatedly tails a file, again ignoring content and with unspecified Chunk
+ boundaries. Takes one mandatory parameter; a path to the file to tail. Keeps a 
+  file handle open in order to detect log file rotation.
+<pre class="code">add filetailer.FileTailingAdaptor BarData /foo/bar 0</pre>
+This pushes <span class="codefrag">/foo/bar</span> in a sequence of Chunks of type <span class="codefrag">BarData</span>
+
+</li>
+
+
+
+<li>
+<strong>filetailer.RCheckFTAdaptor</strong>
+ An experimental modification of the above, which avoids the need to keep a file handle
+ open.  Same parameters and usage as the above.
+</li>
+
+
+<li>
+<strong>filetailer.CharFileTailingAdaptorUTF8</strong>
+The same as the base FileTailingAdaptor, except that chunks are guaranteed to end only at carriage returns.
+ This is useful for most ASCII log file formats.
+</li>
+
+
+<li>
+<strong>filetailer.CharFileTailingAdaptorUTF8NewLineEscaped</strong>
+ The same, except that chunks are guaranteed to end only at non-escaped carriage
+ returns. This is useful for pushing Chukwa-formatted log files, where exception
+ stack traces stay in a single chunk.
+</li>
+
+
+<li>
+<strong>DirTailingAdaptor</strong> Takes a directory path and an
+ adaptor name as mandatory parameters; repeatedly scans that directory and all
+ subdirectories, and starts the indicated adaptor running on each file. Since
+ the DirTailingAdaptor does not, itself, emit data, the datatype parameter is 
+ applied to the newly-spawned adaptors.  Note  that if you try this on a large 
+ directory with an adaptor that keeps file handles open,
+  it is possible to exceed your system's limit on open files.
+  A file pattern can be specified as an optional second parameter.
+
+<pre class="code">add DirTailingAdaptor logs /var/log/ *.log filetailer.CharFileTailingAdaptorUTF8 0</pre>
+
+
+</li>
+
+<li>
+<strong>ExecAdaptor</strong> Takes a frequency (in milliseconds) as optional 
+parameter, and then program name as mandatory parameter. Runs that program 
+repeatedly at a rate specified by frequency.
+
+<pre class="code">add ExecAdaptor Df 60000 /bin/df -x nfs -x none 0</pre>
+ This adaptor will run <span class="codefrag">df</span> every minute, labeling output as Df.
+</li>
+
+
+<li>
+<strong>UDPAdaptor</strong> Takes a port number as mandatory parameter.
+Binds to the indicated UDP port, and emits one Chunk for each received packet.
+
+<pre class="code">add UdpAdaptor Packets 1234 0</pre>
+ This adaptor will listen for incoming traffic on port 1234, labeling output as Packets.
+</li>
+
+
+
+<li>
+<strong>edu.berkeley.chukwa_xtrace.XtrAdaptor</strong> (available in <span class="codefrag">contrib</span>)
+ Takes an <a href="http://www.x-trace.net/wiki/doku.php">Xtrace</a> ReportSource
+ class name [without package] as mandatory argument, and no optional parameters.
+ Listens for incoming reports in the same way as that ReportSource would.
+
+<pre class="code">add edu.berkeley.chukwa_xtrace.XtrAdaptor Xtrace UdpReportSource 0</pre>
+ This adaptor will create and start a <span class="codefrag">UdpReportSource</span>, labeling its
+  output datatype as Xtrace.
+</li>
+
+</ul>
+</div>
+
+</div>
+<!--+
+    |end content
+    +-->
+<div class="clearboth">&nbsp;</div>
+</div>
+<div id="footer">
+<!--+
+    |start bottomstrip
+    +-->
+<div class="lastmodified">
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<div class="copyright">
+        Copyright &copy;
+         2007-2010 <a href="http://www.apache.org/licenses/">The Apache Software Foundation.</a>
+</div>
+<!--+
+    |end bottomstrip
+    +-->
+</div>
+</body>
+</html>

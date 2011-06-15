@@ -1,0 +1,370 @@
+#!/bin/bash 
+DIR=`dirname $0`
+
+#################################
+_CLUSTER_ROLE="chukwa"
+_INSTALL_DIR=`echo ~`
+
+# _STANDARD_INSTALLATION="yes"
+
+_JAVA_HOME="`which java|xargs dirname|xargs dirname`" 
+_JAVA_PLATFORM="Linux-i386-32"
+_HADOOP_HOME="/usr/lib/hadoop"
+_HADOOP_CONF_DIR="${_HADOOP_HOME}/conf"
+PRIVATE_HADOOP_JAR="`ls ${_HADOOP_HOME}/hadoop-core-*.jar 2> /dev/null`"
+_HADOOP_JAR="${PRIVATE_HADOOP_JAR:-hadoop-core*.jar}"
+_HADOOP_LOG_DIR="/var/log/hadoop"
+_HADOOP_JOB_HISTORY_LOG="${_HADOOP_LOG_DIR}/history/done"
+_CHUKWA_LOG_DIR="${_HADOOP_LOG_DIR}/chukwa"
+_CHUKWA_HOME=$_INSTALL_DIR/$CHUKWA_HITUNE_DIST
+_COLLECTORS_LIST="localhost"
+
+_HADOOP_CLUSTER_AGENTS_LIST="localhost"
+_HADOOP_CLUSTER_COLLECTORS_LIST=$_COLLECTORS_LIST
+_HADOOP_CLUSTER_JAVA_HOME=$_JAVA_HOME
+_HADOOP_CLUSTER_JAVA_PLATFORM=$_JAVA_PLATFORM
+_HADOOP_CLUSTER_CHUKWA_LOG_DIR=$_CHUKWA_LOG_DIR 
+_HADOOP_CLUSTER_HADOOP_HOME=$_HADOOP_HOME
+_HADOOP_CLUSTER_HADOOP_CONF_DIR=$_HADOOP_CONF_DIR
+_HADOOP_CLUSTER_HADOOP_JAR=$_HADOOP_JAR
+_HADOOP_CLUSTER_HADOOP_JOB_HISTORY_LOG=$_HADOOP_JOB_HISTORY_LOG
+ 
+_HADOOP_CLUSTER_IOSTAT="`which iostat`" 
+_HADOOP_CLUSTER_VMSTAT="`which vmstat`" 
+_HADOOP_CLUSTER_MPSTAT="`which mpstat`" 
+_HADOOP_CLUSTER_SAR="`which sar`"
+
+_CHUKWA_CLUSTER_COLLECTORS_LIST=$_COLLECTORS_LIST
+_CHUKWA_CLUSTER_WRITE_HDFS_FILESYSTEM="hdfs://127.0.0.1:9000" 
+
+_CHUKWA_CLUSTER_CHUKWA_LOG_DIR=$_CHUKWA_LOG_DIR 
+_CHUKWA_CLUSTER_JAVA_HOME=$_JAVA_HOME
+_CHUKWA_CLUSTER_JAVA_PLATFORM=$_JAVA_PLATFORM
+_CHUKWA_CLUSTER_HADOOP_HOME=$_HADOOP_HOME
+_CHUKWA_CLUSTER_HADOOP_CONF_DIR=$_HADOOP_CONF_DIR
+_CHUKWA_CLUSTER_HADOOP_JAR=$_HADOOP_JAR
+
+#-----------------------------
+
+PRIVATE_FOUR_SPACEPRIVATE_TAB="    "
+PRIVATE_TAB="\t"
+PRIVATE_CONF_TEMPLATE="$DIR/.conf"
+PRIVATE_TMP_CONF_FILE="$DIR/${_CLUSTER_ROLE}-cluster.conf"
+PRIVATE_PREFIX="_CHUKWA_CLUSTER"
+CHUKWA_HITUNE_DIST="chukwa-hitune-dist"
+
+REQUIRED_SYSSTAT_VERSION=9
+CONF_FILE=
+#################################
+
+
+
+
+# ./configure [-f conf_file]
+usage(){
+    echo "$0 [options]";
+    echo "${PRIVATE_FOUR_SPACEPRIVATE_TAB}-f configuration file.${PRIVATE_TAB}You can copy .hitune.conf.template file and edit it properly into a configuration file"
+    echo "${PRIVATE_FOUR_SPACEPRIVATE_TAB}-h${PRIVATE_TAB}show this"
+    exit 1;
+}
+
+while [ $# -ge 1 ]; do
+    case $1 in
+    -f)
+        CONF_FILE=$2
+        shift
+        ;;
+    *)
+        usage
+        ;;
+    esac
+    shift
+done
+
+parsenodes(){
+    main=$1
+    start=$2
+    end=$3
+    
+    test "$end" = "" && echo ${main}${start} && return;
+    
+    if [ $start -le $end ]; then
+        while [ $start -le $end ]; do
+            echo ${main}${start}
+            let start++
+        done
+    else
+        while [ $end -le $start ]; do
+            echo ${main}${end}
+            let end++
+        done
+    fi
+}
+
+expandnodelist(){
+    list=`echo $1|sed "s/,/ /g"`
+    file=$2
+    
+    for nodes in $list; do
+        if [ "`echo $nodes|grep -E '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+'`" = "" ];then
+            parsenodes `echo $nodes |awk -F - '{print $1 " " $2}'|sed  's/\([[:alpha:]]*\)/\1 /'`
+        else
+            parsenodes `echo $nodes|awk -F - '{print $1 " " $2}'|sed 's|\(.*\)\.\([^.]*\)|\1\. \2|'`
+        fi
+    done
+}
+
+setitem(){
+    ITEM=$1
+    VAL=$2
+    FILE=$3
+    
+    TARGET="@TODO${ITEM}@"
+    eval "${ITEM}=$VAL"
+    if [ "$FILE" = "" ]; then
+        FILE=$PRIVATE_TMP_CONF_FILE
+    fi
+    sed "s|$TARGET|$VAL|g" $FILE >> $FILE.swap
+    test $? = 0 && mv $FILE.swap $FILE
+    
+}
+
+validate_val(){
+    VAL=$1
+    CANDIDATES=`echo $2|sed "s/|/ /g"`
+    flag=1;
+    for v in $CANDIDATES; do
+        test $VAL = $v && flag=0 && break
+    done
+    test $flag != 0 && echo "[Error]$val is not in the range of ($CANDIDATES)" 
+    exit $flag    
+}
+
+validate_dir(){
+    VAL=$1
+    flag=1
+    test -e $VAL && test -d $VAL && flag=0
+    test $flag != 0 && echo "[Error]$val doesn't exist or isn't a folder" 
+    exit $flag
+}
+
+validate_file(){
+    VAL=$1
+    flag=1
+    test -e $VAL && test -f $VAL && flag=0
+    test $flag != 0 && echo "[Error]$val doesn't exist or isn't a file" 
+    exit $flag
+}
+
+makeconf(){
+    
+    # cluster role
+    validated=1
+    default=$_CLUSTER_ROLE
+    while [ "$validated" = "1" ]; do
+        echo -en "The role of the cluster - either \"hadoop\" or \"chukwa\"[$default]:"; read _CLUSTER_ROLE;
+        _CLUSTER_ROLE=${_CLUSTER_ROLE:-"$default"}
+        PRIVATE_TMP_CONF_FILE="$DIR/${_CLUSTER_ROLE}-cluster.conf"
+        cp -ra $PRIVATE_CONF_TEMPLATE $PRIVATE_TMP_CONF_FILE
+        setitem "_CLUSTER_ROLE" ${_CLUSTER_ROLE};
+        validated=`validate_val $_CLUSTER_ROLE "hadoop|chukwa"`
+    done
+    
+    if [ "$_CLUSTER_ROLE" = "chukwa" ]; then
+        PRIVATE_PREFIX="_CHUKWA_CLUSTER"
+    else
+        PRIVATE_PREFIX="_HADOOP_CLUSTER"
+    fi
+    
+    ##keep chukwa-cluster and 
+    # validated=1
+    # default=$_STANDARD_INSTALLATION
+    # while [ $validated = 1 ]; do
+        # echo -en "To keep hadoop-cluster and chukwa-cluster the same configuration, either \"yes\" or \"no\"[$default]:"; read _STANDARD_INSTALLATION;
+        # _STANDARD_INSTALLATION=${_STANDARD_INSTALLATION:-"$default"}
+        # setitem "_STANDARD_INSTALLATION" ${_STANDARD_INSTALLATION}
+        # validated=`validate_val $_STANDARD_INSTALLATION "yes|no"`
+    # done
+    
+    # installation folder
+    validated=1
+    default=$_INSTALL_DIR
+    while [ "$validated" = "1" ]; do
+        echo -en "The folder to install HiTune[$default]:"; read _INSTALL_DIR;
+        _INSTALL_DIR=${_INSTALL_DIR:-"$default"}
+        setitem "_INSTALL_DIR" ${_INSTALL_DIR};
+        validated=`validate_dir ${_INSTALL_DIR}`
+    done
+    
+    # agent list
+    default=$_HADOOP_CLUSTER_AGENTS_LIST
+    echo -en "The list of nodes in the Hadoop cluster - multiple nodes can be separated with comma, and can also be specified as hostname1-100 or 192.168.0.1-100[$default]:"; read _HADOOP_CLUSTER_AGENTS_LIST;
+    _HADOOP_CLUSTER_AGENTS_LIST=${_HADOOP_CLUSTER_AGENTS_LIST:-"$default"}
+    setitem "_HADOOP_CLUSTER_AGENTS_LIST" ${_HADOOP_CLUSTER_AGENTS_LIST};
+    
+    
+    # collector list
+    default=$_COLLECTORS_LIST
+    echo -en "The list of collector nodes in the Chukwa cluster - multiple nodes can be separated with comma, and can also be specified as hostname1-100 pattern or 192.168.0.1-100[$default]:"; read _COLLECTORS_LIST;
+    _CHUKWA_CLUSTER_COLLECTORS_LIST=${__COLLECTORS_LIST:-"$default"}
+    setitem "_CHUKWA_CLUSTER_COLLECTORS_LIST" ${_COLLECTORS_LIST};
+    setitem "_HADOOP_CLUSTER_COLLECTORS_LIST" ${_COLLECTORS_LIST};
+    
+    # storing fs
+    default=$_CHUKWA_CLUSTER_WRITE_HDFS_FILESYSTEM
+    echo -en "The HDFS URI of the Chukwa cluster[$default]:"; read _CHUKWA_CLUSTER_WRITE_HDFS_FILESYSTEM;
+    _CHUKWA_CLUSTER_WRITE_HDFS_FILESYSTEM=${_CHUKWA_CLUSTER_WRITE_HDFS_FILESYSTEM:-"$default"}
+    setitem "_CHUKWA_CLUSTER_WRITE_HDFS_FILESYSTEM" ${_CHUKWA_CLUSTER_WRITE_HDFS_FILESYSTEM};
+    
+    # java home
+    validated=1
+    default=$_JAVA_HOME
+    while [ "$validated" = "1" ]; do
+        echo -en "Java home[$default]:"; read _JAVA_HOME;
+        _JAVA_HOME=${_JAVA_HOME:-"$default"}
+        setitem "_CHUKWA_CLUSTER_JAVA_HOME" ${_JAVA_HOME};
+        setitem "_HADOOP_CLUSTER_JAVA_HOME" ${_JAVA_HOME};
+        validated=`validate_dir ${_JAVA_HOME}`
+    done
+    
+    # java platform
+    default=$_JAVA_PLATFORM
+    echo -en "Java platform[$default]:"; read _JAVA_PLATFORM;
+    _JAVA_PLATFORM=${_JAVA_PLATFORM:-"$default"}
+    setitem "_CHUKWA_CLUSTER_JAVA_PLATFORM" ${_JAVA_PLATFORM};
+    setitem "_HADOOP_CLUSTER_JAVA_PLATFORM" ${_JAVA_PLATFORM};
+    
+        
+    # hadoop home
+    validated=1
+    default=$_HADOOP_HOME
+    while [ "$validated" = "1" ]; do
+    echo -en "Hadoop home[$default]:"; read _HADOOP_HOME;
+    _HADOOP_HOME=${_HADOOP_HOME:-"$default"}
+    setitem "_CHUKWA_CLUSTER_HADOOP_HOME" ${_HADOOP_HOME};
+    setitem "_HADOOP_CLUSTER_HADOOP_HOME" ${_HADOOP_HOME};
+    validated=`validate_dir ${_HADOOP_HOME}`
+    done
+    
+    _HADOOP_CONF_DIR="${_HADOOP_HOME}/conf"
+    _HADOOP_JAR="`ls ${_HADOOP_HOME}/hadoop-core-*.jar 2> /dev/null`" 
+    
+    
+    
+        #hadoop conf dir
+    validated=1
+    default=$_HADOOP_CONF_DIR
+    while [ "$validated" = "1" ]; do
+    echo -en "Hadoop configuration folder[$default]:"; read _HADOOP_CONF_DIR;
+    _HADOOP_CONF_DIR=${_HADOOP_CONF_DIR:-"$default"}
+    setitem "_CHUKWA_CLUSTER_HADOOP_CONF_DIR" ${_HADOOP_CONF_DIR};
+    setitem "_HADOOP_CLUSTER_HADOOP_CONF_DIR" ${_HADOOP_CONF_DIR};
+    validated=`validate_dir ${_HADOOP_CONF_DIR}`
+    done
+    
+        # hadoop jar
+    validated=1
+    default=$_HADOOP_JAR
+    while [ "$validated" = "1" ]; do
+    echo -en "Hadoop core jar file[$default]:"; read _HADOOP_JAR;
+    _HADOOP_JAR=${_HADOOP_JAR:-"$default"}
+    setitem "_CHUKWA_CLUSTER_HADOOP_JAR" ${_HADOOP_JAR};
+    setitem "_HADOOP_CLUSTER_HADOOP_JAR" ${_HADOOP_JAR};
+    validated=`validate_file ${_HADOOP_JAR}`
+    done
+    
+    # chukwa log dir
+    validated=1
+    default=$_CHUKWA_LOG_DIR
+    while [ "$validated" = "1" ]; do
+        echo -en "Chukwa's log dir - it is strongly recommended to put the Chukwa log folder under the hadoop_log_dir [$default]:"; read _CHUKWA_LOG_DIR;
+        _CHUKWA_LOG_DIR=${_CHUKWA_LOG_DIR:-"$default"}
+        setitem "_CHUKWA_CLUSTER_CHUKWA_LOG_DIR" ${_CHUKWA_LOG_DIR};
+        setitem "_HADOOP_CLUSTER_CHUKWA_LOG_DIR" ${_CHUKWA_LOG_DIR};
+        validated=`validate_dir ${_CHUKWA_LOG_DIR}`
+    done
+    
+    _HADOOP_JOB_HISTORY_LOG="${_HADOOP_LOG_DIR}/history/done"
+    
+    # chukwa log dir
+    validated=1
+    default=$_HADOOP_JOB_HISTORY_LOG
+    while [ "$validated" = "1" ]; do
+        echo -en "Hadoop history log folder - it is usually under /history/done[$default]:"; read _HADOOP_JOB_HISTORY_LOG;
+        _HADOOP_JOB_HISTORY_LOG=${_HADOOP_JOB_HISTORY_LOG:-"$default"}
+        setitem "_CHUKWA_CLUSTER_HADOOP_JOB_HISTORY_LOG" ${_HADOOP_JOB_HISTORY_LOG};
+        setitem "_HADOOP_CLUSTER_HADOOP_JOB_HISTORY_LOG" ${_HADOOP_JOB_HISTORY_LOG};
+        validated=`validate_dir ${_HADOOP_JOB_HISTORY_LOG}`
+    done
+    
+}
+
+loadtemplate(){
+    
+    cp -ra $DIR/$CHUKWA_HITUNE_DIST/conf/chukwa-env.sh.template $DIR/$CHUKWA_HITUNE_DIST/conf/chukwa-env.sh
+    cp -ra $DIR/$CHUKWA_HITUNE_DIST/conf/hadoop-metrics.properties.template $DIR/$CHUKWA_HITUNE_DIST/conf/hadoop-metrics.properties
+    cp -ra $DIR/$CHUKWA_HITUNE_DIST/conf/initial_adaptors.template $DIR/$CHUKWA_HITUNE_DIST/conf/initial_adaptors
+    cp -ra $DIR/$CHUKWA_HITUNE_DIST/conf/hitune-hadoop-env.sh.template $DIR/$CHUKWA_HITUNE_DIST/conf/hitune-hadoop-env.sh
+    cp -ra $DIR/$CHUKWA_HITUNE_DIST/conf/chukwa-collector-conf.xml.template $DIR/$CHUKWA_HITUNE_DIST/conf/chukwa-collector-conf.xml
+}
+
+build(){
+    if [ "$_CLUSTER_ROLE" = "chukwa" ]; then
+        PRIVATE_PREFIX="_CHUKWA_CLUSTER"
+    else
+        PRIVATE_PREFIX="_HADOOP_CLUSTER"
+    fi
+    
+    
+    
+    setitem "_JAVA_HOME" `eval "echo \\\$${PRIVATE_PREFIX}_JAVA_HOME"` $DIR/$CHUKWA_HITUNE_DIST/conf/chukwa-env.sh
+    setitem "_JAVA_PLATFORM" `eval "echo \\\$${PRIVATE_PREFIX}_JAVA_PLATFORM"` $DIR/$CHUKWA_HITUNE_DIST/conf/chukwa-env.sh
+    setitem "_HADOOP_HOME" `eval "echo \\\$${PRIVATE_PREFIX}_HADOOP_HOME"` $DIR/$CHUKWA_HITUNE_DIST/conf/chukwa-env.sh
+    setitem "_HADOOP_CONF_DIR" `eval "echo \\\$${PRIVATE_PREFIX}_HADOOP_CONF_DIR"` $DIR/$CHUKWA_HITUNE_DIST/conf/chukwa-env.sh
+    setitem "_HADOOP_JAR" `eval "echo \\\$${PRIVATE_PREFIX}_HADOOP_JAR"` $DIR/$CHUKWA_HITUNE_DIST/conf/chukwa-env.sh
+    setitem "_CHUKWA_LOG_DIR" `eval "echo \\\$${PRIVATE_PREFIX}_CHUKWA_LOG_DIR"` $DIR/$CHUKWA_HITUNE_DIST/conf/chukwa-env.sh
+    
+    
+    expandnodelist $_HADOOP_CLUSTER_COLLECTORS_LIST > $DIR/$CHUKWA_HITUNE_DIST/conf/collectors
+    expandnodelist $_HADOOP_CLUSTER_AGENTS_LIST > $DIR/$CHUKWA_HITUNE_DIST/conf/agents
+    
+    #if [ "$_CLUSTER_ROLE" = "chukwa" ]; then
+        setitem "_CHUKWA_LOG_DIR" $_CHUKWA_CLUSTER_CHUKWA_LOG_DIR $DIR/$CHUKWA_HITUNE_DIST/conf/hadoop-metrics.properties
+        setitem "_CHUKWA_CLUSTER_WRITE_HDFS_FILESYSTEM" $_CHUKWA_CLUSTER_WRITE_HDFS_FILESYSTEM $DIR/$CHUKWA_HITUNE_DIST/conf/chukwa-collector-conf.xml
+    #else
+        version=`$_HADOOP_CLUSTER_IOSTAT -V 2>&1 |grep version|sed "s|[^0-9]*\([0-9]*\)\..*|\1|g"`
+        if [ $version != $REQUIRED_SYSSTAT_VERSION ]; then
+            echo "[Error]Please check your sysstat version"
+            exit 1
+        fi
+        setitem "_HADOOP_CLUSTER_IOSTAT" $_HADOOP_CLUSTER_IOSTAT $DIR/$CHUKWA_HITUNE_DIST/conf/initial_adaptors
+        setitem "_HADOOP_CLUSTER_SAR" $_HADOOP_CLUSTER_SAR $DIR/$CHUKWA_HITUNE_DIST/conf/initial_adaptors
+        setitem "_HADOOP_CLUSTER_MPSTAT" $_HADOOP_CLUSTER_MPSTAT $DIR/$CHUKWA_HITUNE_DIST/conf/initial_adaptors
+        setitem "_HADOOP_CLUSTER_HADOOP_JOB_HISTORY_LOG"  $_HADOOP_CLUSTER_HADOOP_JOB_HISTORY_LOG $DIR/$CHUKWA_HITUNE_DIST/conf/initial_adaptors
+        setitem "_CHUKWA_HOME"  $_INSTALL_DIR/$CHUKWA_HITUNE_DIST $DIR/$CHUKWA_HITUNE_DIST/conf/initial_adaptors
+        
+        setitem "_CHUKWA_HOME"  $_INSTALL_DIR/$CHUKWA_HITUNE_DIST $DIR/$CHUKWA_HITUNE_DIST/conf/hitune-hadoop-env.sh
+    
+    #fi
+    
+}
+
+loadconf(){
+   test -z $CONF_FILE && echo "[Error]$CONF_FILE doesn't exist" 1>&2 && exit 1;
+   . $CONF_FILE  
+}
+
+main(){
+    loadtemplate
+    if [ "$CONF_FILE" = "" ];then
+        makeconf
+    else 
+        loadconf
+    fi
+    build
+    
+}
+
+
+#Execution Main Entry
+main;

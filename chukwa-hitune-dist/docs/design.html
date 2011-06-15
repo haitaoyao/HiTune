@@ -1,0 +1,415 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="Apache Forrest" name="Generator">
+<meta name="Forrest-version" content="0.8">
+<meta name="Forrest-skin-name" content="pelt">
+<title>Chukwa: Architecture and Design</title>
+<link type="text/css" href="skin/basic.css" rel="stylesheet">
+<link media="screen" type="text/css" href="skin/screen.css" rel="stylesheet">
+<link media="print" type="text/css" href="skin/print.css" rel="stylesheet">
+<link type="text/css" href="skin/profile.css" rel="stylesheet">
+<script src="skin/getBlank.js" language="javascript" type="text/javascript"></script><script src="skin/getMenu.js" language="javascript" type="text/javascript"></script><script src="skin/fontsize.js" language="javascript" type="text/javascript"></script>
+<link rel="shortcut icon" href="">
+</head>
+<body onload="init()">
+<script type="text/javascript">ndeSetTextSize();</script>
+<div id="top">
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+<a href="http://www.apache.org/">Apache</a> &gt; <a href="http://hadoop.apache.org/">Hadoop</a> &gt; <a href="http://hadoop.apache.org/pig/">Chukwa</a><script src="skin/breadcrumbs.js" language="JavaScript" type="text/javascript"></script>
+</div>
+<!--+
+    |header
+    +-->
+<div class="header">
+<!--+
+    |start group logo
+    +-->
+<div class="grouplogo">
+<a href="http://hadoop.apache.org/"><img class="logoImage" alt="Hadoop" src="images/hadoop-logo.jpg" title="Apache Hadoop"></a>
+</div>
+<!--+
+    |end group logo
+    +-->
+<!--+
+    |start Project Logo
+    +-->
+<div class="projectlogo">
+<a href="http://hadoop.apache.org/"><img class="logoImage" alt="Chukwa" src="images/chukwa_logo_small.jpg" title="A data collection system for monitoring and analyzing large distributed systems."></a>
+</div>
+<!--+
+    |end Project Logo
+    +-->
+<!--+
+    |start Search
+    +-->
+<div class="searchbox">
+<form action="http://www.google.com/search" method="get" class="roundtopsmall">
+<input value="" name="sitesearch" type="hidden"><input onFocus="getBlank (this, 'Search the site with google');" size="25" name="q" id="query" type="text" value="Search the site with google">&nbsp; 
+                    <input name="Search" value="Search" type="submit">
+</form>
+</div>
+<!--+
+    |end search
+    +-->
+<!--+
+    |start Tabs
+    +-->
+<ul id="tabs">
+<li>
+<a class="unselected" href="http://hadoop.apache.org/chukwa">Project</a>
+</li>
+<li>
+<a class="unselected" href="http://wiki.apache.org/hadoop/Chukwa/">Wiki</a>
+</li>
+<li class="current">
+<a class="selected" href="index.html">Chukwa 0.4 Documentation</a>
+</li>
+</ul>
+<!--+
+    |end Tabs
+    +-->
+</div>
+</div>
+<div id="main">
+<div id="publishedStrip">
+<!--+
+    |start Subtabs
+    +-->
+<div id="level2tabs"></div>
+<!--+
+    |end Endtabs
+    +-->
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+
+             &nbsp;
+           </div>
+<!--+
+    |start Menu, mainarea
+    +-->
+<!--+
+    |start Menu
+    +-->
+<div id="menu">
+<div onclick="SwitchMenu('menu_selected_1.1', 'skin/')" id="menu_selected_1.1Title" class="menutitle" style="background-image: url('skin/images/chapter_open.gif');">Overview</div>
+<div id="menu_selected_1.1" class="selectedmenuitemgroup" style="display: block;">
+<div class="menuitem">
+<a href="index.html">Overview</a>
+</div>
+<div class="menupage">
+<div class="menupagetitle">Architecture</div>
+</div>
+<div class="menuitem">
+<a href="admin.html">Admin Guide</a>
+</div>
+<div class="menuitem">
+<a href="agent.html">Agent Configuration Guide</a>
+</div>
+<div class="menuitem">
+<a href="dataflow.html">Guide to Chukwa Storage layout</a>
+</div>
+<div class="menuitem">
+<a href="programming.html">Programming Guide</a>
+</div>
+<div class="menuitem">
+<a href="api/index.html">API Docs</a>
+</div>
+<div class="menuitem">
+<a href="http://wiki.apache.org/hadoop/Chukwa/">Wiki</a>
+</div>
+<div class="menuitem">
+<a href="http://wiki.apache.org/hadoop/Chukwa/FAQ">FAQ</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.2', 'skin/')" id="menu_1.2Title" class="menutitle">Miscellaneous</div>
+<div id="menu_1.2" class="menuitemgroup">
+<div class="menuitem">
+<a href="releasenotes.html">Release Notes</a>
+</div>
+<div class="menuitem">
+<a href="changes.html">Change Log</a>
+</div>
+</div>
+<div id="credit"></div>
+<div id="roundbottom">
+<img style="display: none" class="corner" height="15" width="15" alt="" src="skin/images/rc-b-l-15-1body-2menu-3menu.png"></div>
+<!--+
+  |alternative credits
+  +-->
+<div id="credit2"></div>
+</div>
+<!--+
+    |end Menu
+    +-->
+<!--+
+    |start content
+    +-->
+<div id="content">
+<div title="Portable Document Format" class="pdflink">
+<a class="dida" href="design.pdf"><img alt="PDF -icon" src="skin/images/pdfdoc.gif" class="skin"><br>
+        PDF</a>
+</div>
+<h1>Chukwa: Architecture and Design</h1>
+<div id="minitoc-area">
+<ul class="minitoc">
+<li>
+<a href="#Introduction">Introduction</a>
+</li>
+<li>
+<a href="#Agents+and+Adaptors">Agents and Adaptors</a>
+</li>
+<li>
+<a href="#Data+Model">Data Model</a>
+</li>
+<li>
+<a href="#Collectors">Collectors</a>
+</li>
+<li>
+<a href="#MapReduce+processing">MapReduce processing</a>
+</li>
+<li>
+<a href="#HICC">HICC</a>
+</li>
+</ul>
+</div>
+	  
+<a name="N1000D"></a><a name="Introduction"></a>
+<h2 class="h3">Introduction</h2>
+<div class="section">
+<p>
+  	  Log processing was one of the original purposes of MapReduce. Unfortunately,
+  	  using Hadoop for MapReduce processing of logs is somewhat troublesome. 
+  	  Logs are generated incrementally across many machines, but Hadoop MapReduce
+  	  works best on a small number of large files. And HDFS doesn't currently
+  	  support appends, making it difficult to keep the distributed copy fresh.
+  	  </p>
+<p>
+  	  Chukwa aims to provide a flexible and powerful platform for distributed
+  	  data collection and rapid data processing. Our goal is to produce a system
+  	  that's usable today, but that can be modified to take advantage of newer
+  	  storage technologies (HDFS appends, HBase, etc) as they mature. In order
+  	  to maintain this flexibility, Chukwa is structured as a pipeline of
+  	  collection and processing stages, with clean and narrow interfaces between
+  	  stages. This will facilitate future innovation without breaking existing code.
+  	  </p>
+<p>
+  	  Chukwa has four primary components:
+  	  </p>
+<ol>
+  	  
+<li>
+<strong>Agents</strong> that run on each machine and emit data.</li>
+  	  
+<li>
+<strong>Collectors</strong> that receive data from the agent and write
+  	   it to stable storage.</li>
+  	  
+<li>
+<strong>MapReduce jobs</strong> for parsing and archiving the data.</li>
+  	  
+<li>
+<strong>HICC</strong>, the Hadoop Infrastructure Care Center; a web-portal
+  	  style interface for displaying data.</li>
+  	  
+</ol>
+<p>
+  	  Below is a figure showing the Chukwa data pipeline, annotated with data
+  	  dwell times at each stage. A more detailed figure is available at the end
+  	  of this document.
+  	  </p>
+<div id="" style="text-align: center;">
+<img id="" class="figure" alt="A picture of the chukwa data pipeline" src="images/datapipeline.png"></div>
+</div>
+	  
+	  
+<a name="N1003A"></a><a name="Agents+and+Adaptors"></a>
+<h2 class="h3">Agents and Adaptors</h2>
+<div class="section">
+<p>
+	  Chukwa agents do not collect some particular fixed set of data. Rather, they
+	  support dynamically starting and stopping <em>Adaptors</em>, which small
+	  dynamically-controllable modules that run inside the Agent process and are
+	  responsible for the actual collection of data.
+	  </p>
+<p>
+		These dynamically controllable data sources are called 
+		adaptors, since they generally are wrapping some other data source, 
+		such as a file or a Unix command-line tool.  The Chukwa <a href="agent.html">
+		agent guide</a> includes an up-to-date list of available Adaptors.
+	  </p>
+<p>
+	  Data sources need to be dynamically controllable because the particular data
+	  being collected from a machine changes over time, and varies from machine 
+	  to machine. For example, as Hadoop tasks start and stop, different log files
+	  must be monitored. We might want to increase our collection rate if we 
+	  detect anomalies.  And of course, it makes no sense to collect Hadoop 
+	  metrics on an NFS server. 
+	  </p>
+</div>
+
+	
+<a name="N10050"></a><a name="Data+Model"></a>
+<h2 class="h3">Data Model</h2>
+<div class="section">
+<p>Chukwa Adaptors emit data in <em>Chunks</em>. A Chunk is a sequence of bytes,
+		 with some metadata. Several of these are set automatically by the Agent or 
+		 Adaptors. Two of them require user intervention: <span class="codefrag">cluster name</span> and 
+		 <span class="codefrag">datatype</span>.  Cluster name is specified in <span class="codefrag">conf/chukwa-env.sh</span>,
+		  and is global to each Agent process.  Datatype describes the expected format 
+		  of the data collected by an Adaptor instance, and it is specified when that 
+		  instance is started. 
+  </p>
+<p>The following table lists the Chunk metadata fields. 
+		</p>
+<table class="ForrestTable" cellspacing="1" cellpadding="4">
+		
+<tr>
+<td colspan="1" rowspan="1">Field</td><td colspan="1" rowspan="1">Meaning</td><td colspan="1" rowspan="1">Source</td>
+</tr>
+		
+<tr>
+<td colspan="1" rowspan="1">Source</td><td colspan="1" rowspan="1">Hostname where Chunk was generated</td><td colspan="1" rowspan="1">Automatic</td>
+</tr>
+		
+<tr>
+<td colspan="1" rowspan="1">Cluster</td><td colspan="1" rowspan="1">Cluster host is associated with</td><td colspan="1" rowspan="1">Specified by user
+		 in agent config</td>
+</tr>
+		
+<tr>
+<td colspan="1" rowspan="1">Datatype</td><td colspan="1" rowspan="1">Format of output</td><td colspan="1" rowspan="1">Specified by user when Adaptor
+		 started</td>
+</tr>
+		
+<tr>
+<td colspan="1" rowspan="1">Sequence ID</td><td colspan="1" rowspan="1">Offset of Chunk in stream</td><td colspan="1" rowspan="1">Automatic, initial
+		 offset specified when Adaptor started</td>
+</tr>
+		
+<tr>
+<td colspan="1" rowspan="1">Name</td><td colspan="1" rowspan="1">Name of data source</td><td colspan="1" rowspan="1">Automatic, chosen by Adaptor</td>
+</tr>
+		
+</table>
+<p>Conceptually, each Adaptor emits a semi-infinite stream of bytes, numbered
+		 starting from zero. The sequence ID specifies how many bytes each Adaptor has
+		 sent, including the current chunk.  So if an adaptor emits a chunk containing
+		 the first 100 bytes from a file, the sequenceID of that Chunk will be 100. 
+		 And the second hundred bytes will have sequence ID 200.  This may seem a 
+		 little peculiar, but it's actually the same way that TCP sequence numbers work.
+		</p>
+<p>Adaptors need to take sequence ID as a parameter so that they can resume 
+		correctly after a crash, and not send redundant data. When starting adaptors, 
+		it's usually save to specify 0 as an ID, but it's sometimes useful to specify 
+		something else. For instance, it lets you do things like only tail the second 
+		half of a file. 
+		</p>
+</div>
+		
+		
+<a name="N100C5"></a><a name="Collectors"></a>
+<h2 class="h3">Collectors</h2>
+<div class="section">
+<p>
+		Rather than have each adaptor write directly to HDFS, data is sent across 
+		the network to a <em>collector</em> process, that does the HDFS writes.  
+		Each collector receives data from up to several hundred hosts, and writes all
+		this data to a single <em>sink file</em>, which is a Hadoop sequence file of
+		serialized Chunks. Periodically, collectors close their sink files, rename 
+		them to mark them available for processing, and resume writing a new file.  
+		Data is sent to collectors over HTTP.  
+   </p>
+<p>
+	 Collectors thus drastically reduce the number of HDFS files generated by Chukwa,
+	 from one per machine or adaptor per unit time, to a handful per cluster.  
+	 The decision to put collectors between data sources and the data store has 
+	 other benefits. Collectors hide the details of the HDFS file system in use, 
+	 such as its Hadoop version, from the adaptors.  This is a significant aid to 
+	 configuration.  It is especially helpful when using Chukwa to monitor a 
+	 development cluster running a different version of Hadoop or when using 
+	 Chukwa to monitor a non-Hadoop cluster.  
+		</p>
+<p>For more information on configuring collectors, see the 
+		<a href="collector.html">Collector documentation</a>.</p>
+</div>
+		
+		
+<a name="N100DE"></a><a name="MapReduce+processing"></a>
+<h2 class="h3">MapReduce processing</h2>
+<div class="section">
+<p>
+		Collectors write data in sequence files. This is convenient for rapidly
+		getting data committed to stable storage. But it's less convenient for
+		analysis or finding particular data items. As a result, Chukwa has a toolbox
+		of MapReduce jobs for organizing and processing incoming data. </p>
+<p>
+		These jobs come in two kinds: <em>Archiving</em> and <em>Demux</em>.
+		The archiving jobs simply take Chunks from their input, and output new sequence
+		files of Chunks, ordered and grouped. They do no parsing or modification of 
+		the contents. (There are several different archiving jobs, that differ in
+		precisely how they group the data.)
+		</p>
+<p>  
+		The Demux job, in contrast, take Chunks as input and parse them to produce
+		ChukwaRecords, which are sets of key-value pairs.
+		</p>
+<p>
+		 For details on controlling this part of the pipeline, see the 
+		 <a href="admin.html">Administration guide</a>. For details about the file
+		 formats, and how to use the collected data, see the <a href="programming.html">
+		 Programming guide</a>.
+		</p>
+</div>
+		
+		
+<a name="N100FE"></a><a name="HICC"></a>
+<h2 class="h3">HICC</h2>
+<div class="section">
+<p>
+		HICC, the Hadoop Infrastructure Care Center is a web-portal
+  	style interface for displaying data.  Data is fetched from a MySQL database,
+  	which in turn is populated by a mapreduce job that runs on the collected data,
+  	after Demux. The  <a href="admin.html">Administration guide</a> has details
+  	on setting up HICC.
+		</p>
+<p>And now, the full-size picture of Chukwa:</p>
+<div id="" style="text-align: center;">
+<img id="" class="figure" alt="Chukwa Components" src="images/components.gif"></div>
+</div>
+  
+</div>
+<!--+
+    |end content
+    +-->
+<div class="clearboth">&nbsp;</div>
+</div>
+<div id="footer">
+<!--+
+    |start bottomstrip
+    +-->
+<div class="lastmodified">
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<div class="copyright">
+        Copyright &copy;
+         2007-2010 <a href="http://www.apache.org/licenses/">The Apache Software Foundation.</a>
+</div>
+<!--+
+    |end bottomstrip
+    +-->
+</div>
+</body>
+</html>

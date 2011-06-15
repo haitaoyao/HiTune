@@ -1,0 +1,130 @@
+================================================================================
+README
+================================================================================
+
+Chukwa includes configuration files for components installed on:
+
+> The Chukwa hadoop cluster (CC) 
+> The monitored source nodes (SN) 
+> The monitored source nodes set up as a hadoop cluster (SN-C)
+
+To modify a configuration file, copy, rename, and edit the *.template file.
+For example:
+> Copy chukwa-collector-conf.xml.template to a file named 
+  chukwa-collector-conf.xml
+> Edit chukwa-collector-conf.xml to include the cluster/group name for the 
+  source nodes
+
+See the Chukwa Administration Guide for more information.
+
+================================================================================
+Configuration File (CC)
+================================================================================
+alert.template  
+> Modify? yes, optional    
+> The email address for Chukwa alerts.
+--------------------------------------------
+chukwa-collector-conf.xml.template 
+> Modify? yes   
+> The name node address, used by collectors to write data to HDFS 
+> eg: write.hdf.filesystem = hdfs://localhost:9000/
+--------------------------------------------
+jdbc.conf.template
+> Modify? yes     			
+> URL for the MySQL database 
+> eg: jdbc:mysql://localhost:3306?user-root
+---------------------------------------------
+nagios.properties.template
+> Modify? yes, optional   	
+> Nagio server that receives NSCA alert 
+> eg: log4j.appender.NAGIOS.Host=nagios.example.com
+--------------------------------------------
+aggregator.sql
+> Modify? no 
+> SQL load scripts.
+--------------------------------------------
+chukwa-demux-conf.xml
+> Modify? no (When available, check the Programmers Guide for more info)		
+> Chukwa demux settings 
+--------------------------------------------
+chukwa-log4j.properties
+> Modify? no			
+> Logging for Chukwa cluster (Data Processor nodes).
+--------------------------------------------
+commons-logging.properties
+> Modify? no			
+> Internal log properties.
+--------------------------------------------
+database_create_tables.sql	
+> Modify? no				
+> SQL load scripts.
+--------------------------------------------
+log4j.properties
+> Modify? no (When available, check the Programmers Guide for more info)	
+> Logging for streaming, bundle with your streaming program. 
+--------------------------------------------
+mdl.xml
+> Modify? no (When available, check the Programmers Guide for more info)			
+> Chukwa metrics data loader (MDL) settings. 
+
+
+================================================================================
+Configuration File (CC, SN)
+================================================================================
+chukwa-env.sh.template
+> Modify? yes			
+> Environment variables.
+--------------------------------------------
+default.properties
+> Modify? no			
+> Default settings.
+--------------------------------------------
+build.properties
+> Modify? yes, optional			
+> Override default settings using this file.
+
+
+================================================================================
+Configuration File (SN)
+================================================================================
+agents.template
+> Modify? yes				
+> A list of hosts running the Chukwa agent.
+--------------------------------------------
+chukwa-agent-conf.xml.template
+> Modify? yes				
+> The cluster/group name for the source nodes 
+> eg: chukwaAgent.tags, cluster="xyz"
+--------------------------------------------
+collectors.template
+> Modify? yes				
+> A list of hosts running the Chukwa collector 
+> eg: http://locahost:8080/
+--------------------------------------------
+initial_adaptors.template
+> Modify? yes, optional (When available,check the Programmers Guide for 
+  more info)		
+> A list of adaptors. 
+--------------------------------------------
+system-data-loader.properties
+> Modify? no					
+> Metrics for streaming.
+
+
+================================================================================
+Configuration File (CC, SN-C)
+================================================================================
+hadoop-log4j.properties			
+> Modify? no
+> Logging for Chukwa cluster (Name Node, Task Tracker, Job Tracker nodes).  
+> Logging for source nodes, if set up as a Hadoop cluster (same as above).
+--------------------------------------------
+hadoop-metrics-log4j.properties
+> Modify? no
+> Metrics logging for Chukwa cluster.	
+> Metrics logging for source nodes, if set up as a Hadoop cluster.
+--------------------------------------------
+hadoop-metrics.properties.template
+> Modify? no	
+> Sample metrics for Chukwa cluster.  
+> Sample metrics for source nodes, if set up as a Hadoop cluster.

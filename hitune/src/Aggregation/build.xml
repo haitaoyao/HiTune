@@ -1,0 +1,12 @@
+<project name="HiTune" default="main" basedir=".">
+	
+	
+    <target name="main" description="Default target" depends="chukwa"/>
+    
+	<target name="chukwa" description="chukwa related aggregation">
+        <subant target="main">
+        	<property name="project.version" value="${project.version}"/>
+            <fileset file="./chukwa/build.xml"/>
+        </subant>
+    </target>
+</project>

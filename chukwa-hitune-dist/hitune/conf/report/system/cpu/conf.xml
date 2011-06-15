@@ -1,0 +1,17 @@
+<configuration>
+    <property>
+        <name>outputfilename</name>
+        <value>cpu.csv</value>
+        <description></description>
+    </property>
+    <property>
+        <name>datasource</name>
+        <value>${HiTune.input.reposfolder}/HiTune.Cpustat</value>
+        <description></description>
+    </property>
+    <property>
+        <name>metrics</name>
+        <value>%idle,%iowait,%nice,%steal,%system,%user</value>
+        <description></description>
+    </property>
+</configuration>

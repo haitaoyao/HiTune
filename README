@@ -1,0 +1,98 @@
+HiTune 0.9
+
+This is the README for HiTtune 0.9. For any futher questions, please contact jason.dai@intel.com or jie.huang@intel.com.
+
+============================================================================
+1. Overview of HiTune 0.9
+
+HiTune is a Hadoop performance analyzer. It consists of three major components as follows:
+    1) Tracker - lightweight agents running on each node in the Hadoop cluster to collect runtime information, including sysstat, Hadoop metrics and job history, and Java instrumentations.
+    2) Aggregation Engine - distributed framework that merges the results of the trackers, which is currently implemented using Chukwa.
+    3) Analysis Engine - the program that conducts the performance analysis and generates the analysis report, which is implemented as a series of Hadoop jobs.
+
+In addition, a sample utility is provided, which allows the analysis report to be visualized using Excel 2007.
+
+============================================================================
+2. Description of the Package
+
+The hitune folder in the package contains the source for HiTune 0.9. 
+
+The chukwa-hitune-dist folder in the package contains the distribution of HiTune 0.9, which is integrated with Chukwa. Specially, it contains:
+   1) Chukwa 0.4.0 patched with Chukwa-Metrics.patch, HiTune-Hierarchy.patch, DirTailingAdaptor-filter.patch and Chukwa-stopIssue.patch under hitune/patch/
+   2) HiTune Java instrumentation agent, HiTune plug-in for Chukwa, and HiTune analysis engine (contained under the chukwa-hitune-dist/hitune folder).
+   3) Pre-built configurations for Chukwa
+
+============================================================================
+3. Quick Start
+Please follow the steps below for install and use HiTune.
+
+3.1 Prerequisites 
+    1) Set up a separate Chukwa cluster running Hadoop and HDFS. (In the minimum setup, the Chukwa cluster can comprise just a single node.)
+    2) Designate several nodes in the Chukwa cluster to run the Chukwa collectors and one node in the (Chukwa cluster to run the Chukwa processor (including archive, demux and analysis).
+    3) Time-synchronize all the nodes in the Hadoop cluster and the Chukwa cluster (e.g., using NTP).
+    4) Install sysstat (version 9.0.x) on each node in the Hadoop cluster (The built-in systat package v7.x.x in Redhat is not compatible with current HiTune implementation).
+    5) Disable Hadoop JVM reuse, which is currently not supported by HiTune.
+    
+    Please be noted that HiTune 0.9 has been tested on Red Hat Enterprise Linux; it is also known to run successfully on Ubuntu Server. It is not tested to run on other Linux distributions.
+
+3.2 Installation
+    1)  Extract the HiTune package to a local folder (such as hitune-0.9).
+    2)  Prepare a configuration file through by running:
+            $>cd hitune-0.9
+            $>./configure
+        -------------------------------------------------
+        This will allow the user to input the values of various parameters - e.g., the role of the cluster ("chukwa" or "hadoop"), where to install the HiTune package ($INSTALL_DIR) and where Hadoop is installed ($HADOOP_HOME) - and then generate either chukwa-cluster.conf or hadoop-cluster.conf file under the folder hitune-0.9.
+
+        Alternatively,
+        You can manually prepare the configuration file according to the ".conf" file provided in the package, then and run 
+            $>./configure -f configure_file
+    3)  Install hitune package on one node in your Chukwa or Hadoop cluster by first copying the hitune-0.9 folder to th node, and then running:
+            On Chukwa cluster:
+                $>./install -f chukwa-cluster.conf
+            On Hadoop cluster:
+                $>./install -f hadoop-cluster.conf
+
+        OR, if the configurations for both clusters are the same, you can reuse the configuration file by running:
+            On Chukwa cluster:
+                $>./install -f configure_file -r chukwa
+            On Hadoop cluster:
+                $>./install -f configure_file -r hadoop
+
+        [IMPORTANT] Repeat this step on every other node in the Chukwa or Hadoop cluster; alternatively, you can just sync the $INSTALL_DIR and $HADOOP_HOME on this node to every other node in the Chukwa or Hadoop cluster.
+
+
+3.3 Use HiTune
+    1) Before using HiTune, make sure the Hadoop framework in the Chukwa cluster is started.
+    2) Start the Chukwa agents, collectors and processor. One way to do that is to run the $INSTALL_DIR/chukwa-hitune-dist/bin/start-all.sh script on the Chukwa processor node, which requires
+          * Enable password-less SSH from the Chukwa processor node to each node in the Hadoop cluster and each node in the Chukwa cluster.
+    3) Submit the Hadoop job to the Hadoop cluster; to enable Java instrumentation, add following options to mapred.child.java.opts of the Hadoop job (replacing $INSTALL_DIR with the actual value):
+             -javaagent:$INSTALL_DIR/chukwa-hitune-dist/hitune/HiTuneInstrumentAgent-0.9.jar=traceoutput=$INSTALL_DIR/chukwa-hitune-dist/hitune_output,taskid=@taskid@
+    4) After the job finishes, the Chukwa agents may be optionally stopped by running the $INSTALL_DIR/chukwa-hitune-dist/bin/stop-agents.sh script on the Chukwa processor node
+    5) On the Chukwa processor node, extract the number part of  general hadoop job id: job_{XXXXXXXXXXXX_XXXX}, and run
+            $INSTALL_DIR/chukwa-hitune-dist/hitune/bin/HiTuneAnalysis.sh -id XXXXXXXXXXXX_XXXX
+    6) The analysis output is stored in the HDFS of the Chukwa cluster, and its location is specified in the $INSTALL_DIR/chukwa-hitune-dist/hitune/conf/report/conf.xml file.
+
+3.4 Visualize the Report
+    1) Copy the generated output folder to a Windows machine with Excel 2007.
+    2) Create a file named as "TYPE" under the output folder according to $INSTALL_DIR/chukwa-hitune-dist/hitune/visualreport/TYPE.
+    3) Open $INSTALL_DIR/chukwa-hitune-dist/hitune/visualreport/AnalysisReport.xlsm and load the output folder. 
+
+3.5 Check HiTune runtime status
+    1) To enable full functionalities of the HiTune status checker tool, install the "expect" tool on the Chukwa processor node.
+    2) Edit $INSTALL_DIR/chukwa-hitune-dist/hitune/conf/HiTuneStatusCheck-env.sh file on the Chukwa processor node
+    3) On the Chukwa processor node, check if the Chukwa cluster and HiTune is healthy by running:
+               $> $INSTALL_DIR/chukwa-hitune-dist/hitune/bin/HiTuneStatusCheck.sh
+       The final status report is stored as /tmp/HiTuneStatusCheck.report, more details about the report can be found by adding "-h" argument in command line
+    
+============================================================================
+4. Details
+
+The detailed guide for deploying, configuring and managing Chukwa can be found in the official documentation for Chukwa 0.4.0 (http://incubator.apache.org/chukwa/docs/r0.4.0/).
+
+In case of some IO exception in HDFS of the chukwa-cluster, to configure "dfs.datanode.max.xcievers" of DataNode to be higher than the default value 256, e.g., 65536. 
+
+The HiTune instrument outputs are stored under the $INSTALL_DIR/chukwa-hitune-dist/hitune_output folder on each node in the Hadoop cluster; it will grow over time and will need to be periodically pruned.
+
+The analysis configuration files for hadoop job are automatically created under /.JOBS/ on HDFS of chukwa cluster; the file number will be increased by the finished hadoop job number, so it needs to archive and prune that folder periodically.
+
+More details of the sample utility for visualizing the analysis report can be found in the chukwa-hitune-dist/hitune/visualreport/HiTune_visual_report_user_manual.pdf file. One visual report examples are provided in chukwa-hitune-dist/hitune/visualreport/visual_report_example.

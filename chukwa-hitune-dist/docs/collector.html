@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="Apache Forrest" name="Generator">
+<meta name="Forrest-version" content="0.8">
+<meta name="Forrest-skin-name" content="pelt">
+<title>Chukwa Collector Setup Guide</title>
+<link type="text/css" href="skin/basic.css" rel="stylesheet">
+<link media="screen" type="text/css" href="skin/screen.css" rel="stylesheet">
+<link media="print" type="text/css" href="skin/print.css" rel="stylesheet">
+<link type="text/css" href="skin/profile.css" rel="stylesheet">
+<script src="skin/getBlank.js" language="javascript" type="text/javascript"></script><script src="skin/getMenu.js" language="javascript" type="text/javascript"></script><script src="skin/fontsize.js" language="javascript" type="text/javascript"></script>
+<link rel="shortcut icon" href="">
+</head>
+<body onload="init()">
+<script type="text/javascript">ndeSetTextSize();</script>
+<div id="top">
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+<a href="http://www.apache.org/">Apache</a> &gt; <a href="http://hadoop.apache.org/">Hadoop</a> &gt; <a href="http://hadoop.apache.org/pig/">Chukwa</a><script src="skin/breadcrumbs.js" language="JavaScript" type="text/javascript"></script>
+</div>
+<!--+
+    |header
+    +-->
+<div class="header">
+<!--+
+    |start group logo
+    +-->
+<div class="grouplogo">
+<a href="http://hadoop.apache.org/"><img class="logoImage" alt="Hadoop" src="images/hadoop-logo.jpg" title="Apache Hadoop"></a>
+</div>
+<!--+
+    |end group logo
+    +-->
+<!--+
+    |start Project Logo
+    +-->
+<div class="projectlogo">
+<a href="http://hadoop.apache.org/"><img class="logoImage" alt="Chukwa" src="images/chukwa_logo_small.jpg" title="A data collection system for monitoring and analyzing large distributed systems."></a>
+</div>
+<!--+
+    |end Project Logo
+    +-->
+<!--+
+    |start Search
+    +-->
+<div class="searchbox">
+<form action="http://www.google.com/search" method="get" class="roundtopsmall">
+<input value="" name="sitesearch" type="hidden"><input onFocus="getBlank (this, 'Search the site with google');" size="25" name="q" id="query" type="text" value="Search the site with google">&nbsp; 
+                    <input name="Search" value="Search" type="submit">
+</form>
+</div>
+<!--+
+    |end search
+    +-->
+<!--+
+    |start Tabs
+    +-->
+<ul id="tabs">
+<li>
+<a class="unselected" href="http://hadoop.apache.org/chukwa">Project</a>
+</li>
+<li>
+<a class="unselected" href="http://wiki.apache.org/hadoop/Chukwa/">Wiki</a>
+</li>
+<li class="current">
+<a class="selected" href="index.html">Chukwa 0.4 Documentation</a>
+</li>
+</ul>
+<!--+
+    |end Tabs
+    +-->
+</div>
+</div>
+<div id="main">
+<div id="publishedStrip">
+<!--+
+    |start Subtabs
+    +-->
+<div id="level2tabs"></div>
+<!--+
+    |end Endtabs
+    +-->
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+
+             &nbsp;
+           </div>
+<!--+
+    |start Menu, mainarea
+    +-->
+<!--+
+    |start Menu
+    +-->
+<div id="menu">
+<div onclick="SwitchMenu('menu_1.1', 'skin/')" id="menu_1.1Title" class="menutitle">Overview</div>
+<div id="menu_1.1" class="menuitemgroup">
+<div class="menuitem">
+<a href="index.html">Overview</a>
+</div>
+<div class="menuitem">
+<a href="design.html">Architecture</a>
+</div>
+<div class="menuitem">
+<a href="admin.html">Admin Guide</a>
+</div>
+<div class="menuitem">
+<a href="agent.html">Agent Configuration Guide</a>
+</div>
+<div class="menuitem">
+<a href="dataflow.html">Guide to Chukwa Storage layout</a>
+</div>
+<div class="menuitem">
+<a href="programming.html">Programming Guide</a>
+</div>
+<div class="menuitem">
+<a href="api/index.html">API Docs</a>
+</div>
+<div class="menuitem">
+<a href="http://wiki.apache.org/hadoop/Chukwa/">Wiki</a>
+</div>
+<div class="menuitem">
+<a href="http://wiki.apache.org/hadoop/Chukwa/FAQ">FAQ</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.2', 'skin/')" id="menu_1.2Title" class="menutitle">Miscellaneous</div>
+<div id="menu_1.2" class="menuitemgroup">
+<div class="menuitem">
+<a href="releasenotes.html">Release Notes</a>
+</div>
+<div class="menuitem">
+<a href="changes.html">Change Log</a>
+</div>
+</div>
+<div id="credit"></div>
+<div id="roundbottom">
+<img style="display: none" class="corner" height="15" width="15" alt="" src="skin/images/rc-b-l-15-1body-2menu-3menu.png"></div>
+<!--+
+  |alternative credits
+  +-->
+<div id="credit2"></div>
+</div>
+<!--+
+    |end Menu
+    +-->
+<!--+
+    |start content
+    +-->
+<div id="content">
+<div title="Portable Document Format" class="pdflink">
+<a class="dida" href="collector.pdf"><img alt="PDF -icon" src="skin/images/pdfdoc.gif" class="skin"><br>
+        PDF</a>
+</div>
+<h1>Chukwa Collector Setup Guide</h1>
+<div id="minitoc-area">
+<ul class="minitoc">
+<li>
+<a href="#Basic+Operation">Basic Operation</a>
+</li>
+<li>
+<a href="#Configuration+Knobs">Configuration Knobs</a>
+</li>
+<li>
+<a href="#Advanced+options">Advanced options</a>
+<ul class="minitoc">
+<li>
+<a href="#SocketTeeWriter">SocketTeeWriter</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+  	
+<a name="N1000D"></a><a name="Basic+Operation"></a>
+<h2 class="h3">Basic Operation</h2>
+<div class="section">
+<p>Chukwa Collectors are responsible for accepting incoming data from Agents,
+  		and storing the data.
+  		 Most commonly, collectors simply write all received to HDFS.  
+  		In this mode, the filesystem to write to is determined by the option
+  		<span class="codefrag">writer.hdfs.filesystem</span> in  <span class="codefrag">chukwa-collector-conf.xml</span>.
+  		 This is the only option that you really need to specify to get a working 
+  		 collector.
+  		</p>
+<p> By default, collectors listen on port 8080. This can be configured
+  		in <span class="codefrag">chukwa-collector.conf.xml</span>
+</p>
+</div>
+  	
+  	
+<a name="N10022"></a><a name="Configuration+Knobs"></a>
+<h2 class="h3">Configuration Knobs</h2>
+<div class="section">
+<p>There's a bunch more "standard" knobs worth knowing about. These
+  	are mostly documented in <span class="codefrag">chukwa-collector-conf.xml</span>
+</p>
+<p>
+  	It's also possible to do limited configuration on the command line. This is
+  	primarily intended for debugging.  You can say 'writer=pretend' to get the 
+  	collector to print incoming chunks on standard out, or portno=xyz to override
+  	the default port number.
+  	</p>
+<pre class="code">
+  	  bin/chukwa collector writer=pretend portno=8081
+  	</pre>
+</div>
+  	
+  	
+<a name="N10034"></a><a name="Advanced+options"></a>
+<h2 class="h3">Advanced options</h2>
+<div class="section">
+<p>
+  	  There are some advanced options, not necessarily documented in the
+  	collector conf file, that are helpful in using Chukwa in nonstandard ways.
+  	</p>
+<p>
+	    While normally Chukwa writes sequence files to HDFS, it's possible to
+	    specify an alternate Writer class. The option 
+	    <span class="codefrag">chukwaCollector.writerClass</span> specifies a Java class to instantiate
+	    and use as a writer. See the <span class="codefrag">ChukwaWriter</span> javadoc for details.
+	  </p>
+<p>
+	  	One particularly useful Writer class is <span class="codefrag">PipelineStageWriter</span>, which
+	  	lets you string together a series of <span class="codefrag">PipelineableWriters</span>
+	  	for pre-processing or post-processing incoming data.
+	  	As an example, the SocketTeeWriter class allows other programs to get incoming chunks
+	  	fed to them over a socket by the collector.
+	  	</p>
+<p>Stages in the pipeline should be listed, comma-separated, in option 
+	  	<span class="codefrag">chukwaCollector.pipeline</span>
+</p>
+<pre class="code">
+&lt;property&gt;
+  &lt;name&gt;chukwaCollector.writerClass&lt;/name&gt;
+  &lt;value&gt;org.apache.hadoop.chukwa.datacollection.writer.PipelineStageWriter&lt;/value&gt;
+&lt;/property&gt;
+
+&lt;property&gt;
+  &lt;name&gt;chukwaCollector.pipeline&lt;/name&gt;
+  &lt;value&gt;org.apache.hadoop.chukwa.datacollection.writer.SocketTeeWriter,org.apache.hadoop.chukwa.datacollection.writer.SeqFileWriter&lt;/value&gt;
+&lt;/property&gt;
+	  	</pre>
+<a name="N10057"></a><a name="SocketTeeWriter"></a>
+<h3 class="h4">SocketTeeWriter</h3>
+<p>
+	  		The <span class="codefrag">SocketTeeWriter</span> allows external processes to watch
+	  	the stream of chunks passing through the collector. This allows certain kinds
+	  	of real-time monitoring to be done on-top of Chukwa.</p>
+<p>  
+	  	    SocketTeeWriter listens on a port (specified by conf option
+	  	 <span class="codefrag">chukwaCollector.tee.port</span>, defaulting to 9094.)  Applications
+	  	 that want Chunks should connect to that port, and issue a command of the form
+	  	 <span class="codefrag">RAW|WRITABLE &lt;filter&gt;\n</span>. Filters use the same syntax
+	  	 as the <a href="programming.html#Reading+data+from+the+sink+or+the+archive">
+	  	 Dump command</a>.  If the filter is accepted, the Writer will respond 
+	  	 <span class="codefrag">OK\n</span>.
+	  	 </p>
+<p>
+	  	 Subsequently, Chunks matching the filter will be serialized and sent back over the socket.
+	  	Specifying "WRITABLE" will cause the chunks to be written using Hadoop's 
+	  	Writable serialization framework. "RAW" will send the internal data of the
+	  	Chunk, without any metadata, prefixed by its length encoded as a 32-bit int,
+	  	big-endian.  "HEADER" is similar to "RAW", but with a one-line header in
+	  	front of the content. Header format is <span class="codefrag">hostname</span> 
+	  	<span class="codefrag">datatype</span> <span class="codefrag">stream name</span> <span class="codefrag">offset</span>, separated by spaces.
+	  	</p>
+<p>
+	  	The filter will be de-activated when the socket is closed.
+	  	</p>
+<pre class="code">
+Socket s2 = new Socket("host", SocketTeeWriter.DEFAULT_PORT);
+s2.getOutputStream().write("RAW datatype=XTrace\n".getBytes());
+dis = new DataInputStream(s2.getInputStream());
+dis.readFully(new byte[3]); //read "OK\n"
+while(true) {
+   int len = dis.readInt();
+   byte[] data = new byte[len];
+   dis.readFully(data);
+   DoSomethingUsing(data);
+}
+	  	</pre>
+</div>
+  
+</div>
+<!--+
+    |end content
+    +-->
+<div class="clearboth">&nbsp;</div>
+</div>
+<div id="footer">
+<!--+
+    |start bottomstrip
+    +-->
+<div class="lastmodified">
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<div class="copyright">
+        Copyright &copy;
+         2007-2010 <a href="http://www.apache.org/licenses/">The Apache Software Foundation.</a>
+</div>
+<!--+
+    |end bottomstrip
+    +-->
+</div>
+</body>
+</html>

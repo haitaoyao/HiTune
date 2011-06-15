@@ -1,0 +1,76 @@
+<configuration>
+    <property>
+        <name>analyzerengine</name>
+        <value>InstrumentDataflow</value>
+        <description></description>
+    </property>
+    <property>
+        <name>mapred.map.tasks</name>
+        <value>20</value>
+        <description>
+            The default number of reduce tasks per job. Typically set to
+            99% of the cluster's reduce capacity, so that if a node
+            fails the reduces can still be executed in a single wave.
+            Ignored when mapred.job.tracker is "local".
+        </description>
+    </property>
+
+    <property>
+        <name>attemptid</name>
+        <value>attempt_${HiTune.analyzer.targetjob.baseid}_r_</value>
+        <description></description>
+    </property>
+	
+        <property>
+        <name>HiTune.analyzer.filefilter.pattern</name>
+        <value>.*/REDUCE/${attemptid}.*</value>
+        <description></description>
+    </property>
+    <property>
+        <name>outputfilename</name>
+        <value>instruments_red.csv</value>
+        <description></description>
+    </property>
+    <property>
+        <name>phases</name>
+        <value><![CDATA[
+            <phase>
+                <phasename>Shuffle</phasename>
+                <stack>ReduceCopier.fetchOutputs</stack>
+                <functions></functions>
+            </phase>
+            <phase>
+                <phasename>Sort</phasename>
+                <stack>ReduceCopier.createKVIterator</stack>
+                <functions></functions>
+            </phase>
+            <phase>
+                <phasename>Reduce</phasename>
+                <stack>org.apache.hadoop.mapred.ReduceTask.run(New|Old)Reducer</stack>
+                <functions></functions>
+            </phase>
+            <phase>
+                <phasename>Copier</phasename>
+                <stack>org.apache.hadoop.mapred.ReduceTask\$ReduceCopier\$MapOutputCopier.run</stack>
+                <functions>org.apache.hadoop.mapred.ReduceTask\$ReduceCopier\$ShuffleRamManager.reserve,org.apache.hadoop.mapred.ReduceTask\$ReduceCopier\$MapOutputCopier.getInputStrea,MapOutputCopier.copyOutput,org.apache.hadoop.io.compress.BlockDecompressorStream.decompress,org.apache.hadoop.io.compress.DecompressorStream.decompress</functions>
+            </phase>
+            <phase>
+                <phasename>MemMerge</phasename>
+                <stack>InMemFSMergeThread.run</stack>
+                <functions>org.apache.hadoop.io.compress.CompressorStream.write</functions>
+            </phase>
+            <phase>
+                <phasename>FSMerge</phasename>
+                <stack>LocalFSMerger.run</stack>
+                <functions></functions>
+            </phase>
+            ]]>
+        </value>
+        <description></description>
+    </property>
+    <property>
+        <name>status</name>
+        <value>NEW,RUNNABLE,BLOCKED,TIME_WAITING,WAITING,UNKNOWN</value>
+        <description></description>
+    </property>
+</configuration>

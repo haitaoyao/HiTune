@@ -1,0 +1,27 @@
+<list>
+    <category>
+        <name>cpu</name>
+        <value>${HiTune.analyzer.configfolder}/system/cpu</value>
+        <description></description>
+    </category>
+    <category>
+        <name>mpstat</name>
+        <value>${HiTune.analyzer.configfolder}/system/mpstat</value>
+        <description></description>
+    </category>
+    <category>
+        <name>diskio</name>
+        <value>${HiTune.analyzer.configfolder}/system/io</value>
+        <description></description>
+    </category>
+    <category>
+        <name>network</name>
+        <value>${HiTune.analyzer.configfolder}/system/network</value>
+        <description></description>
+    </category>
+    <category>
+        <name>memory</name>
+        <value>${HiTune.analyzer.configfolder}/system/memory</value>
+        <description></description>
+    </category>
+</list>

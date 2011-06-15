@@ -1,0 +1,17 @@
+<configuration>
+    <property>
+        <name>outputfilename</name>
+        <value>memory.csv</value>
+        <description></description>
+    </property>
+    <property>
+        <name>datasource</name>
+        <value>${HiTune.input.reposfolder}/HiTune.Memstat</value>
+        <description></description>
+    </property>
+    <property>
+        <name>metrics</name>
+        <value>pgpgin/s,pgpgout/s,fault/s,majflt/s,pgfree/s,pgscank/s,pgscand/s,pgsteal/s,%vmeff,kbmemfree,kbmemused,%memused,kbbuffers,kbcached,kbcommit,%commit,kbswpfree,kbswpused,%swpused,kbswpcad,%swpcad</value>
+        <description></description>
+    </property>
+</configuration>

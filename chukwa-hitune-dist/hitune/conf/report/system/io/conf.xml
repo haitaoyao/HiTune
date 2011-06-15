@@ -1,0 +1,22 @@
+<configuration>
+    <property>
+        <name>outputfilename</name>
+        <value>io.csv</value>
+        <description></description>
+    </property>
+    <property>
+        <name>datasource</name>
+        <value>${HiTune.input.reposfolder}/HiTune.Iostat</value>
+        <description></description>
+    </property>
+    <property>
+        <name>device</name>
+        <value></value>
+        <description></description>
+    </property>
+    <property>
+        <name>metrics</name>
+        <value>rrqm/s,wrqm/s,svctm,avgrq-sz,%util,r/s,w/s,rkB/s,wkB/s,await</value>
+        <description></description>
+    </property>
+</configuration>

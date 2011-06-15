@@ -1,0 +1,453 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="Apache Forrest" name="Generator">
+<meta name="Forrest-version" content="0.8">
+<meta name="Forrest-skin-name" content="pelt">
+<title>Chukwa User and Programming Guide</title>
+<link type="text/css" href="skin/basic.css" rel="stylesheet">
+<link media="screen" type="text/css" href="skin/screen.css" rel="stylesheet">
+<link media="print" type="text/css" href="skin/print.css" rel="stylesheet">
+<link type="text/css" href="skin/profile.css" rel="stylesheet">
+<script src="skin/getBlank.js" language="javascript" type="text/javascript"></script><script src="skin/getMenu.js" language="javascript" type="text/javascript"></script><script src="skin/fontsize.js" language="javascript" type="text/javascript"></script>
+<link rel="shortcut icon" href="">
+</head>
+<body onload="init()">
+<script type="text/javascript">ndeSetTextSize();</script>
+<div id="top">
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+<a href="http://www.apache.org/">Apache</a> &gt; <a href="http://hadoop.apache.org/">Hadoop</a> &gt; <a href="http://hadoop.apache.org/pig/">Chukwa</a><script src="skin/breadcrumbs.js" language="JavaScript" type="text/javascript"></script>
+</div>
+<!--+
+    |header
+    +-->
+<div class="header">
+<!--+
+    |start group logo
+    +-->
+<div class="grouplogo">
+<a href="http://hadoop.apache.org/"><img class="logoImage" alt="Hadoop" src="images/hadoop-logo.jpg" title="Apache Hadoop"></a>
+</div>
+<!--+
+    |end group logo
+    +-->
+<!--+
+    |start Project Logo
+    +-->
+<div class="projectlogo">
+<a href="http://hadoop.apache.org/"><img class="logoImage" alt="Chukwa" src="images/chukwa_logo_small.jpg" title="A data collection system for monitoring and analyzing large distributed systems."></a>
+</div>
+<!--+
+    |end Project Logo
+    +-->
+<!--+
+    |start Search
+    +-->
+<div class="searchbox">
+<form action="http://www.google.com/search" method="get" class="roundtopsmall">
+<input value="" name="sitesearch" type="hidden"><input onFocus="getBlank (this, 'Search the site with google');" size="25" name="q" id="query" type="text" value="Search the site with google">&nbsp; 
+                    <input name="Search" value="Search" type="submit">
+</form>
+</div>
+<!--+
+    |end search
+    +-->
+<!--+
+    |start Tabs
+    +-->
+<ul id="tabs">
+<li>
+<a class="unselected" href="http://hadoop.apache.org/chukwa">Project</a>
+</li>
+<li>
+<a class="unselected" href="http://wiki.apache.org/hadoop/Chukwa/">Wiki</a>
+</li>
+<li class="current">
+<a class="selected" href="index.html">Chukwa 0.4 Documentation</a>
+</li>
+</ul>
+<!--+
+    |end Tabs
+    +-->
+</div>
+</div>
+<div id="main">
+<div id="publishedStrip">
+<!--+
+    |start Subtabs
+    +-->
+<div id="level2tabs"></div>
+<!--+
+    |end Endtabs
+    +-->
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+
+             &nbsp;
+           </div>
+<!--+
+    |start Menu, mainarea
+    +-->
+<!--+
+    |start Menu
+    +-->
+<div id="menu">
+<div onclick="SwitchMenu('menu_selected_1.1', 'skin/')" id="menu_selected_1.1Title" class="menutitle" style="background-image: url('skin/images/chapter_open.gif');">Overview</div>
+<div id="menu_selected_1.1" class="selectedmenuitemgroup" style="display: block;">
+<div class="menuitem">
+<a href="index.html">Overview</a>
+</div>
+<div class="menuitem">
+<a href="design.html">Architecture</a>
+</div>
+<div class="menuitem">
+<a href="admin.html">Admin Guide</a>
+</div>
+<div class="menuitem">
+<a href="agent.html">Agent Configuration Guide</a>
+</div>
+<div class="menuitem">
+<a href="dataflow.html">Guide to Chukwa Storage layout</a>
+</div>
+<div class="menupage">
+<div class="menupagetitle">Programming Guide</div>
+</div>
+<div class="menuitem">
+<a href="api/index.html">API Docs</a>
+</div>
+<div class="menuitem">
+<a href="http://wiki.apache.org/hadoop/Chukwa/">Wiki</a>
+</div>
+<div class="menuitem">
+<a href="http://wiki.apache.org/hadoop/Chukwa/FAQ">FAQ</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.2', 'skin/')" id="menu_1.2Title" class="menutitle">Miscellaneous</div>
+<div id="menu_1.2" class="menuitemgroup">
+<div class="menuitem">
+<a href="releasenotes.html">Release Notes</a>
+</div>
+<div class="menuitem">
+<a href="changes.html">Change Log</a>
+</div>
+</div>
+<div id="credit"></div>
+<div id="roundbottom">
+<img style="display: none" class="corner" height="15" width="15" alt="" src="skin/images/rc-b-l-15-1body-2menu-3menu.png"></div>
+<!--+
+  |alternative credits
+  +-->
+<div id="credit2"></div>
+</div>
+<!--+
+    |end Menu
+    +-->
+<!--+
+    |start content
+    +-->
+<div id="content">
+<div title="Portable Document Format" class="pdflink">
+<a class="dida" href="programming.pdf"><img alt="PDF -icon" src="skin/images/pdfdoc.gif" class="skin"><br>
+        PDF</a>
+</div>
+<h1>Chukwa User and Programming Guide</h1>
+<div id="minitoc-area">
+<ul class="minitoc">
+<li>
+<a href="#Reading+data+from+the+sink+or+the+archive">Reading data from the sink or the archive</a>
+<ul class="minitoc">
+<li>
+<a href="#Dumping+some+data">Dumping some data</a>
+</li>
+<li>
+<a href="#Exploring+the+Sink+or+Archive">Exploring the Sink or Archive</a>
+</li>
+<li>
+<a href="#Using+MapReduce">Using MapReduce</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#Sink+File+Format">Sink File Format</a>
+</li>
+<li>
+<a href="#Demux+and+Archiving">Demux and Archiving</a>
+</li>
+<li>
+<a href="#Simple+Archiver">Simple Archiver</a>
+</li>
+<li>
+<a href="#Demux">Demux</a>
+<ul class="minitoc">
+<li>
+<a href="#Writing+a+custom+demux+Mapper">Writing a custom demux Mapper</a>
+</li>
+<li>
+<a href="#Writing+a+custom+reduce">Writing a custom reduce</a>
+</li>
+<li>
+<a href="#Output">Output</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+
+<p>
+At the core of Chukwa is a flexible system for collecting and processing
+monitoring data, particularly log files. This document describes how to use the
+collected data.  (For an overview of the Chukwa data model and collection 
+pipeline, see the <a href="design.html">Design Guide</a>.)  
+</p>
+
+
+<p>
+In particular, this document discusses the Chukwa archive file formats, the
+demux and archiving mapreduce jobs, and  the layout of the Chukwa storage directories.</p>
+
+
+
+
+<a name="N10017"></a><a name="Reading+data+from+the+sink+or+the+archive"></a>
+<h2 class="h3">Reading data from the sink or the archive</h2>
+<div class="section">
+<p>
+Chukwa gives you several ways of inspecting or processing collected data.
+</p>
+<a name="N10020"></a><a name="Dumping+some+data"></a>
+<h3 class="h4">Dumping some data</h3>
+<p>
+It very often happens that you want to retrieve one or more files that have been
+collected with Chukwa. If the total volume of data to be recovered is not too
+great, you can use <span class="codefrag">bin/chukwa dumpArchive</span>, a command-line tool that does the job.
+The <span class="codefrag">dump</span> tool does an in-memory sort of the data, so you'll be 
+constrained by the Java heap size (typically a few hundred MB).
+</p>
+<p>
+The <span class="codefrag">dump</span> tool takes a search pattern as its first argument, followed
+by a list of files or file-globs.  It will then print the contents of every data
+stream in those files that matches the pattern. (A data stream is a sequence of
+chunks with the same host, source, and datatype.)  Data is printed in order,
+with duplicates removed.  No metadata is printed.  Separate streams are 
+separated by a row of dashes.  
+</p>
+<p>For example, the following command will dump all data from every file that
+matches the glob pattern.  Note the use of single quotes to pass glob patterns
+through to the application, preventing the shell from expanding them.</p>
+<pre class="code">
+$CHUKWA_HOME/bin/chukwa dumpArchive 'datatype=.*' 'hdfs://host:9000/chukwa/archive/*.arc'
+</pre>
+<p>
+The patterns used by <span class="codefrag">dump</span> are based on normal regular 
+expressions. They are of the form <span class="codefrag">field1=regex&amp;field2=regex</span>.
+That is, they are a sequence of rules, separated by ampersand signs. Each rule
+is of the form <span class="codefrag">metadatafield=regex</span>, where 
+<span class="codefrag">metadatafield</span> is one of the Chukwa metadata fields, and 
+<span class="codefrag">regex</span> is a regular expression.  The valid metadata field names are:
+<span class="codefrag">datatype</span>, <span class="codefrag">host</span>, <span class="codefrag">cluster</span>, 
+<span class="codefrag">content</span>, <span class="codefrag">name</span>.  Note that the <span class="codefrag">name</span> field matches the stream name -- often the filename
+that the data was extracted from.
+</p>
+<p>
+In addition, you can match arbitrary tags via <span class="codefrag">tags.tagname</span>.
+So for instance, to match chunks with tag <span class="codefrag">foo="bar"</span> you could say
+<span class="codefrag">tags.foo=bar</span>. Note that quotes are present in the tag, but not
+in the filter rule.</p>
+<p>A stream matches the search pattern only if every rule matches. So to 
+retrieve HadoopLog data from cluster foo, you might search for 
+<span class="codefrag">cluster=foo&amp;datatype=HadoopLog</span>.
+</p>
+<a name="N10072"></a><a name="Exploring+the+Sink+or+Archive"></a>
+<h3 class="h4">Exploring the Sink or Archive</h3>
+<p>
+Another common task is finding out what data has been collected. Chukwa offers
+a specialized tool for this purpose: <span class="codefrag">DumpArchive</span>. This tool has
+two modes: summarize and verbose, with the latter being the default.
+</p>
+<p>
+In summarize mode, <span class="codefrag">DumpArchive</span> prints a count of chunks in each
+data stream.  In verbose mode, the chunks themselves are dumped.</p>
+<p>
+You can invoke the tool by running <span class="codefrag">$CHUKWA_HOME/bin/dumpArchive.sh</span>.
+To specify summarize mode, pass <span class="codefrag">--summarize</span> as the first argument.
+</p>
+<pre class="code">
+bin/chukwa dumpArchive --summarize 'hdfs://host:9000/chukwa/logs/*.done'
+</pre>
+<a name="N10091"></a><a name="Using+MapReduce"></a>
+<h3 class="h4">Using MapReduce</h3>
+<p>
+A key goal of Chukwa was to facilitate MapReduce processing of collected data.
+The next section discusses the file formats.  An understanding of MapReduce
+and SequenceFiles is helpful in understanding the material.</p>
+</div>
+
+
+<a name="N1009B"></a><a name="Sink+File+Format"></a>
+<h2 class="h3">Sink File Format</h2>
+<div class="section">
+<p>
+As data is collected, Chukwa dumps it into <em>sink files</em> in HDFS. By
+default, these are located in <span class="codefrag">hdfs:///chukwa/logs</span>.  If the file name 
+ends in .chukwa, that means the file is still being written to. Every few minutes, 
+the collector will close the file, and rename the file to '*.done'.  This 
+marks the file as available for processing.</p>
+<p>
+Each sink file is a Hadoop sequence file, containing a succession of 
+key-value pairs, and periodic synch markers to facilitate MapReduce access. 
+They key type is <span class="codefrag">ChukwaArchiveKey</span>; the value type is 
+<span class="codefrag">ChunkImpl</span>. See the Chukwa Javadoc for details about these classes.
+</p>
+<p>Data in the sink may include duplicate and omitted chunks.</p>
+</div>
+
+
+<a name="N100B7"></a><a name="Demux+and+Archiving"></a>
+<h2 class="h3">Demux and Archiving</h2>
+<div class="section">
+<p>It's possible to write MapReduce jobs that directly examine the data sink, 
+but it's not extremely convenient. Data is not organized in a useful way, so 
+jobs will likely discard most of their input. Data quality is imperfect, since 
+duplicates and omissions may exist.  And MapReduce and HDFS are optimized to 
+deal with a modest number of large files, not many small ones.</p>
+<p> Chukwa therefore supplies several MapReduce jobs for organizing collected 
+data and putting it into a more useful form; these jobs are typically run 
+regularly from cron.  Knowing how to use Chukwa-collected data requires 
+understanding how these jobs lay out storage. For now, this document only 
+discusses one such job: the Simple Archiver. </p>
+</div>
+
+
+<a name="N100C4"></a><a name="Simple+Archiver"></a>
+<h2 class="h3">Simple Archiver</h2>
+<div class="section">
+<p>The simple archiver is designed to consolidate a large number of data sink 
+files into a small number of archive files, with the contents grouped in a 
+useful way.  Archive files, like raw sink files, are in Hadoop sequence file 
+format. Unlike the data sink, however, duplicates have been removed.  (Future 
+versions of the Simple Archiver will indicate the presence of gaps.)</p>
+<p>The simple archiver moves every <span class="codefrag">.done</span> file out of the sink, and 
+then runs a MapReduce job to group the data. Output Chunks will be placed into 
+files with names of the form 
+<span class="codefrag">hdfs:///chukwa/archive/clustername/Datatype_date.arc</span>.  
+Date corresponds to when the data was collected; Datatype is the datatype of 
+each Chunk. 
+</p>
+<p>If archived data corresponds to an existing filename, a new file will be 
+created with a disambiguating suffix.</p>
+</div>
+
+
+
+<a name="N100DB"></a><a name="Demux"></a>
+<h2 class="h3">Demux</h2>
+<div class="section">
+<p>A key use for Chukwa is processing arriving data, in parallel, using MapReduce.
+The most common way to do this is using the Chukwa demux framework.
+As <a href="dataflow.html">data flows through Chukwa</a>, the demux job is often the
+first job that runs.
+</p>
+<p>By default, Chukwa will use the default TsProcessor. This parser will try to
+ extract the real log statement from the log entry using the ISO8601 date 
+ format. If it fails, it will use the time at which the chunk was written to
+ disk (collector timestamp).</p>
+<a name="N100EA"></a><a name="Writing+a+custom+demux+Mapper"></a>
+<h3 class="h4">Writing a custom demux Mapper</h3>
+<p>If you want to extract some specific information and perform more processing you
+ need to write your own parser. Like any M/R program, your have to write at least
+ the Map side for your parser. The reduce side is Identity by default.</p>
+<p>On the Map side,you can write your own parser from scratch or extend the AbstractProcessor class
+ that hides all the low level action on the chunk. See
+ <span class="codefrag">org.apache.hadoop.chukwa.extraction.demux.processor.mapper.Df</span> for an example
+ of a Map class for use with Demux.
+ </p>
+<p>For Chukwa to invoke your Mapper code, you have
+ to specify which data types it should run on.
+ Edit <span class="codefrag">${CHUKWA_HOME}/conf/chukwa-demux-conf.xml</span> and add the following lines:
+ </p>
+<pre class="code">
+      &lt;property&gt;
+            &lt;name&gt;MyDataType&lt;/name&gt; 
+            &lt;value&gt;org.apache.hadoop.chukwa.extraction.demux.processor.mapper.MyParser&lt;/value&gt;
+            &lt;description&gt;Parser class for MyDataType.&lt;/description&gt;
+      &lt;/property&gt;
+</pre>
+<p>You can use the same parser for several different recordTypes.</p>
+<a name="N10107"></a><a name="Writing+a+custom+reduce"></a>
+<h3 class="h4">Writing a custom reduce</h3>
+<p>You only need to implement a reduce side if you need to group records together. 
+The interface that your need to implement is <span class="codefrag">ReduceProcessor</span>:
+</p>
+<pre class="code">
+public interface ReduceProcessor
+{
+           public String getDataType();
+           public void process(ChukwaRecordKey key,Iterator&lt;ChukwaRecord&gt; values,
+                      OutputCollector&lt;ChukwaRecordKey, 
+                      ChukwaRecord&gt; output, Reporter reporter);
+}
+</pre>
+<p>The link between the Map side and the reduce is done by setting your reduce class
+ into the reduce type: <span class="codefrag">key.setReduceType("MyReduceClass");</span>.
+ Note that in the current version of Chukwa, your class needs to be in the package
+ <span class="codefrag">org.apache.hadoop.chukwa.extraction.demux.processor</span>
+See <span class="codefrag">org.apache.hadoop.chukwa.extraction.demux.processor.reducer.SystemMetrics</span>
+for an example of a Demux reducer.</p>
+<a name="N10123"></a><a name="Output"></a>
+<h3 class="h4">Output</h3>
+<p> Your data is going to be sorted by RecordType then by the key field. The default
+ implementation use the following grouping for all records:</p>
+<ol>
+
+<li>Time partition (Time up to the hour)</li>
+
+<li>Machine name (physical input source)</li>
+
+<li>Record timestamp </li>
+
+</ol>
+<p>The demux process will use the recordType to save similar records together 
+(same recordType) to the same directory: 
+<span class="codefrag">&gt;cluster name&gt;/&lt;record type&gt;/</span>
+
+</p>
+</div>
+
+
+
+</div>
+<!--+
+    |end content
+    +-->
+<div class="clearboth">&nbsp;</div>
+</div>
+<div id="footer">
+<!--+
+    |start bottomstrip
+    +-->
+<div class="lastmodified">
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<div class="copyright">
+        Copyright &copy;
+         2007-2010 <a href="http://www.apache.org/licenses/">The Apache Software Foundation.</a>
+</div>
+<!--+
+    |end bottomstrip
+    +-->
+</div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<list>
+    <category>
+        <name>MapTaskPool</name>
+        <value>${HiTune.analyzer.configfolder}/instruments/MapTaskPool</value>
+        <description></description>
+    </category>
+    <category>
+        <name>ReduceTaskPool</name>
+        <value>${HiTune.analyzer.configfolder}/instruments/ReduceTaskPool</value>
+        <description></description>
+    </category>
+	<category>
+        <name>MapTaskPoolHotspot</name>
+        <value>${HiTune.analyzer.configfolder}/instruments/MapTaskPoolHotspot</value>
+        <description></description>
+    </category>
+    <category>
+        <name>ReduceTaskPoolHotspot</name>
+        <value>${HiTune.analyzer.configfolder}/instruments/ReduceTaskPoolHotspot</value>
+        <description></description>
+    </category>
+</list>

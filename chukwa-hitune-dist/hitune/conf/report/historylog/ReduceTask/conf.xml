@@ -1,0 +1,24 @@
+<configuration>
+    
+    <property>
+        <name>outputfilename</name>
+        <value>ReduceTask.csv</value>
+        <description></description>
+    </property>
+    <property>
+        <name>taskid</name>
+        <value>task_${HiTune.analyzer.targetjob.baseid}_r</value>
+        <description></description>
+    </property>
+	
+        <property>
+        <name>HiTune.analyzer.filefilter.pattern</name>
+        <value>.*/ReduceTask/.*</value>
+        <description></description>
+    </property>
+    <property>
+        <name>metrics</name>
+        <value>START_TIME,FINISH_TIME,TASK_TYPE,TASK_STATUS,COUNTERS,HDFS bytes read,Local bytes written,Reduce input groups,Combine output records,Reduce output records,Combine input records,Reduce input records</value>
+        <description></description>
+    </property>
+</configuration>
